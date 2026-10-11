@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#2C3FD1">
+<meta name="theme-color" content="#0A5C78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Recto">
@@ -232,6 +235,8 @@ textarea{min-height:84px;resize:vertical}
 .fb.bad{background:var(--bad-bg);color:var(--bad)}
 .learn{margin-top:12px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
 .learn p{margin:4px 0 0;overflow-wrap:anywhere}
+.install{display:flex;align-items:center;gap:12px;margin-top:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.install .it{flex:1;min-width:0}.install b{display:block}.install span{font-size:13.5px;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){.flip,.bar>i,.rg-fg{transition:none}}
 </style>
 </head>
@@ -1452,6 +1457,10 @@ Q.gN4=[
   if (data.fs == null) data.fs = 0;
   data.pro = proActive();
 
+  var deferredPrompt = null;
+  function isStandalone(){
+    try { return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; } catch (e) { return false; }
+  }
   var ui = { view:'home', deckId:null, lessonId:null, modal:null, confirmDel:null, err:'', study:null, focus:null, back:{view:'home'}, homeY:0, last:'home' };
   var app = document.getElementById('app');
 
@@ -1528,7 +1537,8 @@ Q.gN4=[
       '<section class="hero">' + TOPO + '<div class="hero-in"><div><div class="eyebrow">Programme national de la RDC</div><h2>Géographie, 6e année</h2>' +
       '<p>Questions à cocher, puis l’essentiel à retenir.</p></div>' +
       '<div class="ringbox">' + ringSvg(pct, 84, 8, '') + '<div class="lab">' + pct + '%</div></div></div>' +
-      '<button class="btn light full" data-a="mix">' + ico('shuffle', 20) + ' Révision mixte de ' + MIX_SIZE + ' cartes</button></section>';
+      '<button class="btn light full" data-a="mix">' + ico('shuffle', 20) + ' Révision mixte de ' + MIX_SIZE + ' cartes</button></section>' +
+      (deferredPrompt && !isStandalone() ? '<div class="install"><div class="it"><b>Installer Recto</b><span>Ouvrez-le comme une vraie application, même avec peu de connexion.</span></div><button class="btn small" data-a="install">Installer</button></div>' : '');
     COURSE.forEach(function(part, pi){
       h += '<h2 class="part" style="--c:' + colorVar(pi) + '">' + esc(part.t) + '</h2>';
       part.ch.forEach(function(chap){
@@ -1660,7 +1670,7 @@ Q.gN4=[
       '<div class="shead">Données</div><div class="group"><div class="srow"><div class="st"><b>Progression</b><span>' + tot.k + ' cartes acquises sur ' + tot.t + '</span></div>' +
       '<button class="link danger" data-a="resetAll" style="min-height:40px;padding:0">' + (ui.confirmReset ? 'Confirmer la remise à zéro' : 'Remettre à zéro') + '</button></div></div>' +
       '<div class="shead">Aide</div><div class="group">' +
-      '<div class="srow"><div class="st"><b>Installer sur le téléphone</b><span>Android (Chrome) : menu ⋮ puis « Ajouter à l’écran d’accueil ». iPhone (Safari) : bouton Partager puis « Sur l’écran d’accueil ».</span></div></div>' +
+      '<div class="srow"><div class="st"><b>Installer sur le téléphone</b><span>' + (isStandalone() ? 'Recto est déjà installée sur cet appareil.' : 'Android (Chrome) : menu ⋮ puis « Installer l’application ». iPhone (Safari) : bouton Partager puis « Sur l’écran d’accueil ».') + '</span></div>' + (deferredPrompt && !isStandalone() ? '<button class="btn small" data-a="install">Installer</button>' : '') + '</div>' +
       '<div class="srow"><div class="st"><b>Une question ?</b><span>Écrivez-nous sur WhatsApp : +243 85 08 00 833</span></div>' +
       '<a class="btn small ghost" href="https://wa.me/' + WA + '" target="_blank" rel="noopener">' + ico('chat', 16) + ' WhatsApp</a></div></div>' +
       '<div class="shead">À propos</div><div class="group"><div class="srow"><div class="st"><b>Recto, version 3</b><span>Fiches reformulées avec nos propres mots à partir du programme national de géographie de la RDC (2005) et d’un manuel de référence. Vérifiez toujours avec votre enseignant.</span></div></div></div>';
@@ -1953,6 +1963,12 @@ Q.gN4=[
       else { ui.confirmReset = true; }
       render();
     },
+    install: function(){
+      var d = deferredPrompt;
+      if (!d) return;
+      d.prompt();
+      if (d.userChoice && d.userChoice.then) d.userChoice.then(function(){ deferredPrompt = null; render(); });
+    },
     pro: function(){ ui.modal = 'pro'; ui.msg = null; render(); },
     pay: function(){ ui.modal = 'pay'; ui.msg = null; render(); },
     copy: function(id){
@@ -2003,6 +2019,11 @@ Q.gN4=[
   });
 
   render();
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt = e; render(); });
+  window.addEventListener('appinstalled', function(){ deferredPrompt = null; render(); });
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', function(){ try { navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {} });
+  }
 })();
 </script>
 </body>
