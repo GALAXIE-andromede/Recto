@@ -4,14 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A5C78">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-180.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Recto">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Recto – Géographie 6e année (RDC)</title>
+<title>Recto – Géographie 6e année (RDC) & Cours modulaires</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,21 +13,16 @@
   --bg:#EEF3F2;--surface:#FFFFFF;--surface2:#F4F7F6;--ink:#0E2A38;--muted:#4F656E;--line:#D3DEDC;
   --brand:#0A5C78;--on-brand:#FFFFFF;--brand-soft:#DCEEF4;--sel:#DCEEF4;
   --good:#1B7A53;--good-bg:#DDF1E7;--bad:#B3322F;--bad-bg:#FBE4E1;
-  --t1:#0A5C78;--t2:#1F7A57;--t3:#9A6414;--t4:#A8472F;
   --hero1:#0A5C78;--hero2:#0C3A50;
   --shadow:0 1px 2px rgba(14,42,56,.06),0 8px 22px rgba(14,42,56,.08);
-  --font-d:'Fraunces',Georgia,'Times New Roman',serif;
-  --font-b:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
+  --font-d:'Fraunces',Georgia,serif;
+  --font-b:'Source Sans 3',system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#08161D;--surface:#0F2530;--surface2:#12303D;--ink:#E6F1F2;--muted:#9DB3BB;--line:#1E3B48;
     --brand:#62BBD8;--on-brand:#04212C;--brand-soft:#123A4A;--sel:#123A4A;
     --good:#5FD3A0;--good-bg:#11382B;--bad:#FF908A;--bad-bg:#3F1B1A;
-    --t1:#62BBD8;--t2:#5FD3A0;--t3:#E7B04F;--t4:#F0916F;
     --hero1:#12485E;--hero2:#0A2B3A;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);
   }
@@ -43,759 +31,90 @@
   --bg:#08161D;--surface:#0F2530;--surface2:#12303D;--ink:#E6F1F2;--muted:#9DB3BB;--line:#1E3B48;
   --brand:#62BBD8;--on-brand:#04212C;--brand-soft:#123A4A;--sel:#123A4A;
   --good:#5FD3A0;--good-bg:#11382B;--bad:#FF908A;--bad-bg:#3F1B1A;
-  --t1:#62BBD8;--t2:#5FD3A0;--t3:#E7B04F;--t4:#F0916F;
   --hero1:#12485E;--hero2:#0A2B3A;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
-*,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:var(--fs,17px);line-height:1.5;-webkit-text-size-adjust:100%;overscroll-behavior-y:none}
-button,input,textarea{font:inherit;color:inherit}
-button,.opt,.chip,.tab{cursor:pointer;touch-action:manipulation}
-:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
-.wrap{max-width:560px;margin:0 auto;padding:0 18px 36px}
-.wrap.hasbar{padding-bottom:110px}
-h1,h2,h3{font-family:var(--font-d);margin:0;line-height:1.15;letter-spacing:-.005em}
-h1{font-size:28px;font-weight:700}
-h2{font-size:24px;font-weight:700}
-h3{font-size:18px;font-weight:700}
-.sub{color:var(--muted);margin:6px 0 0;font-size:15px}
-.ico{display:block;flex:none}
-
-/* boutons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border-radius:14px;border:2px solid var(--brand);background:var(--brand);color:var(--on-brand);font-weight:700}
-a.btn{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.ghost{background:transparent;color:var(--brand)}
-.btn.small{min-height:40px;padding:0 14px;font-size:15px}
-.btn.full{display:flex;width:100%}
-.btn.good{background:var(--good-bg);border-color:var(--good);color:var(--good)}
-.btn.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
-.btn.light{background:#fff;border-color:#fff;color:#0A4A62}
-.link{background:none;border:0;padding:8px 0;min-height:44px;color:var(--brand);font-weight:700;text-align:left}
-.link.danger{color:var(--bad)}
-.chip{border:1.5px solid var(--t3);background:transparent;color:var(--ink);border-radius:999px;min-height:36px;padding:0 14px;font-weight:700;font-size:14px}
-.chip.mini{min-height:30px;padding:0 10px;font-size:13px}
-.iconbtn{flex:none;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--ink);display:grid;place-items:center}
-
-/* barres */
-.appbar{display:flex;align-items:center;gap:12px;padding:14px 0 6px}
-.logo{flex:none;width:44px;height:44px;border-radius:14px;background:linear-gradient(140deg,var(--hero1),var(--hero2));color:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}
-.ab-t{flex:1;min-width:0}
-.ab-n{font-family:var(--font-d);font-weight:700;font-size:23px;line-height:1}
-.ab-s{font-size:13px;color:var(--muted);margin-top:2px}
-.subbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
-.sb-t{flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pagehead{padding:18px 0 4px}
-
-/* héros et anneaux */
-.hero{position:relative;overflow:hidden;margin-top:8px;padding:20px;border-radius:24px;color:#fff;background:linear-gradient(140deg,var(--hero1),var(--hero2));box-shadow:var(--shadow)}
-.hero .topo{position:absolute;right:-40px;top:-30px;width:300px;opacity:.16;pointer-events:none;color:#fff}
-.hero-in{position:relative;display:flex;gap:14px;align-items:center;justify-content:space-between}
-.eyebrow{font-size:13px;font-weight:600;opacity:.85}
-.hero h2{font-size:29px;color:#fff;margin-top:4px}
-.hero p{margin:6px 0 0;font-size:15px;opacity:.92}
-.hero .btn{position:relative;margin-top:16px}
-.ringbox{position:relative;flex:none}
-.ringbox .lab{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-d);font-weight:700;font-size:19px}
-.rg-bg{stroke:rgba(255,255,255,.28)}
-.rg-fg{stroke:#fff;transition:stroke-dashoffset .4s}
-.ring-dark .rg-bg{stroke:var(--line)}
-.ring-dark .rg-fg{stroke:var(--brand)}
-
-/* sections et leçons */
-.part{display:flex;align-items:center;gap:10px;margin:30px 0 0;font-size:21px}
-.part::before{content:"";flex:none;width:6px;height:24px;border-radius:3px;background:var(--c,var(--brand))}
-.chap{margin:16px 2px 0;display:flex;align-items:center;gap:10px;justify-content:space-between}
-.chap h3{flex:1;font-family:var(--font-b);font-size:15px;font-weight:700;color:var(--muted)}
-.list{list-style:none;margin:8px 0 0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-.lrow{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}
-.lrow:last-child{border-bottom:0}
-.lmain{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:12px 6px 12px 14px;background:none;border:0;text-align:left;min-height:66px}
-.lbadge{flex:none;min-width:42px;height:42px;padding:0 6px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-d);font-weight:700;font-size:15px;color:var(--c,var(--brand));border:2px solid var(--c,var(--brand))}
-.ltxt{flex:1;min-width:0}
-.deck-name{display:block;font-weight:700;font-size:16px;line-height:1.25;overflow-wrap:anywhere}
-.deck-meta{display:block;font-size:13px;color:var(--muted);margin-top:1px}
-.mini{display:block;height:4px;border-radius:4px;background:var(--line);margin-top:7px;overflow:hidden}
-.mini i{display:block;height:100%;background:var(--c,var(--brand));width:var(--p,0%)}
-.go{flex:none;align-self:center;margin:0 12px 0 4px;width:42px;height:42px;border-radius:50%;border:0;background:var(--brand);color:var(--on-brand);display:grid;place-items:center}
-.go.lockd{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
-.empty{margin:18px 0;padding:18px;border:2px dashed var(--line);border-radius:18px;color:var(--muted)}
-.foot{margin-top:28px;color:var(--muted);font-size:13.5px}
-
-/* formulaires */
-label{display:block;font-weight:700;margin:14px 0 6px}
-input[type=text],textarea{width:100%;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px;font-size:16px}
-textarea{min-height:84px;resize:vertical}
-.row{display:flex;gap:10px;align-items:center}
-.row input{flex:1}
-.err{color:var(--bad);font-weight:700;margin:10px 0 0}
-.cards{list-style:none;margin:14px 0 0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-.cards li{display:flex;gap:10px;justify-content:space-between;align-items:flex-start;padding:14px 16px;border-bottom:1px solid var(--line)}
-.cards li:last-child{border-bottom:0}
-.cards .q{font-weight:700;overflow-wrap:anywhere}
-.cards .a{color:var(--muted);overflow-wrap:anywhere;margin-top:2px}
-.cards .ok{flex:none;color:var(--good);font-weight:700;font-size:13px}
-
-/* progression et réglages */
-.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:16px 0 4px}
-.bar>i{display:block;height:100%;background:var(--good);width:var(--p,0%);transition:width .3s}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:var(--shadow)}
-.stat b{display:block;font-family:var(--font-d);font-size:24px;line-height:1.1}
-.stat span{font-size:12.5px;color:var(--muted)}
-.center{display:flex;justify-content:center;margin-top:18px}
-.prow{padding:14px 16px;border-bottom:1px solid var(--line)}
-.prow:last-child{border-bottom:0}
-.ph{display:flex;justify-content:space-between;gap:10px;font-weight:700}
-.ph span:last-child{color:var(--muted);font-weight:600;font-size:14px;white-space:nowrap}
-.pbar{height:9px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:8px}
-.pbar i{display:block;height:100%;background:var(--c,var(--brand));width:var(--p,0%)}
-.shead{font-size:13px;font-weight:700;color:var(--muted);margin:24px 4px 0}
-.group{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
-.srow{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);min-height:58px;flex-wrap:wrap}
-.srow:last-child{border-bottom:0}
-.st{flex:1;min-width:140px}
-.st b{display:block}
-.st span{font-size:13.5px;color:var(--muted);display:block}
-.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
-.seg button{border:0;background:none;padding:7px 11px;border-radius:9px;font-weight:600;color:var(--muted);min-height:36px;font-size:14px}
-.seg button.on{background:var(--brand);color:var(--on-brand)}
-
-/* barre d'onglets */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 20px rgba(14,42,56,.06)}
-.tabs{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 7px;background:none;border:0;color:var(--muted);font-size:12px;font-weight:700;min-height:60px}
-.tico{display:grid;place-items:center;width:54px;height:30px;border-radius:15px}
-.tab.on{color:var(--brand)}
-.tab.on .tico{background:var(--brand-soft)}
-
-/* carte retournable */
-.scene{margin-top:18px;perspective:1200px}
-.flip{position:relative;display:block;width:100%;min-height:340px;padding:0;border:0;background:none;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,.7,.2,1);text-align:center}
-.flip.is-flipped{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:26px 22px;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:auto}
-.face .side{font-size:14px;opacity:.75}
-.face .txt{font-family:var(--font-d);font-weight:500;font-size:clamp(19px,5.2vw,26px);line-height:1.3;overflow-wrap:anywhere}
-.front{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
-.back{background:var(--brand);color:var(--on-brand);transform:rotateY(180deg)}
-.hint{text-align:center;color:var(--muted);font-size:15px;margin:12px 0 0}
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-.answers[hidden]{display:none}
-.result{text-align:center;margin-top:36px}
-.result .big{font-family:var(--font-d);font-size:56px;font-weight:700;line-height:1;margin:14px 0 6px}
-.result .btn{margin-top:12px}
-
-/* fenêtres */
-.overlay{position:fixed;inset:0;z-index:20;background:rgba(6,20,28,.58);display:flex;align-items:flex-end;justify-content:center;padding:0}
-.sheet{width:100%;max-width:560px;background:var(--surface);border-radius:26px 26px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));max-height:90%;overflow:auto}
-.sheet ul{padding-left:20px;margin:14px 0}
-.sheet li{margin:6px 0}
-.sheet .btn{margin-top:10px}
-.sheet h3{margin-top:18px}
-.sheet .fb{margin-top:12px}
-.price{display:flex;gap:10px;margin:14px 0}
-.price>div{flex:1;border:1.5px solid var(--line);border-radius:16px;padding:12px;text-align:center;background:var(--surface2)}
-.price b{display:block;font-family:var(--font-d);font-size:22px}
-.price span{font-size:14px;color:var(--muted)}
-.pm{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
-.pm-l{flex:1;min-width:0}
-.pm-n{font-weight:700}
-.pm-v{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;overflow-wrap:anywhere;color:var(--muted);margin-top:2px}
-
-/* questions à cocher */
-.qcard{margin-top:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 20px 20px}
-.qcard .side,.learn .side{font-size:14px;color:var(--muted)}
-.qtxt{font-family:var(--font-d);font-weight:500;font-size:clamp(20px,5.3vw,25px);line-height:1.28;margin:6px 0 0;overflow-wrap:anywhere}
-.opts{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-.opt{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:56px;padding:12px 14px;border-radius:16px;border:2px solid var(--line);background:var(--surface);text-align:left}
-.opt .box{flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--muted);display:grid;place-items:center}
-.opt[role=radio] .box{border-radius:50%}
-.opt .otxt{flex:1;overflow-wrap:anywhere}
-.opt .tag{flex:none;font-size:13px;font-weight:700;white-space:nowrap}
-.opt.sel{border-color:var(--brand);background:var(--sel)}
-.opt.sel .box,.opt.good .box{background:var(--brand);border-color:var(--brand)}
-.opt.sel .box::after,.opt.good .box::after{content:"✓";color:var(--on-brand);font-size:15px;font-weight:700;line-height:1}
-.opt.sel[role=radio] .box::after,.opt.good[role=radio] .box::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--on-brand)}
-.opt.good{border-color:var(--good);background:var(--good-bg)}
-.opt.good .box{background:var(--good);border-color:var(--good)}
-.opt.good .tag,.opt.miss .tag{color:var(--good)}
-.opt.miss{border-color:var(--good);border-style:dashed}
-.opt.bad{border-color:var(--bad);background:var(--bad-bg)}
-.opt.bad .box{border-color:var(--bad)}
-.opt.bad .box::after{content:"✕";color:var(--bad);font-size:14px;font-weight:700;line-height:1}
-.opt.bad .tag{color:var(--bad)}
-.opt.off{opacity:.6}
-.opt:disabled{cursor:default}
-.assert{margin-top:12px;padding:18px 16px;border:2px solid var(--line);border-radius:16px;font-weight:600;background:var(--surface);overflow-wrap:anywhere}
-.assert.good{border-color:var(--good);background:var(--good-bg)}
-.assert.bad{border-color:var(--bad);background:var(--bad-bg)}
-.fb{margin-top:16px;padding:12px 14px;border-radius:14px;font-weight:700}
-.fb.good{background:var(--good-bg);color:var(--good)}
-.fb.bad{background:var(--bad-bg);color:var(--bad)}
-.learn{margin-top:12px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
-.learn p{margin:4px 0 0;overflow-wrap:anywhere}
-.install{display:flex;align-items:center;gap:12px;margin-top:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
-.install .it{flex:1;min-width:0}.install b{display:block}.install span{font-size:13.5px;color:var(--muted)}
-.seg.cs{margin-top:10px}.seg.cs button{flex:1;min-height:42px;font-size:15px}
-@media (prefers-reduced-motion: reduce){.flip,.bar>i,.rg-fg{transition:none}}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:17px;line-height:1.5;}
+.wrap{max-width:560px;margin:0 auto;padding:18px 18px 60px;}
+h1,h2,h3{font-family:var(--font-d);margin:0;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:14px;border:2px solid var(--brand);background:var(--brand);color:var(--on-brand);font-weight:700;cursor:pointer;text-decoration:none;}
+.list{list-style:none;margin:12px 0 0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;}
+.lrow{display:flex;align-items:center;border-bottom:1px solid var(--line);padding:12px 16px;}
+.lrow:last-child{border-bottom:0;}
+.ltxt{flex:1;}
+.deck-name{font-weight:700;font-size:16px;}
+.deck-meta{font-size:13px;color:var(--muted);}
+.hero{margin-top:12px;padding:22px;border-radius:24px;color:#fff;background:linear-gradient(140deg,var(--hero1),var(--hero2));box-shadow:var(--shadow);}
+.hero h2{font-size:26px;color:#fff;margin-bottom:6px;}
+.hero p{margin:0;opacity:.9;}
 </style>
 </head>
 <body>
-<div class="wrap" id="app"></div>
+<div class="wrap" id="app">
+  <div class="hero">
+    <h2>Recto – Géographie & Cours RDC</h2>
+    <p>Chargement des fichiers modulaires de cours en cours...</p>
+  </div>
+</div>
+
+<!-- ================================================================= -->
+<!-- CHARGEMENT DES FICHIERS DE MATIÈRES SÉPARÉS                       -->
+<!-- Vous pourrez ajouter d'autres fichiers ici (ex: chimie.js, etc.)  -->
+<!-- ================================================================= -->
+<script src="geographie.js"></script>
+<!-- <script src="chimie.js"></script> -->
 
 <script>
 (function(){
-  var KEY = 'recto:v1';
-  var FREE_DECKS = 3, FREE_CARDS = 25, MIX_SIZE = 15;
-  var memory = null;
+  // Assemblage dynamique de tous les cours chargés depuis les différents fichiers
+  var COURSE = [].concat(
+    window.COURSE_GEO || []
+    // window.COURSE_CHIMIE || [] // Prêt pour vos futurs fichiers !
+  );
 
-  /* ================== CONTENU DU PROGRAMME ================== */
-  function L(n, t, c){ return { id:'g' + n.replace(/[^0-9A-Za-z]/g, '_'), n:n, t:t, c:c }; }
+  var app = document.getElementById('app');
 
-  var COURSE = [
-  { t:'Notions clés du développement', ch:[
-    { t:'Objectif terminal du programme', free:true, ls:[
-      L('N1','Indices et facteurs de développement',[
-        ['Que doit savoir faire l’élève à la fin de la 6e année, selon le programme ?','Déterminer les indices et les facteurs de développement, ainsi que les solutions appropriées au sous-développement de la RDC et de l’Afrique.'],
-        ['Citez des indices de développement.','Revenu par habitant (PIB/hab.), indice de développement humain (IDH), espérance de vie, taux d’alphabétisation, mortalité infantile, accès à l’eau potable et à l’électricité, taux d’urbanisation.'],
-        ['Qu’est-ce que l’IDH ?','L’indice de développement humain, calculé par le PNUD. Il combine la santé (espérance de vie), l’éducation et le niveau de vie (revenu par habitant).'],
-        ['Citez des facteurs de développement.','Naturels (ressources, climat, position), humains (population, formation), économiques (capitaux, infrastructures, industries) et politiques (paix, bonne gouvernance).'],
-        ['Quelle différence entre croissance économique et développement ?','La croissance est l’augmentation de la production (PIB). Le développement est plus large : il améliore durablement la santé, l’éducation et les conditions de vie de la population.'],
-        ['Quelles sont les causes du sous-développement en Afrique ?','Héritage colonial (économies tournées vers l’exportation de matières premières), dépendance aux produits bruts, dette, conflits, mauvaise gouvernance, manque d’infrastructures et de formation, croissance rapide de la population.'],
-        ['Pourquoi le pouvoir de négociation de l’Afrique est-il faible dans les forums internationaux ?','Ses économies sont faibles et dépendantes des matières premières et de l’aide, ses États sont divisés et peu intégrés, et les prix de ses produits sont fixés sur les marchés mondiaux.'],
-        ['Que signifie la dégradation des termes de l’échange ?','Les prix des matières premières exportées baissent ou stagnent, alors que ceux des produits manufacturés importés augmentent : il faut exporter toujours plus pour acheter la même chose.'],
-        ['Quelles solutions face au sous-développement ?','Diversifier et transformer sur place, investir dans l’éducation et la santé, construire des infrastructures, assurer la paix et la bonne gouvernance, intégrer les économies africaines, moderniser l’agriculture.']
-      ]),
-      L('N2','Lire et réaliser une carte thématique',[
-        ['Qu’est-ce qu’une carte thématique ?','Une carte qui représente un seul thème (climats, mines, population, transports…) à partir de données géographiques recueillies, sur un fond de carte.'],
-        ['Quels éléments doit contenir une carte ?','Un titre, une légende, une échelle, l’orientation (le nord) et la source des données.'],
-        ['À quoi sert la légende ?','À expliquer les signes, les couleurs et les symboles utilisés sur la carte.'],
-        ['Que signifie une échelle de 1/1 000 000 ?','1 cm sur la carte représente 1 000 000 cm sur le terrain, soit 10 km.'],
-        ['Comment réaliser une carte thématique ?','Choisir le thème, rassembler les données, préparer le fond de carte, choisir signes et couleurs, tracer, puis ajouter titre, légende, échelle et source.'],
-        ['Quels outils servent à comparer des données statistiques ?','Les tableaux et les graphiques : courbes, histogrammes et diagrammes circulaires, utilisés avec les cartes.']
-      ])
-    ]}
-  ]},
+  function renderHome() {
+    if (!COURSE || COURSE.length === 0) {
+      app.innerHTML = `
+        <div class="hero">
+          <h2>Aucun cours trouvé</h2>
+          <p>Vérifiez que le fichier <strong>geographie.js</strong> est bien présent dans le même dossier.</p>
+        </div>`;
+      return;
+    }
 
-  { t:'Première partie : la République démocratique du Congo', ch:[
+    var html = `
+      <div class="hero">
+        <h2>Recto – Géographie (RDC)</h2>
+        <p>Application modulaire prête pour l'intégration de nouvelles matières.</p>
+      </div>
+    `;
 
-    { t:'Chapitre I. La nature et les hommes', free:true, ls:[
-      L('1','Présentation de la RDC',[
-        ['Où se situe la RDC en Afrique ?','Au cœur de l’Afrique centrale, à cheval sur l’équateur : l’essentiel du pays se trouve dans l’hémisphère sud.'],
-        ['Quelle est la superficie de la RDC ?','Environ 2 345 409 km², soit le deuxième plus grand pays d’Afrique après l’Algérie (plus de 75 fois la Belgique).'],
-        ['Quels sont les neuf pays voisins de la RDC ?','Congo-Brazzaville, Centrafrique, Soudan du Sud, Ouganda, Rwanda, Burundi, Tanzanie, Zambie et Angola.'],
-        ['Pourquoi dit-on que la RDC est semi-enclavée ?','Elle n’a qu’un étroit accès à l’océan Atlantique, d’environ 40 km (Muanda–Banana), à l’embouchure du fleuve Congo.'],
-        ['Quels sont les trois types d’atouts de la RDC ?','Des potentialités physiques (fleuve, forêt, sols, climat), humaines (population nombreuse et jeune) et économiques (mines, énergie, agriculture, tourisme).'],
-        ['Quelles contraintes le programme cite-t-il ?','Le semi-enclavement, des frontières difficiles à surveiller et des moyens de communication inadaptés.'],
-        ['Pourquoi les frontières sont-elles difficiles à surveiller ?','Elles sont très longues (plus de 10 000 km), traversent forêts, fleuves et lacs, et manquent de postes de contrôle équipés.'],
-        ['Quelle est la capitale de la RDC ?','Kinshasa, sur la rive sud du fleuve Congo, face à Brazzaville, capitale du Congo voisin.']
-      ]),
-      L('2','Structure et relief',[
-        ['Décrivez la structure générale du relief de la RDC.','Une vaste cuvette centrale (300 à 500 m d’altitude) entourée de plateaux étagés, puis de hautes terres et de montagnes à l’Est et au Sud-Est.'],
-        ['Qu’est-ce que la cuvette centrale ?','Une grande dépression au centre du pays, drainée par le fleuve Congo et couverte surtout de forêt équatoriale et de marécages.'],
-        ['Citez des plateaux importants.','Les plateaux des Batéké (Ouest), du Kwango (Bandundu) et ceux du Katanga (Biano, Manika, Kundelungu).'],
-        ['Citez les principales montagnes.','Les monts Mitumba et le Rwenzori (Est), les monts Virunga (volcans), les Monts Bleus et le massif du Mayombe (Bas-Congo).'],
-        ['Quel est le plus haut sommet lié à la RDC ?','Le pic Marguerite (5 109 m), dans le massif du Rwenzori, à la frontière avec l’Ouganda.'],
-        ['Qu’est-ce que le Rift (fossé d’effondrement) ?','Une longue cassure de l’écorce terrestre à l’Est. Il abrite les lacs Albert, Édouard, Kivu et Tanganyika, et explique les volcans et les séismes.'],
-        ['Quels volcans sont actifs en RDC ?','Le Nyiragongo et le Nyamuragira, dans les monts Virunga (Nord-Kivu).'],
-        ['Quel avantage économique pour chaque milieu ?','Cuvette : agriculture, forêt, pêche. Plateaux : élevage et mines (Katanga). Montagnes : climat frais, cultures, tourisme. Chutes et rapides : hydroélectricité.']
-      ]),
-      L('3-4','Climat, sols et végétation',[
-        ['Quels sont les trois grands types de climat de la RDC ?','Équatorial (cuvette centrale), tropical humide (au Nord et au Sud) et climat de montagne (hautes terres de l’Est).'],
-        ['Caractéristiques du climat équatorial ?','Chaud (25 à 27 °C en moyenne), humide, avec des pluies abondantes toute l’année et de faibles écarts de température.'],
-        ['Caractéristiques du climat tropical humide ?','Chaud, avec deux saisons contrastées (pluies et sèche), la saison sèche s’allongeant vers le Sud.'],
-        ['Quelles sont les principales formations végétales ?','Forêt dense équatoriale (cuvette), forêts claires et savanes (Nord, Sud, Ouest), végétation de montagne étagée (Est) et mangroves (côte).'],
-        ['Quelle place occupe la forêt congolaise dans le monde ?','C’est la deuxième plus grande forêt tropicale du monde après l’Amazonie ; elle joue un rôle majeur pour le climat et la biodiversité.'],
-        ['Quels types de sols trouve-t-on ?','Ferralitiques (rouges, acides, pauvres, dominants), alluviaux (fertiles, vallées), volcaniques (très fertiles, Nord-Kivu) et sableux (pauvres, plateaux Batéké).'],
-        ['Pourquoi les sols ferralitiques sont-ils pauvres ?','Les fortes pluies lessivent les éléments nutritifs. Seule la mince couche d’humus de la forêt entretient leur fertilité, d’où la nécessité de jachères.'],
-        ['Quels sont les atouts du climat, des sols et de la végétation ?','Grande variété de cultures, bois précieux (limba, wengé, sapelli), pâturages, biodiversité.'],
-        ['Quelles sont les contraintes ?','Forêt difficile à pénétrer, sols lessivés et érosion, maladies tropicales (paludisme, maladie du sommeil), mouche tsé-tsé qui gêne l’élevage.']
-      ]),
-      L('5','Protection de la nature et tourisme',[
-        ['Quel est le plus ancien parc national d’Afrique ?','Le parc national des Virunga (Nord-Kivu), créé en 1925.'],
-        ['Citez des parcs nationaux et réserves de la RDC.','Virunga, Garamba, Salonga, Maïko, Upemba, Kundelungu, Kahuzi-Biega, parc marin des Mangroves et réserve de faune à okapis (Epulu).'],
-        ['Quel est le plus grand parc de forêt tropicale d’Afrique ?','La Salonga, qui s’étend sur l’Équateur, le Bandundu et le Kasaï Occidental dans l’ancien découpage.'],
-        ['Quels animaux emblématiques trouve-t-on ?','Gorille de montagne (Virunga), gorille de plaine (Kahuzi-Biega), bonobo (propre à la RDC), okapi (Epulu), éléphants (Garamba).'],
-        ['Combien de sites naturels de la RDC sont au patrimoine mondial de l’UNESCO ?','Cinq : Virunga, Garamba, Kahuzi-Biega, Salonga et la réserve de faune à okapis.'],
-        ['Pourquoi protéger la nature ?','Pour préserver la biodiversité, réguler le climat, garder des ressources pour l’avenir et profiter du tourisme.'],
-        ['Quelle est l’importance du tourisme dans l’économie ?','Il rapporte des devises, crée des emplois, finance la conservation et fait connaître le pays.'],
-        ['Quels équipements manquent au tourisme congolais ?','Hôtels, routes, aéroports, guides formés, centres d’accueil et promotion. L’insécurité et le braconnage freinent aussi le secteur.'],
-        ['À quoi sert la carte touristique ?','À localiser les parcs, réserves, chutes, lacs et sites historiques, pour planifier leur aménagement.']
-      ]),
-      L('6','Hydrographie',[
-        ['Quelle est la longueur du fleuve Congo et son rang ?','Environ 4 700 km. Deuxième fleuve d’Afrique après le Nil et deuxième du monde par le débit après l’Amazone.'],
-        ['Où le fleuve Congo prend-il naissance et où se jette-t-il ?','Il naît au Katanga sous le nom de Lualaba et se jette dans l’océan Atlantique, à Muanda–Banana.'],
-        ['Pourquoi le débit du Congo est-il régulier ?','Il traverse l’équateur deux fois et reçoit des affluents des deux hémisphères, dont les saisons des pluies se compensent.'],
-        ['Citez les principaux affluents du Congo.','Rive droite : Ubangi, Itimbiri, Aruwimi, Lindi. Rive gauche : Kasaï (avec Kwango, Kwilu, Sankuru, Lulua), Lomami, Lulonga.'],
-        ['Quels obstacles à la navigation sur le fleuve ?','Les chutes Boyoma (Kisangani) et les rapides entre Kinshasa et Matadi (chutes Livingstone). Le bief Kinshasa–Kisangani, navigable, fait environ 1 700 km.'],
-        ['Quel est l’élargissement du fleuve entre Kinshasa et Brazzaville ?','Le Pool Malebo (ancien Stanley Pool).'],
-        ['Citez les principaux lacs de la RDC.','Tanganyika, Kivu, Albert, Édouard, Moero (Mweru), Upemba, Mai-Ndombe et Tumba.'],
-        ['Que dit-on du lac Tanganyika ?','C’est le deuxième lac le plus profond du monde, partagé avec la Tanzanie, le Burundi et la Zambie.'],
-        ['Quels sont les avantages économiques de l’hydrographie ?','Transport, pêche, hydroélectricité, eau potable, irrigation et tourisme.']
-      ]),
-      L('7','Population',[
-        ['Combien d’habitants compte la RDC ?','Plus de 100 millions d’après les estimations récentes ; le dernier recensement général date de 1984.'],
-        ['Quelle est la composition de la population ?','Plus de 200 groupes ethniques, en majorité bantous, avec aussi des peuples soudanais, nilotiques et pygmées.'],
-        ['Quelle est la structure par âge ?','Une population très jeune, avec une natalité élevée : la pyramide des âges a une base large et un sommet étroit.'],
-        ['Comment évolue la population ?','Elle croît rapidement (environ 3 % par an) et double en une vingtaine d’années.'],
-        ['Quelle est la densité moyenne ?','Environ 40 habitants au km², mais très inégalement répartis.'],
-        ['Quelles régions sont denses ou peu peuplées ?','Denses : Kinshasa, Bas-Congo, Kivu, Kasaï, Katanga minier. Peu peuplées : cuvette centrale forestière et zones enclavées.'],
-        ['Quels facteurs expliquent la répartition ?','Attirent : climat favorable, sols fertiles, mines, villes, voies de communication, sécurité. Repoussent : forêt dense, marécages, enclavement, insécurité.'],
-        ['Quelles sont les langues du pays ?','Langue officielle : le français. Quatre langues nationales : kikongo, lingala, swahili et tshiluba.'],
-        ['Quelles sont les religions principales ?','Majorité chrétienne (catholiques, protestants, kimbanguistes…), minorité musulmane et croyances traditionnelles.']
-      ]),
-      L('8','Développement urbain',[
-        ['Qu’est-ce que le taux d’urbanisation ?','La part de la population totale qui vit dans les villes (proche de la moitié en RDC).'],
-        ['Quelles sont les causes de l’urbanisation rapide ?','Exode rural, croissance naturelle, recherche d’emploi et de services, insécurité dans les campagnes.'],
-        ['Quels types de villes selon la fonction ?','Administratives (Kinshasa), portuaires (Matadi, Boma), minières (Lubumbashi, Kolwezi, Mbuji-Mayi), commerciales, universitaires (Kinshasa, Lubumbashi, Kisangani), touristiques (Goma, Bukavu).'],
-        ['Citez les principales villes.','Kinshasa (la plus grande), Lubumbashi, Mbuji-Mayi, Kananga, Kisangani, Bukavu, Goma, Tshikapa, Kolwezi, Likasi.'],
-        ['Quels problèmes rencontrent les villes congolaises ?','Logement et habitat spontané, eau potable, électricité, assainissement et ordures, chômage et secteur informel, embouteillages, érosion, insécurité.'],
-        ['Quelles solutions ?','Planification urbaine, cadastre, infrastructures, création d’emplois et développement des campagnes pour freiner l’exode rural.'],
-        ['Qu’est-ce qu’une ville ?','Une agglomération importante qui concentre les habitants, les activités non agricoles (commerce, industrie, services) et les fonctions administratives.']
-      ])
-    ]},
+    COURSE.forEach(function(part, pIdx) {
+      html += `<h3 style="margin-top:24px;font-size:20px;color:var(--brand);">${part.t}</h3>`;
+      part.ch.forEach(function(chap, cIdx) {
+        html += `<div style="margin-top:12px;font-weight:700;color:var(--muted);font-size:14px;">${chap.t}</div>`;
+        html += `<ul class="list">`;
+        chap.ls.forEach(function(les) {
+          html += `
+            <li class="lrow">
+              <div class="ltxt">
+                <span class="deck-name">${les.n}</span>
+                <span class="deck-meta">${les.c.length} questions / fiches disponibles</span>
+              </div>
+            </li>
+          `;
+        });
+        html += `</ul>`;
+      });
+    });
 
-    { t:'Chapitre II. Aspects économiques', free:false, ls:[
-      L('9-10','Caractères généraux de l’économie',[
-        ['Qu’est-ce que le dualisme de l’économie congolaise ?','La coexistence d’un secteur moderne tourné vers l’exportation (mines, industries) et d’un secteur traditionnel de subsistance (agriculture), faiblement reliés.'],
-        ['Que veut dire économie peu dynamique (désarticulée) ?','Les secteurs ne s’alimentent pas entre eux : peu de transformation locale, infrastructures insuffisantes, faible circulation des richesses.'],
-        ['Que veut dire économie extravertie ?','Tournée vers l’extérieur : elle exporte des matières premières brutes (cuivre, cobalt, diamants, bois) et importe des produits manufacturés et alimentaires.'],
-        ['Que veut dire économie de type agricole ?','La majorité de la population active vit de l’agriculture, souvent de subsistance et à faible productivité.'],
-        ['Pourquoi l’économie est-elle fragile ?','Elle dépend de quelques produits d’exportation dont les prix varient sur le marché mondial, et son dualisme limite la croissance.'],
-        ['Qu’est-ce que le secteur informel ?','Les activités non déclarées (petit commerce, transport, artisanat) qui emploient la majorité des citadins.'],
-        ['Quels remèdes aux faiblesses de l’économie ?','Diversifier l’économie, transformer sur place, relier les secteurs, développer les infrastructures et former la main-d’œuvre.']
-      ]),
-      L('11-12','Agriculture, pêche, élevage et forêt',[
-        ['Quels sont les systèmes de production agricole ?','Agriculture itinérante sur brûlis (traditionnelle, vivrière), plantations agro-industrielles et agriculture paysanne autour des villes.'],
-        ['Quelles sont les principales cultures vivrières ?','Manioc (aliment de base), maïs, riz, banane plantain, haricot, arachide, patate douce, igname.'],
-        ['Quelles sont les cultures d’exportation ?','Café, cacao, huile de palme, caoutchouc (hévéa), thé et quinquina (Kivu), coton, canne à sucre.'],
-        ['Où cultive-t-on quoi ?','Palmier à huile : Bandundu, Équateur, Bas-Congo. Café, thé : Kivu. Cacao, hévéa : Équateur. Canne à sucre : Bas-Congo.'],
-        ['Citez de grandes sociétés agro-industrielles.','Plantations et Huileries du Congo (PHC) et la sucrerie de Kwilu-Ngongo (Bas-Congo), par exemple.'],
-        ['Comment se pratiquent la pêche et l’élevage ?','Pêche artisanale sur le fleuve et les lacs (Tanganyika, Mai-Ndombe), très peu de pêche maritime. Élevage limité par la mouche tsé-tsé, plus développé au Kivu et au Katanga.'],
-        ['Que produit l’exploitation forestière ?','Bois d’œuvre (limba, wengé, sapelli, acajou), bois de chauffe et makala. Problèmes : exploitation illégale et déforestation.'],
-        ['Qu’est-ce que la crise agricole ?','La production ne suffit plus à nourrir le pays, qui importe maïs, riz, blé, poisson et volaille.'],
-        ['Quelles sont les causes de la crise agricole ?','Routes de desserte dégradées, outils rudimentaires, semences peu performantes, manque de crédit, insécurité, exode rural, conservation et commercialisation difficiles.']
-      ]),
-      L('13','Le secteur minier',[
-        ['Quelle est l’importance du secteur minier ?','Les mines fournissent l’essentiel des exportations et des devises de la RDC.'],
-        ['Que signifie « scandale géologique » ?','Le contraste entre un sous-sol extrêmement riche, encore peu prospecté et sous-exploité, et un pays qui reste pauvre.'],
-        ['Quels minerais trouve-t-on au Katanga ?','Cuivre, cobalt, zinc, étain, manganèse, uranium, charbon (Luena) et lithium (Manono).'],
-        ['Où trouve-t-on les diamants ?','Kasaï Oriental (Mbuji-Mayi, MIBA), Kasaï Occidental (Tshikapa) et Province Orientale (Kisangani).'],
-        ['Où trouve-t-on l’or ?','En Ituri (Kilo-Moto, OKIMO), dans le Kivu et au Maniema.'],
-        ['Où trouve-t-on l’étain et le coltan ?','Cassitérite (étain) et coltan dans le Kivu et le Maniema, et aussi au Katanga.'],
-        ['Où exploite-t-on le pétrole ?','Au littoral, à Muanda (Bas-Congo), en mer. D’autres ressources existent mais sont peu exploitées.'],
-        ['Quelle place pour le cobalt ?','La RDC est le premier producteur mondial de cobalt, métal utilisé dans les batteries.'],
-        ['Citez les principales sociétés productrices.','Gécamines (cuivre, cobalt), MIBA (diamant), OKIMO (or), KCC et TFM (Kolwezi, Fungurume).'],
-        ['Quelles sont les provinces minières ?','Katanga, Kasaï Oriental et Occidental, Province Orientale, Kivu, Maniema (et Bas-Congo pour le pétrole).'],
-        ['Quels problèmes pose le secteur minier ?','Exploitation artisanale dangereuse, fraude et contrebande, minerais liés aux conflits, peu de transformation sur place, manque d’énergie, pollution.']
-      ]),
-      L('14-15','Les sources d’énergie',[
-        ['Quelles sont les principales sources d’énergie ?','Bois de chauffage et makala, houille, pétrole, gaz naturel, hydroélectricité et uranium (le solaire reste à développer).'],
-        ['Quelle est la première source d’énergie des ménages ?','Le bois de chauffe et le charbon de bois (makala), ce qui accélère la déforestation.'],
-        ['Où trouve-t-on la houille ?','Au Katanga, notamment à Luena.'],
-        ['Où exploite-t-on pétrole et gaz ?','Pétrole : littoral de Muanda. Gaz méthane : lac Kivu (potentiel important).'],
-        ['Citez des barrages hydroélectriques.','Inga I et II et Zongo (Bas-Congo), Nzilo, Mwadingusha et Koni (Katanga), Ruzizi (Sud-Kivu), Tshopo (Kisangani), Lubilanji (Kasaï Oriental), Mobayi-Mbongo (Équateur).'],
-        ['Quel est le plus grand site hydroélectrique ?','Inga, sur le bas Congo, près de Matadi. Le projet Grand Inga viserait environ 40 000 MW.'],
-        ['Quel est le potentiel hydroélectrique de la RDC ?','Estimé autour de 100 000 MW, parmi les plus élevés d’Afrique, mais exploité en très petite partie.'],
-        ['Quels sont les avantages de l’hydroélectricité ?','Énergie renouvelable, peu polluante, peu chère à long terme, utile à l’industrie et aux mines.'],
-        ['Quels sont les inconvénients des sources d’énergie ?','Bois : déforestation. Houille et pétrole : pollution de l’air, de l’eau et du sol. Barrages : coût élevé, populations déplacées, impact sur l’environnement.'],
-        ['Quels problèmes pour l’électricité ?','Faible accès (environ un habitant sur cinq), réseau vétuste, délestages. La SNEL est l’entreprise nationale d’électricité.']
-      ]),
-      L('16-17','Les industries',[
-        ['Que veut dire pays faiblement industrialisé ?','L’industrie pèse peu dans l’économie ; elle se limite surtout à l’extraction et à la première transformation.'],
-        ['Quels types d’industries existent ?','Extractives (mines), alimentaires (brasseries, minoteries, huileries, sucreries), textiles, chimiques, matériaux de construction (ciment), métallurgiques, bois.'],
-        ['Donnez des exemples d’industries.','Brasseries (Bralima, Bracongo), textile (Utexafrica, Kinshasa), sidérurgie (Sosider, Maluku), ciment (Lukala), raffinerie Sozir (Moanda).'],
-        ['Qu’est-ce qu’une industrialisation incomplète et peu intégrée ?','Peu d’industries lourdes ; les usines dépendent d’intrants importés et ne sont pas reliées entre elles, d’où une faible valeur ajoutée.'],
-        ['Quelles en sont les conséquences ?','Dépendance aux importations, chômage, peu de richesses créées et exportation de matières premières brutes.'],
-        ['Comment les industries sont-elles réparties ?','Mal : concentrées à Kinshasa, au Bas-Congo (Matadi, Boma, Lukala) et au Katanga (Lubumbashi, Likasi, Kolwezi), très peu ailleurs.'],
-        ['Pourquoi si peu d’industrialisation ?','Manque d’énergie, de capitaux et de routes, marché intérieur à faible pouvoir d’achat, instabilité, concurrence des importations.'],
-        ['Quelles solutions pour industrialiser ?','Énergie fiable, zones économiques spéciales, transformation des minerais sur place, crédit, formation, climat favorable aux investissements.']
-      ]),
-      L('18','Les transports',[
-        ['Quelle est l’importance des transports ?','Ils désenclavent les régions, permettent les échanges, relient les provinces, favorisent l’unité nationale et l’accès aux services.'],
-        ['Quels sont les principaux réseaux de communication ?','Routier, ferroviaire, maritime, fluvial et lacustre, aérien.'],
-        ['Citez des lignes de chemin de fer.','Matadi–Kinshasa, Lubumbashi–Ilebo (Voie nationale), réseaux de l’Est (Kindu–Kalemie), Kisangani–Ubundu et Nord-Est (Vicicongo).'],
-        ['Qu’est-ce que la Voie nationale ?','Un itinéraire multimodal reliant le Katanga à Kinshasa : rail Lubumbashi–Ilebo, puis fleuve Kasaï et Congo.'],
-        ['Quels sont les ports maritimes ?','Matadi (principal), Boma, et le projet de port en eau profonde à Banana.'],
-        ['Que sait-on du transport fluvial et lacustre ?','Le Congo et ses affluents offrent plus de 14 000 km de voies navigables. Ports : Kinshasa, Mbandaka, Kisangani, Ilebo, Kindu. Lacs : Tanganyika (Kalemie), Kivu (Goma, Bukavu).'],
-        ['Pourquoi le fleuve est-il important ?','C’est la voie naturelle de pénétration vers l’intérieur : navigable sur environ 1 700 km entre Kinshasa et Kisangani.'],
-        ['Où sont les grands aéroports ?','N’djili (Kinshasa), Luano (Lubumbashi), Bangboka (Kisangani) et Goma. L’avion relie les régions enclavées.'],
-        ['Qu’est-ce que le désenclavement ?','Rendre accessibles les régions isolées et le pays lui-même : réhabiliter routes, rail et ports et ouvrir des corridors vers Dar es Salaam, Durban, Beira, Lobito.'],
-        ['Quels sont les problèmes des transports ?','Routes en terre mal entretenues, rail et bateaux vétustes, aéroports peu équipés, coûts élevés, insécurité.']
-      ])
-    ]},
+    app.innerHTML = html;
+  }
 
-    { t:'Chapitre III. Les services', free:false, ls:[
-      L('19','Le commerce',[
-        ['Comment fonctionne le commerce intérieur ?','Échanges entre villes et campagnes (vivres vers les villes, produits manufacturés vers les campagnes) et entre provinces (Kinshasa s’approvisionne dans le Bandundu, l’Équateur, le Bas-Congo).'],
-        ['Que la RDC exporte-t-elle ?','Cuivre, cobalt, diamants, or, pétrole, bois, café.'],
-        ['Que la RDC importe-t-elle ?','Produits alimentaires, biens de consommation, machines, véhicules, carburants, médicaments.'],
-        ['Qu’est-ce que la balance commerciale ?','La différence entre la valeur des exportations et celle des importations : excédentaire si les exportations dominent, déficitaire sinon.'],
-        ['Quels sont les principaux partenaires économiques ?','Chine, Afrique du Sud, Zambie, Belgique, France, États-Unis, Union européenne (l’ordre varie selon les années).'],
-        ['Quelles sont les caractéristiques du commerce national ?','Dominé par l’informel, exportations de produits bruts, importations de produits finis, forte dépendance aux cours mondiaux.']
-      ]),
-      L('20','L’enseignement',[
-        ['Quels sont les secteurs de l’enseignement ?','Éducation maternelle, enseignement primaire, secondaire (général, normal, technique), supérieur et universitaire.'],
-        ['Quelle est la finalité de l’enseignement ?','Former le citoyen congolais responsable, utile à lui-même et à la société, capable de promouvoir le développement du pays et la culture nationale.'],
-        ['Quels établissements forment l’enseignement supérieur et universitaire ?','Universités, instituts supérieurs pédagogiques (ISP), techniques médicaux (ISTM), de commerce (ISC) et autres instituts.'],
-        ['Quelles furent les premières universités du pays ?','Lovanium (Kinshasa, 1954), Université officielle du Congo (Lubumbashi, 1955) et Université libre du Congo (Kisangani, 1963).'],
-        ['Où se localisent les établissements supérieurs ?','Dans les grandes villes, surtout Kinshasa, Lubumbashi et Kisangani, puis dans les chefs-lieux de province.'],
-        ['Quels sont les problèmes majeurs de l’enseignement ?','Manque d’écoles et de manuels, classes surchargées, salaires faibles des enseignants, frais de scolarité, enfants hors de l’école, chômage des diplômés.'],
-        ['Que s’est-il passé en 2019 pour le primaire ?','Depuis la rentrée 2019, l’enseignement primaire public est déclaré gratuit.'],
-        ['À quoi sert la carte scolaire ?','À montrer la répartition des écoles et des universités et à planifier les besoins.']
-      ]),
-      L('21','La santé',[
-        ['Comment est organisée la santé ?','En pyramide à trois niveaux : central (ministère), intermédiaire (province) et périphérique (zone de santé).'],
-        ['Qu’est-ce qu’une zone de santé ?','L’unité de base du système : elle regroupe plusieurs aires de santé, avec un hôpital général de référence et des centres de santé. Il y en a plus de 500.'],
-        ['Que sont les soins de santé primaires ?','Prévention, vaccination, soins de base, hygiène et nutrition, au plus près de la population.'],
-        ['Quelles sont les maladies majeures ?','Paludisme, tuberculose, VIH/sida, rougeole, choléra, fièvre typhoïde, mpox et Ebola.'],
-        ['Que sait-on d’Ebola ?','Découvert en 1976 près de la rivière Ebola (Yambuku, Équateur). La RDC a connu plusieurs épidémies.'],
-        ['Quels problèmes de santé rencontre le pays ?','Manque de personnel, d’équipements et de médicaments, coût des soins, accès difficile, mortalité maternelle et infantile élevée, malnutrition.'],
-        ['Qu’est-ce qu’une carte nosologique ?','Une carte de la répartition des maladies sur le territoire.'],
-        ['Quelles solutions pour la santé ?','Former le personnel, approvisionner en médicaments, vacciner, assainir, fournir l’eau potable et financer une couverture santé pour tous.']
-      ])
-    ]},
-
-    { t:'Chapitre IV. Étude régionale', free:false, ls:[
-      L('22','Notion de région géographique',[
-        ['Qu’est-ce qu’une région géographique ?','Un espace présentant une unité de caractères physiques, humains ou économiques, qui le distingue des espaces voisins.'],
-        ['Quels sont les critères de régionalisation ?','Physiques (relief, climat, végétation), humains (peuplement, langues, cultures), économiques (activités, communications) et administratifs.'],
-        ['De quoi se compose la région Sud-Ouest ?','Kinshasa, Bandundu et Bas-Congo.'],
-        ['De quoi se compose la région centrale ?','Kasaï Occidental et Kasaï Oriental.'],
-        ['De quoi se compose la région de l’Est ?','Nord-Kivu, Sud-Kivu et Maniema.'],
-        ['De quoi se compose la région du Nord ?','Équateur et Province Orientale.'],
-        ['Quelle est la région du Sud-Est ?','Le Katanga.'],
-        ['Quels sont les chefs-lieux des 11 anciennes provinces ?','Kinshasa, Bandundu (ville), Matadi, Kananga, Mbuji-Mayi, Goma, Bukavu, Kindu, Mbandaka, Kisangani, Lubumbashi.'],
-        ['Combien de provinces compte la RDC aujourd’hui ?','26 (Kinshasa et 25 provinces) depuis le découpage de 2015. Le programme de 2005 utilise encore les 11 anciennes provinces.'],
-        ['En quelles provinces le Katanga, le Bandundu et le Bas-Congo ont-ils été divisés ?','Katanga : Haut-Katanga, Lualaba, Haut-Lomami, Tanganyika. Bandundu : Kwango, Kwilu, Mai-Ndombe. Bas-Congo : Kongo Central.'],
-        ['En quelles provinces l’Équateur et la Province Orientale ont-ils été divisés ?','Équateur : Équateur, Mongala, Nord-Ubangi, Sud-Ubangi, Tshuapa. Province Orientale : Tshopo, Bas-Uélé, Haut-Uélé, Ituri.'],
-        ['En quelles provinces les deux Kasaï ont-ils été divisés ? Et le Kivu ?','Kasaï Occidental : Kasaï, Kasaï-Central. Kasaï Oriental : Kasaï-Oriental, Lomami, Sankuru. Nord-Kivu, Sud-Kivu et Maniema restent inchangés.']
-      ]),
-      L('23','Le Bandundu',[
-        ['Où se situe le Bandundu et quel est son chef-lieu ?','À l’est de Kinshasa. Le chef-lieu est la ville de Bandundu.'],
-        ['Quelle est la spécificité du Bandundu ?','Province essentiellement agricole : manioc, maïs, arachide, palmier à huile, haricot.'],
-        ['Quelles autres activités économiques ?','Pêche (Kasaï, Kwango, Kwilu, lac Mai-Ndombe), élevage, exploitation artisanale, travaux d’ivoire, exploitation forestière.'],
-        ['Que dire de l’industrie ?','La production industrielle est faible.'],
-        ['Quels sont les sites touristiques ?','Les chutes Ntemo et le parc de la Salonga.'],
-        ['Quelle est la place de la province dans le pays ?','Grenier de Kinshasa : vivres (manioc, maïs…), bois et charbon de bois y arrivent par route et par rivière.'],
-        ['Quels sont ses problèmes ?','Routes et ponts dégradés, faible industrialisation, électricité insuffisante, déboisement.']
-      ]),
-      L('24','Le Bas-Congo',[
-        ['Quel est le chef-lieu du Bas-Congo et son atout géographique ?','Matadi. C’est la seule façade maritime du pays.'],
-        ['Quelle est la spécificité de la province ?','Port maritime (Matadi, Boma, Banana) et nombreuses chutes d’eau.'],
-        ['Quelles sont les productions agricoles ?','Banane, manioc, café, canne à sucre, huile de palme, cultures maraîchères.'],
-        ['Quelles productions industrielles et énergétiques ?','Barrages d’Inga et de Zongo, cimenterie de Lukala, raffinerie de Moanda, pétrole de Muanda, sucrerie de Kwilu-Ngongo.'],
-        ['Quels gisements ne sont pas exploités ?','Or, bauxite, mercure.'],
-        ['Quels sont les sites touristiques ?','Jardin botanique de Kisantu, grottes de Mbanza-Ngungu, parc marin des Mangroves, plages de Moanda.'],
-        ['Quelle est sa place dans le pays ?','Porte d’entrée et de sortie des marchandises, région stratégique reliée à Kinshasa par la route et le chemin de fer.'],
-        ['Quelles perspectives d’avenir ?','Port en eau profonde à Banana, extension de l’hydroélectricité (Inga) et exploitation des gisements.']
-      ]),
-      L('25','La ville de Kinshasa',[
-        ['Quel est le statut de Kinshasa ?','Capitale et ville-province, au bord du Pool Malebo, face à Brazzaville.'],
-        ['Quelle est sa spécificité ?','Premier pôle économique du pays et grand centre universitaire.'],
-        ['Quelles sont ses activités économiques ?','Production industrielle (brasserie, textile, alimentaire), premier centre commercial, agriculture périurbaine et cultures maraîchères.'],
-        ['Quels sont les sites touristiques ?','Cité de la N’sele, jardin botanique et zoologique, rapides de Kinsuka, chutes de la Lukunga, Joli Site, sports nautiques.'],
-        ['Comment se caractérise la croissance de la ville ?','Une croissance démographique et spatiale très rapide, due à la natalité et à l’exode rural.'],
-        ['Quelles en sont les conséquences ?','Habitat spontané, érosion et ravinement, manque d’eau et d’électricité, embouteillages, chômage, insalubrité, insécurité.'],
-        ['Quelles perspectives ?','Planification urbaine, assainissement, transports collectifs, décentralisation économique pour désengorger la capitale.'],
-        ['Quel fait remarquable lie Kinshasa à Brazzaville ?','Ce sont deux capitales voisines séparées seulement par le fleuve, parmi les plus proches du monde.']
-      ]),
-      L('27','Le Kasaï Occidental',[
-        ['Quel est le chef-lieu du Kasaï Occidental ?','Kananga.'],
-        ['Quelle est sa spécificité ?','L’exploitation artisanale du diamant (Tshikapa).'],
-        ['Quel est son artisanat ?','Le tissu « velours » (kuba) et la sculpture luba et tshokwe.'],
-        ['Quelles autres activités économiques ?','Produits agricoles (manioc, maïs, palmier à huile, arachide) et quelques productions industrielles.'],
-        ['Quels sont les sites touristiques ?','Lac Mukamba, chutes Katende, parc de la Salonga.'],
-        ['Quels sont sa place et ses problèmes ?','Province diamantifère mais enclavée : routes dégradées, fraude diamantaire, faible industrialisation.']
-      ]),
-      L('28','Le Kasaï Oriental',[
-        ['Quel est le chef-lieu du Kasaï Oriental ?','Mbuji-Mayi, l’une des plus grandes villes du pays.'],
-        ['Quelle est sa spécificité ?','C’est une province diamantifère.'],
-        ['Qu’est-ce que la MIBA ?','La Société minière de Bakwanga, principale société diamantifère du pays, installée à Mbuji-Mayi.'],
-        ['Quelles autres activités économiques ?','Produits agricoles, productions industrielles et hydroélectricité (Lubilanji).'],
-        ['Quels sont les sites touristiques ?','Le lac Mukamba et la MIBA.'],
-        ['Quels sont ses problèmes ?','Enclavement, érosion (ravins), croissance de la ville, problème foncier.']
-      ]),
-      L('29','Le Nord-Kivu',[
-        ['Quel est le chef-lieu du Nord-Kivu ?','Goma, sur le lac Kivu, au pied du volcan Nyiragongo.'],
-        ['Quelle est sa spécificité ?','Région touristique par excellence : parcs des Virunga et de la Maïko, lacs, volcans, eaux chaudes.'],
-        ['Quelles autres activités économiques ?','Agriculture (pommes de terre, haricots, café, thé), élevage, productions industrielles, mines (coltan, cassitérite, or).'],
-        ['Quelle est sa place dans le pays ?','Fournisseur de viande, de pommes de terre et de haricots.'],
-        ['Quels sont ses problèmes ?','Transport difficile, problèmes ethniques et de frontières, absence de districts autonomes, insécurité.'],
-        ['Quel risque volcanique menace Goma ?','Le Nyiragongo a détruit une partie de Goma en 2002 et a fait de nouveau éruption en 2021.'],
-        ['Quelles villes sont commerciales ?','Goma, Butembo et Beni.']
-      ]),
-      L('30','Le Sud-Kivu',[
-        ['Quel est le chef-lieu du Sud-Kivu ?','Bukavu, sur le lac Kivu.'],
-        ['Quelle est sa spécificité ?','Le tourisme : lac Kivu, île d’Idjwi, parc de Kahuzi-Biega.'],
-        ['Quelles sont ses autres activités économiques ?','Agriculture (café, thé, quinquina, banane), élevage, mines (or, cassitérite), industrie, hydroélectricité (Ruzizi).'],
-        ['Quelle est sa place dans le pays ?','Comme le Nord-Kivu, fournisseur de viande, de pommes de terre et de haricots.'],
-        ['Quels sont ses problèmes ?','Problèmes ethniques et de frontière, absence de districts autonomes, enclavement routier, insécurité.'],
-        ['Quel est le port du Sud-Kivu sur le lac Tanganyika ?','Uvira.']
-      ]),
-      L('31','Le Maniema',[
-        ['Quel est le chef-lieu du Maniema ?','Kindu, sur le fleuve Lualaba.'],
-        ['Quelle est sa spécificité ?','C’est une province enclavée, essentiellement agricole.'],
-        ['Quelles sont ses cultures principales ?','Riz, maïs, manioc, palmier à huile, café.'],
-        ['Quelles autres activités économiques ?','Mines (or, cassitérite, coltan), industrie, hydroélectricité.'],
-        ['Quel site touristique le programme cite-t-il ?','Le parc de la Maïko.'],
-        ['Quels sont ses problèmes ?','Enclavement, absence de districts autonomes, faibles infrastructures.']
-      ]),
-      L('32','L’Équateur',[
-        ['Quel est le chef-lieu de l’Équateur ?','Mbandaka, sur le fleuve Congo, ville traversée par l’équateur.'],
-        ['Quelle est sa spécificité ?','Province essentiellement agricole (café, cacao, hévéa, palmier, banane plantain, manioc, riz), avec de nombreuses voies navigables et de la pêche.'],
-        ['Quelles richesses du sous-sol ne sont pas exploitées ?','Or, diamant et hydrocarbures.'],
-        ['Quels sont les sites touristiques ?','Parcs et réserves (Salonga), chutes de Zongo, lacs (Tumba) et jardin botanique d’Eala.'],
-        ['Quelle est sa place dans le pays ?','Elle approvisionne Kinshasa (poisson, huile, banane plantain, bois) et abrite une réserve forestière classée patrimoine mondial.'],
-        ['Quels sont ses problèmes ?','Enclavement intérieur, routes absentes, dépendance du transport fluvial.']
-      ]),
-      L('33','La Province Orientale',[
-        ['Quel est le chef-lieu de la Province Orientale ?','Kisangani, sur le fleuve Congo, troisième pôle économique du pays selon le programme.'],
-        ['Quelle est sa particularité ?','C’est la province la plus vaste du pays, essentiellement agricole.'],
-        ['Quelles autres activités économiques ?','Mines (or de Kilo-Moto, diamants), industrie, hydroélectricité (Tshopo).'],
-        ['Quels sont les sites touristiques ?','Parcs de la Garamba et de la Maïko, réserve d’Epulu (okapis), station de dressage d’éléphants de Gangala na Bodio, rapides des Wagenia, lacs.'],
-        ['Qui sont les Wagenia ?','Des pêcheurs de Kisangani qui capturent le poisson avec des nasses installées sur les rapides du fleuve.'],
-        ['Quels sont sa place et ses problèmes ?','Approvisionnement de Kinshasa, « province martyre » (guerres), exploitation forestière, problèmes de frontières.']
-      ]),
-      L('34','Le Katanga',[
-        ['Quel est le chef-lieu du Katanga ?','Lubumbashi, deuxième ville du pays.'],
-        ['Quelle est la spécificité du Katanga ?','Province minière et industrielle : cuivre, cobalt, zinc, étain, uranium, manganèse, charbon.'],
-        ['Quelles villes minières ?','Lubumbashi, Likasi, Kolwezi, Kipushi.'],
-        ['Quelle hydroélectricité ?','Barrages de Mwadingusha, Koni, Nzilo et Nseke.'],
-        ['Quels produits agricoles ?','Maïs, manioc, haricots ; élevage sur les hauts plateaux.'],
-        ['Quels sont les sites touristiques ?','Parcs de l’Upemba et du Kundelungu, lacs Moero et Tanganyika, chutes de la Lofoi.'],
-        ['Quelle est sa place dans le pays ?','Poumon économique du pays, mais dépendant des mines, avec pollution, éloignement de Kinshasa et transport coûteux.'],
-        ['Par où sortent souvent les minerais ?','Par les ports de Durban, Dar es Salaam, Beira et Lobito.'],
-        ['En combien de provinces le Katanga a-t-il été divisé ?','En quatre : Haut-Katanga, Lualaba, Haut-Lomami et Tanganyika.']
-      ])
-    ]},
-
-    { t:'Chapitre V. Les perspectives d’avenir', free:false, ls:[
-      L('35','Agriculture : perspectives',[
-        ['Quelle est la situation actuelle de l’agriculture ?','Potentiel énorme (environ 80 millions d’hectares de terres arables, dont une faible part est cultivée), mais production insuffisante et dépendance aux importations alimentaires.'],
-        ['Quels efforts de développement ?','Relance des plantations, parcs agro-industriels (Bukanga Lonzo), semences améliorées, appui aux paysans et désenclavement des zones de production.'],
-        ['Comment critiquer l’organisation actuelle ?','Agriculture de subsistance, outils rudimentaires, faible encadrement, accès difficile aux marchés et au crédit, insécurité foncière.'],
-        ['Quelles solutions proposer ?','Routes de desserte, mécanisation, intrants, crédit agricole, formation, conservation et transformation sur place, sécurité.']
-      ]),
-      L('36','Industrie : perspectives',[
-        ['Quelle est la situation actuelle de l’industrie ?','Faible, concentrée, peu intégrée ; forte importation de produits finis.'],
-        ['Quels efforts de développement ?','Réhabilitation d’entreprises, zones économiques spéciales (Maluku, N’sele), code des investissements, projets énergétiques (Inga).'],
-        ['Pourquoi transformer les ressources sur place ?','Cela crée de la valeur ajoutée et des emplois, et réduit la dépendance aux importations.'],
-        ['Que doit-on montrer sur l’exploitation des ressources ?','Par quoi (quels moyens), pour qui et comment elles sont exploitées : souvent par des sociétés étrangères et pour l’exportation. La population doit en tirer un bénéfice.']
-      ]),
-      L('37','Infrastructures de base',[
-        ['Quelle est la situation des transports et quels efforts ?','Réseau vétuste et insuffisant. Programmes de réhabilitation des routes, du rail et des ports, et ouverture de corridors.'],
-        ['Quelle est la situation de la santé et quels efforts ?','Manque de structures et de personnel. Extension des zones de santé, vaccination, lutte contre les épidémies.'],
-        ['Quelle est la situation de l’enseignement et quels efforts ?','Écoles insuffisantes et mal équipées. Gratuité du primaire en 2019, construction d’écoles, formation des enseignants.'],
-        ['Pourquoi les infrastructures conditionnent-elles le développement ?','Sans routes, énergie, écoles et hôpitaux, ni l’agriculture, ni l’industrie, ni le capital humain ne peuvent progresser.']
-      ]),
-      L('38','Tourisme : perspectives',[
-        ['Quelle est la situation actuelle du tourisme ?','Potentiel immense (parcs, volcans, fleuve, lacs, culture) mais très peu exploité : peu de visiteurs, insécurité et équipements insuffisants.'],
-        ['Quels efforts de développement ?','Réhabilitation des parcs et des infrastructures, protection par l’ICCN, partenariats (par exemple à Virunga), promotion du pays.'],
-        ['Que faut-il pour développer le tourisme ?','Sécurité, routes et aéroports, hôtels, formation de guides, promotion à l’étranger, protection de la faune.']
-      ]),
-      L('39','La RDC et ses partenaires économiques',[
-        ['Quels sont les principaux partenaires économiques de la RDC ?','Chine, Afrique du Sud, Zambie, Belgique, France, États-Unis, Union européenne, Inde.'],
-        ['De quelles organisations africaines la RDC est-elle membre ?','Union africaine, SADC, COMESA, CEEAC, CEPGL et, depuis 2022, la Communauté d’Afrique de l’Est (EAC).'],
-        ['Quels efforts d’intégration ?','Adhésion aux groupements régionaux, corridors de transport, projets énergétiques communs (Ruzizi, Inga) et accords commerciaux.'],
-        ['Pourquoi diversifier les partenaires ?','Pour réduire la dépendance à un seul client, obtenir de meilleurs prix et attirer des investissements variés.']
-      ])
-    ]}
-  ]},
-
-  { t:'Deuxième partie : l’Afrique contemporaine', ch:[
-
-    { t:'Chapitre I. Généralités', free:true, ls:[
-      L('40','Présentation de l’Afrique',[
-        ['Où se situe l’Afrique ?','Entre la Méditerranée au nord, l’Atlantique à l’ouest, l’océan Indien et la mer Rouge à l’est. Elle est traversée par l’équateur, le tropique du Cancer et le tropique du Capricorne.'],
-        ['Quelle est la superficie de l’Afrique ?','Environ 30 millions de km² : deuxième continent du monde après l’Asie.'],
-        ['Combien d’États compte l’Afrique ?','54 États reconnus par l’ONU. L’Union africaine compte 55 membres.'],
-        ['Quels sont les grands records du continent ?','Plus haut sommet : Kilimandjaro (5 895 m, Tanzanie). Plus long fleuve : le Nil. Plus grand lac : Victoria. Plus grand désert chaud : le Sahara.'],
-        ['Quels sont les grands ensembles régionaux ?','Afrique du Nord, de l’Ouest, centrale, de l’Est et australe.'],
-        ['Quels sont les atouts de l’Afrique ?','Vastes terres arables, énormes ressources minières et énergétiques, population jeune, potentiel solaire et hydroélectrique, biodiversité et tourisme.'],
-        ['Quelles sont les contraintes ?','Calamités naturelles (sécheresse, désertification, inondations), maladies, conflits armés, moyens de communication insuffisants.'],
-        ['Quelle différence entre épidémie, endémie et pandémie ?','Épidémie : poussée locale et temporaire (choléra). Endémie : maladie présente en permanence dans une région (paludisme). Pandémie : épidémie étendue à plusieurs continents (VIH/sida, COVID-19).'],
-        ['À quoi sert l’utilisation de la carte ?','À lire et dessiner les grands ensembles, États, fleuves et reliefs, pour localiser les faits géographiques.']
-      ]),
-      L('41','L’Afrique dans le monde',[
-        ['Quel est le poids démographique de l’Afrique ?','Plus de 1,4 milliard d’habitants (environ 18 % de l’humanité), le continent le plus jeune.'],
-        ['Quel est son poids économique ?','Environ 3 % de la richesse mondiale (PIB), un poids faible comparé à sa population.'],
-        ['Quel est le revenu par habitant ?','Le plus bas des continents en moyenne, avec de fortes inégalités entre pays riches (Seychelles) et très pauvres (Burundi).'],
-        ['Quelle est la place de la technologie ?','Faible part de la recherche, des brevets et de l’industrie de haute technologie : l’Afrique est surtout importatrice de technologies.'],
-        ['Quelles sont ses principales ressources ?','Cacao (Côte d’Ivoire, Ghana), café, or, diamants, cobalt (RDC), platine (Afrique du Sud), pétrole (Nigeria, Angola, Algérie), phosphates (Maroc).'],
-        ['Quelle est la nature de son commerce international ?','Elle exporte surtout des matières premières et importe des produits manufacturés ; sa part dans le commerce mondial n’est que de quelques pour cent.'],
-        ['Comment se compare-t-elle aux autres continents ?','Moins industrialisée que l’Asie, l’Europe et l’Amérique du Nord, avec un faible niveau d’intégration et d’infrastructures.']
-      ])
-    ]},
-
-    { t:'Chapitre II. Quelques États émergents', free:false, ls:[
-      L('42','La République sud-africaine',[
-        ['Pourquoi la RSA est-elle un État émergent ?','Économie la plus industrialisée du continent, membre du G20 et des BRICS.'],
-        ['Quelles sont les capitales de la RSA ?','Trois : Pretoria (exécutif), Le Cap (législatif) et Bloemfontein (judiciaire). La plus grande ville est Johannesburg.'],
-        ['Quel est son poids : peuplement et productions ?','Environ 60 millions d’habitants ; or, platine, chrome, manganèse, diamants, charbon ; maïs, fruits, vin ; industrie automobile, chimique et sidérurgique.'],
-        ['Quels facteurs de puissance liés à l’industrie et au revenu ?','Industrie diversifiée, mines, services financiers et revenu par habitant parmi les plus élevés d’Afrique.'],
-        ['Quel rôle joue sa position géographique ?','Pointe sud de l’Afrique, sur la route du Cap entre Atlantique et océan Indien, avec de grands ports (Durban, Le Cap, Richards Bay).'],
-        ['Quels facteurs de puissance liés aux infrastructures ?','Réseaux routier, ferroviaire, électrique et portuaire denses, universités réputées et système de santé relativement développé.'],
-        ['Quelles possibilités de coopération avec la RDC ?','Au sein de la SADC et de l’UA : commerce, investissements miniers, projet Inga (achat d’électricité), échanges de formation.'],
-        ['Quelles contraintes du milieu physique ?','Relief (Drakensberg, plateaux) et aridité (Karoo, Kalahari, Namib) : l’eau est rare.'],
-        ['Comment l’homme tire-t-il profit de ces contraintes ?','Barrages et transferts d’eau (Orange, Lesotho), irrigation, élevage de moutons dans le Karoo, mines profondes, tourisme, énergie solaire et éolienne.'],
-        ['Qu’est-ce que l’apartheid ?','Un régime de ségrégation raciale (1948–1994), aboli. Nelson Mandela devient président en 1994 ; les inégalités restent une contrainte.']
-      ]),
-      L('43','Le Nigeria',[
-        ['Où se situe le Nigeria et quelle est sa capitale ?','En Afrique de l’Ouest, au fond du golfe de Guinée. Capitale : Abuja ; plus grande ville : Lagos.'],
-        ['Quel est le poids démographique et économique du Nigeria ?','Pays le plus peuplé d’Afrique (plus de 200 millions d’habitants) et l’une des premières économies du continent.'],
-        ['Quelles sont ses productions ?','Pétrole et gaz (delta du Niger), cacao, arachide, huile de palme, coton, manioc, étain (plateau de Jos), charbon.'],
-        ['Quels facteurs de puissance possède-t-il ?','Ressources énergétiques, forêts, fleuves Niger et Bénoué, grands ports (Lagos, Port Harcourt), climats variés, position sur le golfe de Guinée et grand marché intérieur.'],
-        ['Quelles sont ses contraintes ?','Conflits religieux et ethniques (Nord musulman, Sud chrétien), terrorisme au Nord-Est, corruption, dépendance au pétrole, inégalités.'],
-        ['Quels sont les peuples principaux ?','Haoussa-Peuls (Nord), Yoruba (Sud-Ouest), Igbo (Sud-Est).'],
-        ['Quelles possibilités de coopération avec la RDC ?','Commerce, expérience dans la gestion du pétrole et du gaz, investissements et coopération diplomatique au sein de l’Union africaine.']
-      ]),
-      L('44','L’Égypte',[
-        ['Où se situe l’Égypte et quelle est sa capitale ?','Au nord-est de l’Afrique, entre Méditerranée et mer Rouge. Capitale : Le Caire.'],
-        ['Pourquoi dit-on que l’Égypte est un « don du Nil » ?','La vie et l’agriculture se concentrent dans la vallée et le delta du Nil, au milieu d’un immense désert.'],
-        ['Quel est le poids de l’Égypte ?','Plus de 100 millions d’habitants ; coton, riz, blé, canne à sucre ; pétrole et gaz ; tourisme ; industrie textile et sidérurgie.'],
-        ['Quel rôle joue l’hydrographie ?','Le Nil fournit l’eau, l’irrigation, la navigation et l’électricité (haut barrage d’Assouan, lac Nasser).'],
-        ['Quel est l’intérêt de sa position stratégique ?','Le canal de Suez (1869) relie la Méditerranée et la mer Rouge : source majeure de revenus et lien entre l’Europe et l’Asie.'],
-        ['Quel rôle jouent l’histoire et le tourisme ?','Pyramides de Gizeh, Louxor, Karnak, vallée des Rois : héritage de la civilisation pharaonique, qui attire des millions de visiteurs.'],
-        ['Quelles sont les contraintes de l’Égypte ?','Le désert (la grande majorité du territoire) et l’aridité.'],
-        ['Comment l’Égypte a-t-elle surmonté ses contraintes ?','Irrigation par canaux et barrages, mise en valeur de terres désertiques, dessalement, revenus du canal de Suez et du tourisme.'],
-        ['Quelles possibilités de coopération avec la RDC ?','Au sein de l’UA et du COMESA : commerce, expertise en barrages et irrigation, investissements.']
-      ])
-    ]},
-
-    { t:'Chapitre III. Les perspectives de développement', free:false, ls:[
-      L('45','Ressources agricoles',[
-        ['Quel est le niveau de mise en valeur agricole de l’Afrique ?','Faible : agriculture peu mécanisée, très peu de terres irriguées, rendements bas. L’Afrique importe du blé et du riz alors qu’elle possède une grande part des terres arables non cultivées du monde.'],
-        ['Quels efforts de développement ?','PDDAA du NEPAD (2003), engagement de Maputo de consacrer 10 % des budgets à l’agriculture, irrigation, semences améliorées, coopératives, agro-industries.'],
-        ['Qu’est-ce que le NEPAD ?','Le Nouveau partenariat pour le développement de l’Afrique, lancé en 2001 par l’Union africaine.'],
-        ['Comment critiquer l’organisation actuelle ?','Agriculture de subsistance, dépendance de la pluie, faible financement, exportation de produits bruts, accès difficile à la terre et aux marchés.'],
-        ['Quels remèdes proposer ?','Irrigation, mécanisation, crédit, formation, routes rurales, stockage et transformation, intégration des marchés africains.']
-      ]),
-      L('46','Ressources minières et énergétiques',[
-        ['Quel est le niveau de mise en valeur minière ?','Réserves considérables (cobalt, platine, manganèse, chrome, diamants, bauxite, phosphates) mais exportées surtout à l’état brut, avec peu de transformation.'],
-        ['Quelle est la situation énergétique ?','Pétrole et gaz (Nigeria, Angola, Algérie, Libye), hydroélectricité (Inga, Assouan), solaire, géothermie (Kenya). Environ 600 millions d’Africains n’ont pas l’électricité.'],
-        ['Quels efforts de développement ?','Vision minière africaine (2009), transformation locale, pools énergétiques régionaux (SAPP, WAPP), projets solaires et hydroélectriques.'],
-        ['Quelle critique faire de l’organisation actuelle ?','Exploitation dominée par des firmes étrangères, faibles retombées locales, pollution, conflits liés aux ressources.'],
-        ['Quels remèdes proposer ?','Industrialiser sur place, renégocier les contrats, investir dans l’énergie renouvelable et interconnecter les réseaux.']
-      ]),
-      L('47','Équipements : transport, enseignement, santé',[
-        ['Quel est le niveau des transports ?','Réseaux peu denses, hérités de la colonisation, tournés vers les ports et peu interconnectés entre pays.'],
-        ['Quels efforts pour les transports ?','Programme PIDA de l’UA, routes transafricaines, nouveaux chemins de fer (Éthiopie–Djibouti, Kenya), ports, câbles sous-marins pour internet.'],
-        ['Quelle est la situation de l’enseignement ?','Scolarisation en progrès, mais manque d’enseignants, de classes et de qualité ; forte demande de formation technique et supérieure.'],
-        ['Quelle est la situation de la santé ?','Manque de personnel et de structures. Africa CDC (2017) coordonne la lutte contre les épidémies.'],
-        ['Qu’est-ce que l’Agenda 2063 ?','Le cadre de développement de l’UA (adopté en 2013) pour une Afrique intégrée, prospère et en paix d’ici 2063.']
-      ]),
-      L('48-49','Regroupements régionaux et continentaux',[
-        ['Quand et où l’OUA a-t-elle été créée ? Par quoi a-t-elle été remplacée ?','Le 25 mai 1963 à Addis-Abeba (32 États). Remplacée par l’Union africaine, lancée en 2002 à Durban.'],
-        ['Quels sont les buts de l’UA ?','Unité et solidarité, paix et sécurité, intégration économique, défense de la souveraineté, développement et droits de l’homme.'],
-        ['Quel est le siège de l’UA et combien a-t-elle de membres ?','Addis-Abeba (Éthiopie) ; 55 États membres.'],
-        ['Quels sont les organes principaux de l’UA ?','Conférence des chefs d’État, Conseil exécutif, Commission, Parlement panafricain, Conseil de paix et de sécurité.'],
-        ['Qu’est-ce que la CEDEAO ?','La Communauté économique des États de l’Afrique de l’Ouest, créée en 1975 à Lagos ; siège à Abuja.'],
-        ['Qu’est-ce que la SADC ?','La Communauté de développement de l’Afrique australe : créée en 1980, devenue SADC en 1992, siège à Gaborone. La RDC en est membre depuis 1997.'],
-        ['Qu’est-ce que la CEEAC ?','La Communauté économique des États de l’Afrique centrale, créée en 1983, siège à Libreville. La RDC en est membre.'],
-        ['Qu’est-ce que le COMESA ?','Le Marché commun de l’Afrique orientale et australe (1994), siège à Lusaka.'],
-        ['Qu’est-ce que l’EAC et l’UMA ?','EAC : Communauté d’Afrique de l’Est (siège Arusha ; RDC membre depuis 2022). UMA : Union du Maghreb arabe (1989).'],
-        ['Qu’est-ce que la CEPGL ?','La Communauté économique des pays des Grands Lacs (1976) : Burundi, Rwanda et RDC.'],
-        ['Qu’est-ce que la ZLECAf ?','La Zone de libre-échange continentale africaine, lancée en 2018, échanges effectifs depuis le 1er janvier 2021. Objectif : un marché unique africain.'],
-        ['Quelles sont les étapes de l’intégration économique ?','Zone de libre-échange, union douanière, marché commun, union économique et monétaire.'],
-        ['Quel est le degré d’intégration en Afrique ?','Faible : le commerce entre pays africains ne représente qu’environ 15 % de leurs échanges.'],
-        ['Quels sont les problèmes de l’intégration ?','Appartenances multiples, barrières douanières, manque d’infrastructures, conflits, monnaies différentes, dépendance extérieure, manque de volonté politique.'],
-        ['Quels remèdes proposer ?','ZLECAf, infrastructures communes, libre circulation des personnes, harmonisation des règles, industrialisation, paix et bonne gouvernance.'],
-        ['Que signifie l’indépendance dans la prise de décision ?','Compter davantage sur ses propres ressources pour décider librement, au lieu de dépendre de l’aide et des conditions extérieures.'],
-        ['Qu’est-ce que la culture de la paix ?','Prévenir et régler les conflits par le dialogue et la médiation : une condition du développement et de l’intégration.'],
-        ['Qu’est-ce que la BAD ?','La Banque africaine de développement (1964), siège à Abidjan : elle finance des projets de développement.']
-      ]),
-      L('50-51','Partenaires de l’Afrique et échanges internationaux',[
-        ['Quels sont les pays partenaires commerciaux de l’Afrique ?','États-Unis, Japon et Chine : aide au développement, investissements, exportations et importations.'],
-        ['Quel rôle joue la Chine ?','Premier partenaire commercial de l’Afrique ; forum FOCAC depuis 2000 ; elle investit dans routes, rails, ports et mines, en échange de matières premières.'],
-        ['Quel rôle joue le Japon ?','La conférence TICAD (depuis 1993) : aide au développement, infrastructures et formation.'],
-        ['Quel rôle jouent les États-Unis ?','Aide, investissements et loi AGOA (2000) qui ouvrait leur marché à certains produits africains.'],
-        ['Quelle est l’origine de l’Union européenne et ses objectifs ?','Née des Communautés européennes (traité de Rome, 1957), devenue UE par le traité de Maastricht (1992). Objectifs : marché unique, euro, paix, politiques communes.'],
-        ['Combien de membres compte l’UE ? Citez-en quelques-uns.','27 États : Allemagne, France, Italie, Belgique, Pays-Bas, Espagne… Il suffit d’en citer quelques-uns.'],
-        ['Quelle est la relation entre l’UE et l’Afrique ?','L’UE reste le premier partenaire en bloc et un grand bailleur d’aide ; accords de Lomé (1975) puis de Cotonou (2000).'],
-        ['Qu’est-ce que l’OCDE ?','L’Organisation de coopération et de développement économiques, créée en 1961, siège à Paris, 38 membres surtout développés. Son CAD coordonne l’aide au développement.'],
-        ['Quels sont les organismes de financement ?','Le FMI (stabilité monétaire, prêts aux États en difficulté) et la Banque mondiale (financement de projets de développement), nés à Bretton Woods (1944), siège à Washington.'],
-        ['Quels sont les organismes de soutien et leur domaine ?','OMS (santé), FAO (alimentation et agriculture), UNESCO (éducation, science, culture), PNUD (développement humain).'],
-        ['Quels sont les organismes africains ?','Union africaine, BAD, SADC, CEDEAO, etc.'],
-        ['Qu’est-ce que l’initiative PPTE ?','Un allègement de la dette des pays pauvres très endettés. La RDC a atteint le point d’achèvement en 2010.'],
-        ['Quelle différence entre échanges Nord-Sud et Sud-Sud ?','Nord-Sud : l’Afrique exporte des matières premières vers le Nord et importe des produits finis. Sud-Sud : très faibles entre pays africains.'],
-        ['Pourquoi les échanges Sud-Sud sont-ils faibles ?','Économies qui produisent les mêmes matières premières, mauvaises infrastructures, barrières douanières, manque de financement et de produits transformés.'],
-        ['Qu’est-ce que la mondialisation ?','L’interdépendance croissante des économies, avec la circulation des marchandises, capitaux, informations et personnes à l’échelle du monde.'],
-        ['Qu’est-ce que la régionalisation ?','Le regroupement d’États voisins en blocs économiques pour mieux peser dans le monde.'],
-        ['Quels sont les effets de la mondialisation en Afrique ?','Opportunités (marchés, technologies) mais risques : concurrence, dépendance, marginalisation.'],
-        ['Qu’est-ce que la recomposition de l’espace ?','La réorganisation des espaces économiques sous l’effet des intégrations régionales, de la régionalisation et de la mondialisation.']
-      ])
-    ]}
-  ]}
-  ];
-
-
-  /* ===== Corrections, questions à cocher et nouvelles leçons ===== */
-  var FIX = {}, EXTRA = {}, Q = {};
-FIX.gN1={2:"L’indice de développement humain, calculé par le PNUD. Il combine la santé (espérance de vie), l’instruction (taux d’alphabétisation des adultes) et le revenu (PIB par habitant)."};
-FIX.g1={1:"Environ 2 345 000 km² : le plus vaste pays d’Afrique centrale, deuxième d’Afrique après l’Algérie et onzième du monde (environ 80 fois la Belgique)."};
-FIX.g2={0:"Une vaste cuvette centrale (environ 340 à 700 m d’altitude) entourée de plateaux étagés, puis de hautes terres et de montagnes à l’Est et au Sud-Est.",1:"Une grande dépression d’environ 800 000 km² en RDC, au centre-ouest du pays, drainée par le fleuve Congo et couverte surtout de forêt équatoriale et de marécages.",4:"Le pic Marguerite (environ 5 100 m ; 5 109 ou 5 119 m selon les sources), dans le massif du Rwenzori, à la frontière avec l’Ouganda."};
-FIX.g3_4={0:"Quatre types : équatorial (cuvette centrale), tropical humide, tropical sec (extrême Sud) et climat de montagne (hautes terres de l’Est).",1:"Chaud et humide : températures constantes (plus de 20 °C, amplitude d’environ 2 °C), pluies d’au moins 1 500 mm par an et aucune saison sèche.",2:"Entre 4° et 10° de latitude : 1 200 à 1 500 mm de pluie par an, une longue saison des pluies (8 à 10 mois) et une courte saison sèche (2 à 4 mois)."};
-FIX.g5={2:"La Salonga, le plus vaste parc du pays et plus grand parc de forêt tropicale d’Afrique ; il s’étend sur plusieurs provinces (Tshuapa, Mai-Ndombe, Kasaï, Sankuru)."};
-FIX.g6={0:"Environ 4 700 km : deuxième fleuve d’Afrique après le Nil (6 671 km) ; débit moyen d’environ 50 000 m³/s, le plus puissant d’Afrique et le deuxième du monde après l’Amazone.",1:"Le fleuve naît au Katanga (mont Musofi) ; son cours supérieur porte le nom de Lualaba jusqu’à Kisangani. Il se jette dans l’Atlantique par un vaste estuaire, à Banana (Muanda).",7:"Le plus profond lac d’Afrique (environ 1 435 m) et le deuxième du monde après le Baïkal ; c’est le plus vaste lac de la RDC, partagé avec la Tanzanie, le Burundi et la Zambie."};
-FIX.g7={0:"Les chiffres varient selon les sources : environ 87 millions d’habitants dans les estimations plus anciennes, plus de 100 millions dans les estimations récentes. Le dernier recensement général date de 1984 (environ 30 millions).",1:"Cinq groupes : Pygmées (Mbuti, plus anciens habitants de la forêt), Bantous (majorité, environ deux tiers du territoire), Soudanais (Nord), Nilotiques (Nord-Est) et Hamitiques (Kivu).",3:"Elle croît rapidement (environ 3 % par an) : elle a été multipliée par trois entre 1940 et 1984 (environ 10 millions, puis 30 millions).",5:"Fortes densités (plus de 50 hab./km², jusqu’à plus de 200 dans certains territoires du Kivu) : hautes terres de l’Est, au climat tempéré et aux sols volcaniques fertiles. Densités moyennes (10 à 20) : plateaux de l’Uélé, de l’Ubangi et du Kasaï. Faibles (moins de 10) : cuvette centrale et une partie du Katanga."};
-FIX.g8={0:"La part de la population totale qui vit dans les villes (de l’ordre de 40 à 50 % selon les années)."};
-FIX.g11_12={3:"Café arabica et thé : hautes terres de l’Est (Kivu, Ituri). Café robusta : Uélé, Ubangi, Maniema, Kasaï. Cacao et hévéa : cuvette centrale (Équateur, Mai-Ndombe) et Mayumbe. Palmier à huile : Équateur, Mai-Ndombe, Kwilu, Mayumbe. Canne à sucre : Kongo-Central, Sud-Kivu, Tshopo.",4:"Plantations Lever au Congo (PLC, aujourd’hui PHC) pour le palmier ; sucreries de Kwilu-Ngongo (Kongo-Central), de Kiliba (Sud-Kivu) et de Lotokila (Tshopo) pour la canne à sucre.",5:"Pêche fluviale et lacustre très répandue (fleuve Congo, lacs Albert, Édouard, Tanganyika, Moero, Tumba, Mai-Ndombe) ; pêche semi-industrielle (Kalemie-Kalundu, Vitshumbi, Kasenyi) ; pêche maritime peu développée (PEMARCO à Moanda). Élevage limité par la mouche tsé-tsé, plus développé à l’Est et au Sud-Est."};
-FIX.g13={0:"Les mines sont la principale source de devises (de l’ordre de 70 % dans les statistiques classiques, davantage aujourd’hui).",4:"Kilo-Moto (Ituri, Haut-Uélé), Kivu (Kamituga, Namoya…) et Maniema ; sociétés : OKIMO, SOMINKI et Gécamines.",6:"Au littoral, au large de Muanda (Kongo-Central), seule province productrice ; raffiné à Moanda par la SOCIR. Des bassins (cuvette centrale, lac Tanganyika, Semliki) restent inexploités.",7:"Le cobalt est associé au cuivre (Kolwezi : Kamoto, Musonoi). La RDC détient l’essentiel des réserves mondiales et est aujourd’hui le premier producteur mondial (dans les classements plus anciens, elle était 1re d’Afrique et 6e du monde)."};
-FIX.g14_15={2:"Au Katanga (Luena) et à Lukuga, près de Kalemie. La RDC est pauvre en houille et en importe d’Afrique du Sud.",5:"Inga, sur le bas Congo (chutes Yellela, environ 40 km en amont de Matadi) : Inga I et II existent ; Inga III et le Grand Inga sont des projets. Une ligne à haute tension relie Inga à Kolwezi (environ 1 700 km).",6:"C’est le plus grand potentiel d’Afrique (environ 18 % du potentiel mondial selon certaines estimations) ; ordre de grandeur : plus de 100 000 MW, exploité en très petite partie."};
-FIX.g16_17={0:"L’industrie pèse peu dans l’économie (de l’ordre de 13 % de la main-d’œuvre) ; les industries extractives sont les plus anciennes et les plus développées.",2:"Brasseries (Bralima, Bracongo, Brasimba), textile (Utexco à Kinshasa, Sotexki à Kisangani, Utexafrica à Lubumbashi), sidérurgie (Sosider, Maluku), ciment (CILU à Lukala, CINAT à Kimpese), raffinerie SOCIR (Moanda)."};
-FIX.g18={2:"Matadi–Kinshasa (366 km, construit entre 1890 et 1898), Lubumbashi–Ilebo, Kindu–Kalemie, Kisangani–Ubundu et, au Nord, Bumba–Aketi–Isiro–Mungbere. Le réseau compte environ 5 110 km.",5:"Plus de 13 000 km de voies navigables, entrecoupées de chutes et de rapides : le fleuve est navigable par biefs. Ports fluviaux : Kinshasa, Ilebo, Mbandaka. Lacs : Tanganyika (Kalemie, Kalundu, Moba), Kivu (Bukavu, Goma).",7:"Cinq aéroports internationaux : N’djili (Kinshasa), Luano (Lubumbashi), Goma, Bangboka (Kisangani) et Gbadolite ; Bipemba (Mbuji-Mayi) est le 2e aéroport par le trafic. Il y a environ 40 aéroports au total.",9:"Réseau de 170 000 km dont environ 6 000 km seulement asphaltés. Problèmes : routes en terre mal entretenues, rail et bateaux vétustes, aéroports peu équipés, coûts élevés, insécurité."};
-FIX.g19={0:"Il se fait à l’intérieur du pays : échanges intra-provinciaux (villes et campagnes d’une même province) et interprovinciaux (entre provinces, par exemple vers Kinshasa).",3:"La différence entre la valeur des exportations et celle des importations : excédentaire si les exportations dominent, déficitaire sinon (longtemps décrite comme déficitaire dans les statistiques classiques).",4:"Belgique, Union européenne, Chine, Japon, Canada et Afrique du Sud (l’ordre varie selon les années)."};
-FIX.g20={0:"Quatre niveaux : maternel, primaire (certificat de fin d’études primaires), secondaire (6 ans, diplôme d’État ; types général, normal et technique) et supérieur et universitaire."};
-FIX.g22={2:"Kinshasa, Kongo Central, Kwango, Kwilu et Mai-Ndombe (anciennement Kinshasa, Bas-Congo et Bandundu).",3:"Kasaï, Kasaï-Central, Kasaï-Oriental, Lomami et Sankuru (issues de l’ancien Kasaï Occidental et du Kasaï Oriental).",5:"Équateur, Mongala, Nord-Ubangi, Sud-Ubangi, Tshuapa, Bas-Uélé, Haut-Uélé, Ituri et Tshopo (anciens Équateur et Province Orientale).",6:"Les quatre provinces issues de l’ancien Katanga : Haut-Katanga, Haut-Lomami, Lualaba et Tanganyika."};
-FIX.g23={0:"À l’est de Kinshasa. Le chef-lieu est la ville de Bandundu (aujourd’hui chef-lieu du Kwilu) ; l’ancienne province est divisée en Kwango, Kwilu et Mai-Ndombe."};
-FIX.g24={0:"Matadi, port sur l’estuaire du fleuve ; le Kongo Central est la seule province ayant un accès direct à l’océan Atlantique.",3:"Barrages d’Inga et de Zongo (Sanga), cimenteries de Lukala (CILU) et de Kimpese (CINAT), raffinerie de Moanda (SOCIR), pétrole de Muanda, sucrerie de Kwilu-Ngongo."};
-FIX.g25={1:"Premier pôle économique du pays (l’essentiel des industries manufacturières du pays) et grand centre universitaire."};
-FIX.g27={0:"Kananga (aujourd’hui chef-lieu du Kasaï-Central ; Tshikapa est celle du Kasaï)."};
-FIX.g29={6:"Goma, Butembo et Beni : les trois villes de la province."};
-FIX.g31={1:"C’est une province essentiellement agricole et enclavée (loin des côtes, avec peu de routes). Maniema signifie « forêt galerie »."};
-FIX.g33={0:"Kisangani, sur le fleuve Congo (3e pôle économique selon le programme) ; chef-lieu de la Tshopo depuis le découpage.",1:"Dans l’ancien découpage, c’était la plus vaste province du pays, essentiellement agricole. Aujourd’hui, la Tshopo (environ 199 600 km²) est la plus vaste des 26 provinces."};
-FIX.g34={0:"Lubumbashi, deuxième ville du pays et deuxième pôle économique ; chef-lieu du Haut-Katanga."};
-FIX.g40={1:"Environ 30,3 millions de km² : troisième continent après l’Asie et l’Amérique (l’Amérique étant comptée comme un seul continent) ; deuxième après l’Asie si l’on sépare les deux Amériques."};
-FIX.g41={0:"Plus de 1,3 milliard d’habitants (environ 1,4 milliard aujourd’hui), soit environ 18 % de l’humanité ; densité moyenne d’environ 43 hab./km².",4:"Cacao (Côte d’Ivoire 1re, environ 39 %, puis Ghana), café, or, diamants, cobalt (RDC), platine (Afrique du Sud), pétrole (Nigeria, Angola, Algérie), phosphates (Maroc)."};
-FIX.g42={1:"Pretoria est la capitale (siège de l’exécutif) ; Le Cap abrite le Parlement et Bloemfontein la justice ; Johannesburg est la capitale économique.",5:"Le réseau routier (environ 188 000 km) et le réseau ferré (environ 21 600 km) sont les plus actifs d’Afrique ; ports : Durban, Le Cap, East London, Richards Bay, Saldanha ; universités et système de santé développés.",9:"Régime de ségrégation et de discrimination raciales instauré en 1948 (de l’afrikaans « à part »), aboli officiellement en 1991 ; premières élections multiraciales le 27 avril 1994, Nelson Mandela devenant le premier président noir ; prix Nobel de la paix 1993 avec F. W. de Klerk."};
-FIX.g43={0:"Abuja est la capitale, au centre du pays ; Lagos, port du golfe de Guinée, est la capitale économique."};
-FIX.g48_49={0:"L’OUA est créée le 25 mai 1963 à Addis-Abeba (32 États). L’Union africaine la remplace : lancée à Durban le 8 juillet 2002 (siège à Addis-Abeba ; 55 États membres).",4:"Communauté économique des États de l’Afrique de l’Ouest, créée par le traité de Lagos (1975, en vigueur en 1977) ; siège aujourd’hui à Abuja.",5:"Communauté de développement de l’Afrique australe : créée le 5 avril 1980 (SADCC), devenue SADC en 1992 ; siège à Gaborone ; la RDC en est membre depuis 1997.",7:"Marché commun de l’Afrique orientale et australe, créé au début des années 1990 (traité de 1993, en vigueur en 1994) ; siège à Lusaka."};
-FIX.g50_51={4:"Née des Communautés européennes (CECA en 1951, traité de Rome en 1957), l’UE naît du traité de Maastricht (1992). Objectifs : marché unique, monnaie unique (euro depuis 1999), paix et politiques communes."};
-
-EXTRA.g1=["Environ 2 190 km du nord au sud (de 5°20’ N à 13°27’ S) et environ 2 110 km de l’est à l’ouest.","Nord : Sidi (Nord-Ubangi). Sud : Kipilungu (Haut-Katanga). Ouest : Banana (Kongo-Central). Est : Mahagi (Ituri).","Environ 70 % : rivières (Ubangi, Congo, Kwango, Kasaï, Luapula), lacs (Moero, Tanganyika, Édouard, Albert) et montagnes (Rwenzori, Virunga).","Deuxième pays francophone du monde après la France (par le nombre de locuteurs), et onzième pays du monde par la superficie."];
-EXTRA.g2=["Le Karisimbi (4 507 m). Parmi les volcans encore actifs : le Nyiragongo (3 470 m) et le Nyamuragira (3 058 m)."];
-EXTRA.g3_4=["Entre 10° et 20° de latitude : 800 à 1 200 mm de pluie, longue saison sèche (6 à 9 mois) et courte saison des pluies ; savane herbeuse et forêt claire (extrémité sud du Kwango, du Kwilu, du Kasaï et du Haut-Katanga).","D’environ 1 °C tous les 180 m (0,65 °C pour 100 m) : d’où le climat tempéré des hautes terres de l’Est.","Il remonte le long de la côte atlantique et y apporte la sécheresse."];
-EXTRA.g5=["L’Institut congolais pour la conservation de la nature (ICCN), héritier de l’Institut des parcs nationaux du Congo créé en 1934 ; ses missions : protéger la faune et la flore, favoriser la recherche scientifique et le tourisme.","Virunga : 1925. Garamba : 1938. Upemba : 1939. Kundelungu, Kahuzi-Biega, Maïko et Salonga : 1970."];
-EXTRA.g6=["Cours supérieur ou Lualaba (de la source à Kisangani, environ 2 640 km) ; cours moyen (Kisangani–Kinshasa, environ 1 700 km, navigable) ; cours inférieur (Kinshasa–océan, environ 360 km, avec chutes et rapides).","Le bassin du Congo (presque tout le pays, environ 3 684 000 km²), le bassin du Nil (extrême nord-est, par la Semliki) et le bassin du Shiloango (nord-ouest du Kongo-Central).","Quatre groupes : lacs de fossé d’effondrement (Albert, Édouard, Kivu, Tanganyika), lacs de plateaux du Katanga (Moero, Bangwelo, Upemba, Kisale…), lacs de cuvette (Mai-Ndombe, Tumba), lacs de cratère (lac Vert).","Le lac Kivu, à cause de son gaz méthane ; le lac Albert est au contraire le plus poissonneux.","Environ 148 km (bief maritime Matadi–océan)."];
-EXTRA.g7=["Environ 46 ‰ (contre 16 ‰ pour la mortalité), avec un indice de fécondité d’environ 6,9 enfants par femme : l’un des plus élevés du monde.","Les Pygmées (Mbuti), peuple nomade de chasseurs-cueilleurs, refoulés par les Bantous.","Le français (langue de l’administration, de l’enseignement et du commerce) ; la RDC est le deuxième pays francophone du monde."];
-EXTRA.g8=["Kinshasa et Lubumbashi ; les villes congolaises sont de type colonial et jouent des fonctions économique, administrative, commerciale et industrielle.","Plus de la moitié ; cette jeunesse pose des problèmes d’accueil dans les écoles et les hôpitaux et d’emploi."];
-EXTRA.g9_10=["Trois pôles tournés vers l’extérieur : l’Ouest (Kinshasa, océan Atlantique), l’Est (océan Indien par Mombasa et Dar es Salaam) et le Sud (Afrique australe, SADC, RSA). Les minerais apportent la plus grande part des devises (de l’ordre de 70 % dans les statistiques classiques)."];
-EXTRA.g11_12=["L’arabica (haute qualité, hautes terres volcaniques de l’Est) et le robusta (plus résistant, Uélé, Ubangi, Maniema, Kasaï).","Le maïs (d’Afrique du Sud et de Zambie) pour les minoteries et brasseries, le riz (Pakistan, Thaïlande, Ghana), le blé, le poisson, l’huile végétale.","À l’Est et au Sud-Est : élevage extensif de prestige par les pasteurs nilotiques et hamitiques. Ailleurs : élevage pour la viande (races Ndama, Dahomey, Afrikander).","Environ 48 % du territoire, dont la forêt équatoriale de la cuvette centrale (environ 100 millions d’hectares).","Mayumbe, Boma, Nioki (Mai-Ndombe), Mbandaka, Kwilu et Kwango ; sociétés : Agrifor, Finabois, Forescom, Prodaf, Sokinex."];
-EXTRA.g13=["Le Sud-Katanga (région cuprifère : cuivre, cobalt, zinc, uranium…), la région stannifère (du nord du Haut-Lomami au Nord-Kivu : étain, coltan, or, tungstène), la région aurifère de Kilo-Moto (Ituri, Haut-Uélé) et la région diamantifère (Tshikapa, Mbuji-Mayi).","En 1906, par l’Union minière du Haut-Katanga ; la Gécamines a repris les activités le 1er janvier 1967.","Au Kivu (Masisi, Walikale, Mwenga, Shabunda) ; il sert notamment dans les téléphones portables.","À Kipushi (Haut-Katanga), où il est associé au cuivre ; on y extrait aussi plomb et argent."];
-EXTRA.g14_15=["La SOCIR (Société congolaise des industries de raffinage), à Moanda ; Ango-Ango est le port pétrolier d’où partent les pipelines vers Kinshasa.","Mwadingusha et Koni (sur la Lufira), Nzilo, Nseke et Mukula (sur le Lualaba).","À Shinkolobwe (Haut-Katanga). Le Centre régional d’études nucléaires de Kinshasa (CREN-K) se trouve à l’UNIKIN."];
-EXTRA.g16_17=["Environ 13 % de la main-d’œuvre, ce qui montre la faiblesse du secteur.","CILU à Lukala et CINAT à Kimpese (Kongo-Central), Cemenkat à Lubudi (Katanga), Cimenki à Katana (Sud-Kivu), Ciments-Lacs à Kabimba (Kalemie), GCM à Likasi.","Bralima (Bukavu, Boma, Kisangani, Kinshasa…), Bracongo (Kinshasa…), Brasimba (Lubumbashi, Likasi, Kolwezi) ; huileries et savonneries : Marsavco."];
-EXTRA.g18=["Les routes de desserte agricole relient les villes aux campagnes ; les routes nationales relient les provinces entre elles et à la capitale (par exemple Matadi–Kinshasa).","Ango-Ango, d’où partent les pipelines vers Kinshasa.","Airtel, Orange, Vodacom et Tigo (ex-Oasis) ; la radio et la télévision nationales sont gérées par la RTNC.","Quatre secteurs : Ouest (Matadi–Kinshasa, Tshela–Boma), Est (Kindu–Kalemie, Kisangani–Ubundu), Sud (Sakania–Ilebo…) et Nord (Bumba–Aketi–Isiro–Mungbere)."];
-EXTRA.g19=["Intra-provinciaux : entre villes et campagnes d’une même province. Interprovinciaux (ou extra-provinciaux) : entre plusieurs provinces.","Pièces de rechange, appareils électroménagers, vêtements, cosmétiques, véhicules, appareils électroniques."];
-EXTRA.g20=["En 1967, l’examen d’État sanctionne la fin du cycle long (humanités) par un diplôme d’État ; le cycle d’orientation de deux ans avait été introduit en 1961.","Enseignants mal formés et mal payés, classes surpeuplées, locaux mal entretenus, manque de matériel didactique, et inadéquation entre formation et emploi (chômage élevé)."];
-EXTRA.g21=["Inégale : les médecins sont plus concentrés en ville qu’en milieu rural ; les hôpitaux manquent de médicaments et de matériel et les maladies endémiques restent redoutables."];
-EXTRA.g24=["Le Kongo Central (Moanda) : géant énergétique de la RDC avec le pétrole, Inga et Zongo."];
-EXTRA.g25=["Quatre districts (Mont-Amba, Funa, Lukunga, Tshangu) et 24 communes ; la commune urbano-rurale de Maluku occupe à elle seule 79 % de la ville.","Plus de 10 millions d’habitants ; dans les classements classiques, deuxième ville d’Afrique noire derrière Lagos (des estimations récentes la placent parfois au premier rang)."];
-EXTRA.g29=["Environ 59 000 km² (2,5 % du territoire national), avec 6 territoires : Beni, Lubero, Masisi, Nyiragongo, Rutshuru et Walikale.","Dans la plaine de la Semliki, au nord de Rutshuru (et dans la plaine de la Ruindi)."];
-EXTRA.g30=["Le mont Kahuzi (3 308 m) et le mont Biega, au cœur du parc national de Kahuzi-Biega.","Ruzizi I et II (la Ruzizi II est gérée par la SINELAC, société internationale d’électricité des pays des Grands Lacs)."];
-EXTRA.g31=["Le bief navigable Kindu–Ubundu du fleuve Congo et l’axe ferroviaire Kindu–Kabalo–Lubumbashi."];
-EXTRA.g32=["Mbandaka, ville traversée par la ligne de l’équateur."];
-EXTRA.g33=["Kisangani ; la ville abrite l’aéroport international de Bangboka et est le point de départ du chemin de fer Kisangani–Ubundu et du bief fluvial Kisangani–Kinshasa."];
-EXTRA.g34=["Elle exploite les plus grands gisements de cuivre, cobalt et zinc, avec trois groupes : Ouest (Kolwezi, environ 80 % des réserves cuprifères), Centre (Likasi) et Sud (Lubumbashi, Kipushi).","Les lignes de la compagnie KDL (Kinshasa–Dilolo–Lubumbashi) et les liaisons vers Beira, Dar es Salaam et le Cap ; l’aéroport international de Luano est à Lubumbashi."];
-EXTRA.g40=["Environ 8 000 km, du cap Bon (Tunisie, 37°20’ N) au cap des Aiguilles (Afrique du Sud, 34°40’ S) ; environ 7 500 km d’ouest en est, du cap Vert (Sénégal) au cap Guardafui (Somalie).","Le canal de Suez, creusé à travers l’isthme de Suez et ouvert en 1869.","Un détroit est un bras de mer resserré entre deux terres (Gibraltar) ; un isthme est une bande de terre étroite entre deux mers qui réunit deux continents (Suez)."];
-EXTRA.g41=["Causes naturelles (déserts, forêts denses où sévissent des maladies), historiques (traite des Noirs, qui a déporté des dizaines de millions de personnes) et socio-économiques (sous-développement, guerres, famine).","Les Bantous (Afrique centrale, orientale, australe), les Soudanais (savanes du nord) et les Nilotiques (régions des Grands Lacs), auxquels s’ajoutent les Pygmées et les Bochimans."];
-EXTRA.g42=["La rencontre du courant chaud du Mozambique et du courant froid de Benguela favorise la pêche : la RSA compte parmi les grands pays pêcheurs d’Afrique.","Le charbon, extrait au Transvaal et au Natal ; la RSA détient environ 90 % des réserves africaines de charbon.","Parmi ses langues officielles figurent l’anglais et l’afrikaans, très utilisés dans l’administration et les affaires ; la monnaie est le rand."];
-EXTRA.g43=["36 États, avec cinq régions administratives ; superficie d’environ 924 000 km², monnaie : le naira.","Kainji, sur le fleuve Niger ; le pétrole est extrait autour de Port Harcourt, le charbon à Enugu.","De l’OPEP (Organisation des pays exportateurs de pétrole), créée en 1960, siège à Vienne. Il est aussi lié à la CEDEAO (gazoduc de l’Afrique de l’Ouest, 2003)."];
-EXTRA.g44=["Environ 1 002 000 km², pour une population d’environ 100 millions d’habitants (estimation de 2019).","La RDC appartient au bassin du Nil par son extrémité nord-est (rivière Semliki) : les deux pays appartiennent au bassin du Nil."];
-Q.gN1=[
-["Que doit pouvoir faire l’élève à la fin de la 6e année, selon le programme ?","Déterminer les indices, les facteurs et les solutions du sous-développement de la RDC et de l’Afrique","Dessiner uniquement les cartes des continents","Retenir la liste des capitales du monde","Comparer les climats de tous les continents"],
-["Cochez les indices de développement.",["Revenu par habitant","Espérance de vie","Taux d’alphabétisation"],["Altitude moyenne du pays","Longueur des côtes"]],
-["Sur quels éléments l’IDH est-il calculé ?","Santé, instruction et revenu par habitant","Superficie, climat et relief","Population, densité et natalité","Exportations, importations et dette"],
-["Lequel de ces éléments est un facteur politique de développement ?","La paix et la bonne gouvernance","Le nombre de lacs","Le climat équatorial","La richesse du sous-sol"],
-["Quelle phrase distingue correctement croissance et développement ?","La croissance mesure la hausse de la production ; le développement améliore aussi santé, éduca
+  document.addEventListener('DOMContentLoaded', renderHome);
+})();
+</script>
+</body>
+</html>
