@@ -77,20 +77,16 @@ window.RECTO_COURSES = window.RECTO_COURSES || [];
           ]
         }
       ]
-    }
-  ];
-
-  // Enregistrement du cours de chimie dans le registre Recto
-  window.RECTO_COURSES.push({
-    id: 'chimie',
-    name: 'Chimie',
-    sub: 'Chimie générale, minérale et organique',
-    heroTitle: 'Chimie – Exétat RDC',
-    heroSub: 'Notions fondamentales, calculs stœchiométriques et résolutions détaillées.',
-    parts: PARTIES_CHIMIE
-  });
-})();
-,
+    LZ(5, "Mole, masse molaire et calculs stœchiométriques", [
+            // ... questions de la leçon 5 ...
+          ])
+        ]
+      },
+      {
+        t: "Chapitre 2 : Fonctions inorganiques & Réactions ioniques",
+        free: false,
+        ls: [
+          LZ(6, "Oxydes métalliques et non-métalliques", [
         {
           t: "Chapitre 2 : Fonctions inorganiques & Réactions ioniques",
           free: false,
