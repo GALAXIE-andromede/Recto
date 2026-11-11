@@ -74,23 +74,6 @@ window.RECTO_COURSES = window.RECTO_COURSES || [];
               ["Cochez les assertions exactes sur la masse molaire et la stœchiométrie.", [["La masse molaire atomique d'un élément naturel tient compte de l'abondance isotopique relative de ses différents isotopes.", "La densité d'un gaz par rapport à l'air vaut approximativement d = M / 29."], ["Une mole de n'importe quel solide occupe toujours un volume de 22,4 litres.", "La masse molaire d'un composé dépend de la température de la pièce."]], "À retenir : La masse molaire de l'air sec vaut environ 29 g/mol, d'où la relation classique de densité gazeuse d = M / 29. Seuls les gaz occupent 22,4 L/mol en CNTP."],
               ["Quelle est la densité par rapport à l'air du dioxyde de carbone CO2 (M = 44 g/mol) ?", ["1,52", "0,66", "1,00", "2,00"], "Résolution : d = M / 29 = 44 / 29 = 1,517 ≈ 1,52. Le dioxyde de carbone est environ 1,5 fois plus lourd que l'air, ce qui explique qu'il s'accumule au ras du sol."]
             ])
-          ]
-        }
-      ]
-    LZ(5, "Mole, masse molaire et calculs stœchiométriques", [
-            // ... questions de la leçon 5 ...
-          ])
-        ]
-      },
-      {
-        t: "Chapitre 2 : Fonctions inorganiques & Réactions ioniques",
-        free: false,
-        ls: [
-          LZ(6, "Oxydes métalliques et non-métalliques", [
-        {
-          t: "Chapitre 2 : Fonctions inorganiques & Réactions ioniques",
-          free: false,
-          ls: [
             LZ(6, "Oxydes métalliques et non-métalliques", [
               ["Comment classe-t-on les oxydes minéraux en chimie inorganique ?", ["En oxydes métalliques (oxydes basiques) et oxydes non-métalliques (oxydes acides ou anhydrides)", "En oxydes froids et oxydes chauds", "En oxydes gazeux et oxydes liquides", "En oxydes naturels et oxydes radioactifs"], "À retenir : Les oxydes métalliques (Na2O, CaO, FeO) ont un caractère basique ; les oxydes non-métalliques (CO2, SO2, P2O5) ont un caractère acide."],
               ["Que donne la dissolution d'un oxyde métallique basique (comme Na2O ou CaO) dans l'eau ?", ["Une solution aqueuse basique d'hydroxyde métallique (base)", "Une solution d'acide fort", "Un précipité de sel neutre", "Un dégagement de dioxygène pur"], "À retenir : Oxyde basique + Eau -> Hydroxyde métallique : Na2O + H2O -> 2 NaOH ; CaO + H2O -> Ca(OH)2. Ces solutions font bleuir le papier tournesol."],
