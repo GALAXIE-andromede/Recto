@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A5C78">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recto">
+<title>Recto – Plateforme Officielle Exétat (RDC)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF3F2;--surface:#FFFFFF;--surface2:#F4F7F6;--ink:#0E2A38;--muted:#4F656E;--line:#D3DEDC;
+  --brand:#0A5C78;--on-brand:#FFFFFF;--brand-soft:#DCEEF4;--sel:#DCEEF4;
+  --good:#1B7A53;--good-bg:#DDF1E7;--bad:#B3322F;--bad-bg:#FBE4E1;
+  --t1:#0A5C78;--t2:#1F7A57;--t3:#9A6414;--t4:#A8472F;
+  --hero1:#0A5C78;--hero2:#0C3A50;
+  --shadow:0 1px 2px rgba(14,42,56,.06),0 8px 22px rgba(14,42,56,.08);
+  --font-d:'Fraunces',Georgia,serif;--font-b:'Source Sans 3',system-ui,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#08161D;--surface:#0F2530;--surface2:#12303D;--ink:#E6F1F2;--muted:#9DB3BB;--line:#1E3B48;
+    --brand:#62BBD8;--on-brand:#04212C;--brand-soft:#123A4A;--sel:#123A4A;
+    --good:#5FD3A0;--good-bg:#11382B;--bad:#FF908A;--bad-bg:#3F1B1A;
+    --t1:#62BBD8;--t2:#5FD3A0;--t3:#E7B04F;--t4:#F0916F;
+    --hero1:#12485E;--hero2:#0A2B3A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#08161D;--surface:#0F2530;--surface2:#12303D;--ink:#E6F1F2;--muted:#9DB3BB;--line:#1E3B48;
+  --brand:#62BBD8;--on-brand:#04212C;--brand-soft:#123A4A;--sel:#123A4A;
+  --good:#5FD3A0;--good-bg:#11382B;--bad:#FF908A;--bad-bg:#3F1B1A;
+  --t1:#62BBD8;--t2:#5FD3A0;--t3:#E7B04F;--t4:#F0916F;
+  --hero1:#12485E;--hero2:#0A2B3A;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:var(--fs,17px);line-height:1.5;-webkit-text-size-adjust:100%;overscroll-behavior-y:none}
+button,input,textarea{font:inherit;color:inherit}button,.opt,.chip,.tab{cursor:pointer;touch-action:manipulation}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px 36px}.wrap.hasbar{padding-bottom:110px}
+h1,h2,h3{font-family:var(--font-d);margin:0;line-height:1.15;letter-spacing:-.005em}
+h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size:18px;font-weight:700}
+.sub{color:var(--muted);margin:6px 0 0;font-size:15px}
+.ico{display:block;flex:none}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border-radius:14px;border:2px solid var(--brand);background:var(--brand);color:var(--on-brand);font-weight:700;text-decoration:none}
+.btn:disabled{opacity:.45;cursor:not-allowed}.btn.ghost{background:transparent;color:var(--brand)}
+.btn.small{min-height:40px;padding:0 14px;font-size:15px}.btn.full{display:flex;width:100%}
+.btn.good{background:var(--good-bg);border-color:var(--good);color:var(--good)}.btn.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}.btn.light{background:#fff;border-color:#fff;color:#0A4A62}
+.link{background:none;border:0;padding:8px 0;min-height:44px;color:var(--brand);font-weight:700;text-align:left}.link.danger{color:var(--bad)}
+.chip{border:1.5px solid var(--t3);background:transparent;color:var(--ink);border-radius:999px;min-height:36px;padding:0 14px;font-weight:700;font-size:14px}
+.chip.mini{min-height:30px;padding:0 10px;font-size:13px}
+.chip.selecteur{border-color:var(--brand);background:var(--brand-soft);color:var(--brand);display:inline-flex;align-items:center;gap:6px}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--ink);display:grid;place-items:center}
+
+/* Barres d'en-tête */
+.appbar{display:flex;align-items:center;gap:8px;padding:14px 0 6px}
+.logo{flex:none;width:44px;height:44px;border-radius:14px;background:linear-gradient(140deg,var(--hero1),var(--hero2));color:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}
+.ab-t{flex:1;min-width:0}.ab-n{font-family:var(--font-d);font-weight:700;font-size:22px;line-height:1}.ab-s{font-size:13px;color:var(--muted);margin-top:2px}
+.subbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.sb-t{flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pagehead{padding:18px 0 4px}
+
+/* Cadre Hero & Anneau */
+.hero{position:relative;overflow:hidden;margin-top:8px;padding:20px;border-radius:24px;color:#fff;background:linear-gradient(140deg,var(--hero1),var(--hero2));box-shadow:var(--shadow)}
+.hero .topo{position:absolute;right:-40px;top:-30px;width:300px;opacity:.16;pointer-events:none;color:#fff}
+.hero-in{position:relative;display:flex;gap:14px;align-items:center;justify-content:space-between}
+.eyebrow{font-size:13px;font-weight:600;opacity:.85}.hero h2{font-size:28px;color:#fff;margin-top:4px}.hero p{margin:6px 0 0;font-size:15px;opacity:.92}.hero .btn{position:relative;margin-top:16px}
+.ringbox{position:relative;flex:none}.ringbox .lab{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-d);font-weight:700;font-size:19px}
+.rg-bg{stroke:rgba(255,255,255,.28)}.rg-fg{stroke:#fff;transition:stroke-dashoffset .4s}
+.ring-dark .rg-bg{stroke:var(--line)}.ring-dark .rg-fg{stroke:var(--brand)}
+
+/* Listes de cours & Leçons */
+.part{display:flex;align-items:center;gap:10px;margin:30px 0 0;font-size:20px}
+.part::before{content:"";flex:none;width:6px;height:24px;border-radius:3px;background:var(--c,var(--brand))}
+.chap{margin:16px 2px 0;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.chap h3{flex:1;font-family:var(--font-b);font-size:15px;font-weight:700;color:var(--muted)}
+.list{list-style:none;margin:8px 0 0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.lrow{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}.lrow:last-child{border-bottom:0}
+.lmain{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:12px 6px 12px 14px;background:none;border:0;text-align:left;min-height:66px}
+.lbadge{flex:none;min-width:42px;height:42px;padding:0 6px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-d);font-weight:700;font-size:14px;color:var(--c,var(--brand));border:2px solid var(--c,var(--brand))}
+.ltxt{flex:1;min-width:0}.deck-name{display:block;font-weight:700;font-size:16px;line-height:1.25;overflow-wrap:anywhere}.deck-meta{display:block;font-size:13px;color:var(--muted);margin-top:1px}
+.mini{display:block;height:4px;border-radius:4px;background:var(--line);margin-top:7px;overflow:hidden}.mini i{display:block;height:100%;background:var(--c,var(--brand));width:var(--p,0%)}
+.go{flex:none;align-self:center;margin:0 12px 0 4px;width:42px;height:42px;border-radius:50%;border:0;background:var(--brand);color:var(--on-brand);display:grid;place-items:center}
+.go.lockd{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.foot{margin-top:28px;color:var(--muted);font-size:13.5px}
+
+/* Barre d'onglets */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 20px rgba(14,42,56,.06)}
+.tabs{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 7px;background:none;border:0;color:var(--muted);font-size:12px;font-weight:700;min-height:60px}
+.tico{display:grid;place-items:center;width:54px;height:30px;border-radius:15px}
+.tab.on{color:var(--brand)}.tab.on .tico{background:var(--brand-soft)}
+
+/* Cartes 3D & Quiz */
+.scene{margin-top:18px;perspective:1200px}
+.flip{position:relative;display:block;width:100%;min-height:340px;padding:0;border:0;background:none;transform-style:preserve-3d;transition:transform .55s;text-align:center}
+.flip.is-flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:26px 22px;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:auto}
+.front{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}.back{background:var(--brand);color:var(--on-brand);transform:rotateY(180deg)}
+.hint{text-align:center;color:var(--muted);font-size:15px;margin:12px 0 0}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.result{text-align:center;margin-top:36px}.result .big{font-family:var(--font-d);font-size:56px;font-weight:700;line-height:1;margin:14px 0 6px}
+.qcard{margin-top:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 20px}
+.qtxt{font-family:var(--font-d);font-weight:500;font-size:clamp(19px,5vw,25px);line-height:1.28;margin:6px 0 0}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:56px;padding:12px 14px;border-radius:16px;border:2px solid var(--line);background:var(--surface);text-align:left}
+.opt.sel{border-color:var(--brand);background:var(--sel)}.opt.good{border-color:var(--good);background:var(--good-bg)}.opt.bad{border-color:var(--bad);background:var(--bad-bg)}
+.opt .box{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid var(--muted);display:grid;place-items:center}
+.opt.sel .box,.opt.good .box{background:var(--brand);border-color:var(--brand)}
+.opt.sel .box::after,.opt.good .box::after{content:"✓";color:#fff;font-size:15px;font-weight:700}
+.opt.bad .box::after{content:"✕";color:var(--bad);font-size:14px;font-weight:700}
+.fb{margin-top:16px;padding:12px 14px;border-radius:14px;font-weight:700}.fb.good{background:var(--good-bg);color:var(--good)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.learn{margin-top:12px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+
+/* Formulaires & Cartes */
+label{display:block;font-weight:700;margin:14px 0 6px}
+input[type=text],textarea{width:100%;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px;font-size:16px}
+textarea{min-height:84px;resize:vertical}
+.row{display:flex;gap:10px;align-items:center}.row input{flex:1}
+.cards{list-style:none;margin:14px 0 0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.cards li{display:flex;gap:10px;justify-content:space-between;align-items:flex-start;padding:14px 16px;border-bottom:1px solid var(--line)}
+.cards li:last-child{border-bottom:0}
+.cards .q{font-weight:700}.cards .a{color:var(--muted);margin-top:2px}.cards .ok{color:var(--good);font-weight:700;font-size:13px}
+
+/* Progrès et Réglages */
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:16px 0 4px}
+.bar>i{display:block;height:100%;background:var(--good);width:var(--p,0%)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--font-d);font-size:24px;line-height:1.1}.stat span{font-size:12px;color:var(--muted)}
+.center{display:flex;justify-content:center;margin-top:18px}
+.prow{padding:14px 16px;border-bottom:1px solid var(--line)}
+.ph{display:flex;justify-content:space-between;gap:10px;font-weight:700}
+.pbar{height:9px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:8px}
+.pbar i{display:block;height:100%;background:var(--c,var(--brand));width:var(--p,0%)}
+.shead{font-size:13px;font-weight:700;color:var(--muted);margin:24px 4px 0}
+.group{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
+.srow{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);min-height:58px;flex-wrap:wrap}
+.srow:last-child{border-bottom:0}.st{flex:1;min-width:140px}.st b{display:block}.st span{font-size:13.5px;color:var(--muted);display:block}
+.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:7px 11px;border-radius:9px;font-weight:600;color:var(--muted);min-height:36px;font-size:14px}
+.seg button.on{background:var(--brand);color:var(--on-brand)}
+
+/* Modales */
+.overlay{position:fixed;inset:0;z-index:20;background:rgba(6,20,28,.58);display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:560px;background:var(--surface);border-radius:26px 26px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto}
+.sec-group{margin-top:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.sec-title{font-size:13px;font-weight:700;color:var(--brand);text-transform:uppercase;margin-bottom:8px}
+.sec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn-cours{padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface2);text-align:left;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.btn-cours.dispo{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.btn-cours .badge{font-size:11px;padding:2px 6px;border-radius:6px;background:var(--brand);color:#fff}
+.barre-apify{display:flex;gap:8px;margin-top:14px}.barre-apify input{flex:1;border:2px solid var(--line);border-radius:12px;padding:10px 14px}
+.id-appareil-box{background:var(--surface2);border:1.5px dashed var(--brand);border-radius:14px;padding:12px;margin:14px 0;text-align:center}
+.id-val{font-family:monospace;font-size:22px;font-weight:700;letter-spacing:2px;color:var(--brand);margin-top:4px}
+.pm{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.pm-l{flex:1}.pm-n{font-weight:700}.pm-v{font-family:monospace;font-size:13px;color:var(--muted)}
+.pub-ia{background:var(--brand-soft);border:1.5px solid var(--brand);border-radius:14px;padding:14px;margin:14px 0;font-size:14.5px;line-height:1.4}
+.pub-ia b{color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<!-- ============================================================== -->
+<!-- CHARGEMENT MODULAIRE DES COURS                                 -->
+<!-- ============================================================== -->
+<script src="geographie_data.js"></script>
+<script src="chimie_data.js"></script>
+
+<script>
+/* ==============================================================
+   CLÉ PUBLIQUE DE SIGNATURE CRYPTOGRAPHIQUE (ECDSA P-256)
+   Correspond rigoureusement à votre générateur privé generateur-1.html
+   ============================================================== */
+const CLE_PUBLIQUE_SIGNATURE = {
+  kty: "EC",
+  crv: "P-256",
+  x: "iaMzb-jlgVKDbEAUk-2GoDha8vP1IYBQV0d2gQ2yfyc",
+  y: "kve5zBWh55ZISyQZAyKHjD8WQj8xA9UMmRN9Y5LhgrU"
+};
+
+/* ==============================================================
+   MODULE PASSERELLE MAISHAPAY (MOBILE MONEY RDC)
+   Prêt pour l'automatisation intégrale
+   ============================================================== */
+window.MAISHAPAY_CONFIG = {
+  actif: false, // Passer à 'true' dès que vous avez votre compte marchand
+  cleMarchand: "VOTRE_CLE_MARCHAND_MAISHAPAY",
+  prixUnique: 10000, // Paiement unique 10 000 FC à vie
+  lancerPaiement: function() {
+    if (!this.actif) {
+      alert("La passerelle MaishaPay sera activée très bientôt. Veuillez utiliser Airtel Money, Orange Money ou contacter l'administrateur par WhatsApp.");
+      return;
+    }
+    var retour = encodeURIComponent(window.location.origin + window.location.pathname + "?paiement=succes");
+    window.location.href = "https://gateway.maishapay.net/payment?merchant=" + this.cleMarchand + "&amount=" + this.prixUnique + "&currency=CDF&callback=" + retour;
+  }
+};
+
+/* ==============================================================
+   MODULE CHAT IA INTÉGRÉ (VIA APIFY)
+   ============================================================== */
+window.APIFY_CONFIG = {
+  actif: false, // Passer à 'true' après avoir renseigné votre token Apify
+  tokenApi: "VOTRE_TOKEN_APIFY_ICI",
+  acteurId: "apify~rag-web-browser",
+  interroger: async function(question) {
+    if (!this.actif || this.tokenApi === "VOTRE_TOKEN_APIFY_ICI") {
+      return "Le service de Chat IA est prêt. Veuillez configurer votre jeton Apify dans app.html pour activer les réponses de l'IA.";
+    }
+    try {
+      const rep = await fetch("https://api.apify.com/v2/acts/" + this.acteurId + "/run-sync-get-dataset-items?token=" + this.tokenApi, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: question, maxResults: 2 })
+      });
+      const data = await rep.json();
+      return data && data.length ? (data[0].text || data[0].markdown) : "Aucun résultat trouvé pour votre question.";
+    } catch(e) {
+      return "Erreur lors de l'interrogation du Chat IA : " + e.message;
+    }
+  }
+};
+
+/* ==============================================================
+   CATALOGUE OFFICIEL DES 8 SECTIONS & MATIÈRES EXÉTAT RDC
+   ============================================================== */
+window.SECTIONS_OFFICIELLES = [
+  {
+    section: "Tronc Commun (Général)",
+    cours: [
+      { id: "geo", nom: "Géographie", dispo: true },
+      { id: "histoire_ecm", nom: "Histoire + E.C.M", dispo: false },
+      { id: "francais", nom: "Français", dispo: false },
+      { id: "anglais", nom: "Anglais", dispo: false }
+    ]
+  },
+  {
+    section: "Section Scientifique",
+    cours: [
+      { id: "chimie", nom: "Chimie", dispo: true },
+      { id: "maths", nom: "Mathématiques", dispo: false },
+      { id: "physique", nom: "Physique", dispo: false },
+      { id: "biologie", nom: "Biologie", dispo: false },
+      { id: "geologie", nom: "Géologie", dispo: false }
+    ]
+  },
+  {
+    section: "Section Littéraire",
+    cours: [
+      { id: "latin", nom: "Latin", dispo: false },
+      { id: "philosophie", nom: "Philosophie", dispo: false },
+      { id: "francais_lit", nom: "Français approfondi", dispo: false },
+      { id: "anglais_lit", nom: "Anglais approfondi", dispo: false }
+    ]
+  },
+  {
+    section: "Section Pédagogie Générale",
+    cours: [
+      { id: "pedagogie", nom: "Pédagogie", dispo: false },
+      { id: "psychologie", nom: "Psychologie", dispo: false },
+      { id: "didactiques", nom: "Didactiques", dispo: false }
+    ]
+  },
+  {
+    section: "Section Commerciale & Gestion",
+    cours: [
+      { id: "comptabilite", nom: "Comptabilité", dispo: false },
+      { id: "economie_politique", nom: "Économie politique", dispo: false },
+      { id: "droit", nom: "Droit", dispo: false },
+      { id: "maths_financieres", nom: "Maths financières", dispo: false }
+    ]
+  },
+  {
+    section: "Section Sociale",
+    cours: [
+      { id: "sociologie", nom: "Sociologie", dispo: false },
+      { id: "animation", nom: "Animation rurale/urbaine", dispo: false },
+      { id: "legislation_sociale", nom: "Législation sociale", dispo: false },
+      { id: "psychologie_sociale", nom: "Psychologie sociale", dispo: false }
+    ]
+  },
+  {
+    section: "Section Nutrition",
+    cours: [
+      { id: "dietetique", nom: "Diététique", dispo: false },
+      { id: "anatomie", nom: "Anatomie", dispo: false },
+      { id: "pathologie", nom: "Pathologie", dispo: false },
+      { id: "hygiene", nom: "Hygiène & assainissement", dispo: false }
+    ]
+  },
+  {
+    section: "Section Agronomie & Vétérinaire",
+    cours: [
+      { id: "mineralogie", nom: "Minéralogie", dispo: false },
+      { id: "phytotechnie", nom: "Phytotechnie", dispo: false },
+      { id: "zootechnie", nom: "Zootechnie", dispo: false },
+      { id: "pedologie", nom: "Pédologie", dispo: false },
+      { id: "pathologie_animale", nom: "Pathologie animale", dispo: false }
+    ]
+  }
+];
+
+window.L = function(n, t, c){ return { id:'g' + String(n).replace(/[^0-9A-Za-z]/g, '_'), n:String(n), t:t, c:c }; };
+window.LZ = function(n, t, items){
+  return {
+    id: 'c' + n, n: String(n), t: t,
+    c: items.map(function(item){
+      var obj = { q: item[0], a: item[2] };
+      if (Array.isArray(item[1][0])) { obj.ok = item[1][0]; obj.ko = item[1][1]; }
+      else { obj.ok = [item[1][0]]; obj.ko = item[1].slice(1); }
+      return obj;
+    })
+  };
+};
+
+/* ==============================================================
+   MOTEUR LOGIQUE RECTO
+   ============================================================== */
+(function(){
+  var CLE = 'recto:v1';
+  var MIX_SIZE = 15;
+  var memory = null;
+
+  function b64uToBytes(s) {
+    s = s.replace(/-/g, "+").replace(/_/g, "/");
+    while (s.length % 4) s += "=";
+    var bin = atob(s), arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return arr;
+  }
+
+  // Vérification cryptographique ECDSA P-256 avec votre clé publique
+  async function verifierCodeClient(codeEntre) {
+    try {
+      var cle = await crypto.subtle.importKey("jwk", CLE_PUBLIQUE_SIGNATURE, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+      var sig = b64uToBytes(codeEntre.trim());
+      var donnee = new TextEncoder().encode("PSYCHOTEST|" + data.devId);
+      var valide = await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, cle, sig, donnee);
+      return valide;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function getCourses(){
+    return (window.RECTO_COURSES && window.RECTO_COURSES.length) ? window.RECTO_COURSES : [{
+      id: "geo", name: "Géographie", sub: "6e des humanités", parts: []
+    }];
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function load(){ try { var r = localStorage.getItem(CLE); if (r) return JSON.parse(r); } catch(e){} return memory; }
+  function save(){ memory = data; try { localStorage.setItem(CLE, JSON.stringify(data)); } catch(e){} }
+  function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function plural(n, one, many){ return n + ' ' + (n > 1 ? many : one); }
+  function colorVar(i){ return 'var(--t' + (i % 4 + 1) + ')'; }
+  function label(l){ return /^N/.test(l.n) ? l.t : l.n + '. ' + l.t; }
+
+  function genererIdAppareil() {
+    var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    var s = "";
+    for (var i = 0; i < 8; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
+    return s.slice(0, 4) + "-" + s.slice(4);
+  }
+
+  var data = load() || { pro: false, prog: {}, course: "geo", theme: "auto", fs: 0, devId: null };
+  if (!data.prog) data.prog = {};
+  if (!data.devId) { data.devId = genererIdAppareil(); save(); }
+
+  // Vérification automatique retour MaishaPay
+  var paramsUrl = new URLSearchParams(window.location.search);
+  if (paramsUrl.get("paiement") === "succes") {
+    data.pro = true; save();
+    window.history.replaceState({}, document.title, window.location.pathname);
+    alert("Félicitations ! Votre paiement MaishaPay a été confirmé. Recto Pro est activé à vie sur cet appareil.");
+  }
+
+  var ui = { view: 'home', lessonId: null, modal: null, study: null, apifyResult: '', msg: null };
+  var app = document.getElementById('app');
+
+  function curCourse(){
+    var cs = getCourses(), id = data.course || "geo";
+    for(var i=0; i<cs.length; i++){ if(cs[i].id === id) return cs[i]; }
+    return cs[0];
+  }
+
+  function indexerLecons(){
+    var idx = {}, parts = curCourse().parts || [];
+    parts.forEach(function(p, pi){
+      p.ch.forEach(function(chap){
+        chap.ls.forEach(function(l){ idx[l.id] = { l: l, chap: chap, pi: pi }; });
+      });
+    });
+    return idx;
+  }
+
+  /* ==============================================================
+     RÈGLE MATHÉMATIQUE AUTOMATIQUE : 25 % GRATUIT / 75 % PRO
+     Calcule automatiquement le quota sans configuration manuelle
+     ============================================================== */
+  function tousLesChapitresDuCours() {
+    var chaps = [];
+    (curCourse().parts || []).forEach(function(p){
+      (p.ch || []).forEach(function(ch){ chaps.push(ch); });
+    });
+    return chaps;
+  }
+
+  function unlocked(chap){
+    if (data.pro) return true; // Tout est ouvert pour Pro
+    if (chap.free === true) return true; // Respecte un déblocage manuel
+    var tous = tousLesChapitresDuCours();
+    var index = tous.indexOf(chap);
+    // Calcul automatique du premier quart (25 %)
+    var quotaGratuit = Math.max(1, Math.round(tous.length * 0.25));
+    return index >= 0 && index < quotaGratuit;
+  }
+
+  function lessonItems(l){ return l.c.map(function(c, i){ return { k:l.id + ':' + i, q:c.q, a:c.a, ok:c.ok, ko:c.ko }; }); }
+  function lessonKnown(l){ var n = 0; l.c.forEach(function(c, i){ if(data.prog[l.id + ':' + i]) n++; }); return n; }
+  function courseTotals(){
+    var t = 0, k = 0, idx = indexerLecons();
+    Object.keys(idx).forEach(function(id){ t += idx[id].l.c.length; k += lessonKnown(idx[id].l); });
+    return { t: t, k: k };
+  }
+
+  var TOPO = '<svg class="topo" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M150 40c50-6 96 28 104 74s-18 92-62 110-104 8-130-36S58 52 150 40z"/><path d="M150 70c38-4 72 22 78 56s-14 70-48 84-80 6-100-28S80 78 150 70z"/><path d="M150 100c26-2 50 16 54 40s-10 50-34 60-56 4-70-20 4-74 50-80z"/></svg>';
+  function ringSvg(pct, size, w, cls){
+    var r = (size - w) / 2, c = 2 * Math.PI * r, off = c * (1 - pct / 100), m = size / 2;
+    return '<svg class="' + (cls || '') + '" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
+      '<circle class="rg-bg" cx="' + m + '" cy="' + m + '" r="' + r + '" fill="none" stroke-width="' + w + '"/>' +
+      '<circle class="rg-fg" cx="' + m + '" cy="' + m + '" r="' + r + '" fill="none" stroke-width="' + w + '" stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + off + '" transform="rotate(-90 ' + m + ' ' + m + ')"/></svg>';
+  }
+
+  function barreHaut(){
+    var c = curCourse();
+    return '<header class="appbar">' +
+      '<div class="logo">🎓</div>' +
+      '<div class="ab-t">' +
+        '<div class="ab-n">Recto</div>' +
+        '<div class="ab-s"><button class="chip mini selecteur" data-a="modalCours">' + esc(c.name) + ' ▾</button></div>' +
+      '</div>' +
+      '<button class="btn small' + (data.pro ? ' light' : ' ghost') + '" data-a="btnChatIa" style="padding:0 10px;font-size:13px">🤖 Chat IA intégré</button>' +
+      '<button class="chip" data-a="modalPro" style="margin-left:4px">' + (data.pro ? 'Pro à vie' : 'Activer Pro') + '</button>' +
+    '</header>';
+  }
+
+  function subbar(back, title){
+    return '<header class="subbar"><button class="iconbtn" data-a="' + back[0] + '"' + (back[1] ? ' data-id="' + back[1] + '"' : '') + ' aria-label="Retour">‹</button>' +
+      '<h1 class="sb-t">' + esc(title) + '</h1></header>';
+  }
+
+  function barreNavigation(){
+    var v = ui.view === 'lesson' ? 'home' : ui.view;
+    return '<nav class="tabbar"><div class="tabs">' +
+      [['home','Programme'],['progress','Progrès'],['settings','Réglages']].map(function(t){
+        return '<button class="tab' + (v === t[0] ? ' on' : '') + '" data-a="tab" data-id="' + t[0] + '"><span class="tico"></span>' + t[1] + '</button>';
+      }).join('') + '</div></nav>';
+  }
+
+  function applyPrefs(){
+    var el = document.documentElement; if (!el) return;
+    if (data.theme === 'light' || data.theme === 'dark') el.setAttribute('data-theme', data.theme); else el.removeAttribute('data-theme');
+    el.style.setProperty('--fs', ['17px', '19px', '21px'][data.fs || 0]);
+  }
+
+  function vueAccueil(){
+    var c = curCourse(), tot = courseTotals(), pct = tot.t ? Math.round(tot.k / tot.t * 100) : 0;
+    var h = barreHaut() +
+      '<section class="hero">' + TOPO + '<div class="hero-in"><div>' +
+      '<div class="eyebrow">Examen d’État RDC</div><h2>' + esc(c.heroTitle || c.name) + '</h2>' +
+      '<p>' + esc(c.heroSub || 'Programme national officiel.') + '</p></div>' +
+      '<div class="ringbox">' + ringSvg(pct, 84, 8, '') + '<div class="lab">' + pct + '%</div></div></div>' +
+      '<button class="btn light full" data-a="mix" style="margin-top:14px">🔀 Révision mixte de ' + MIX_SIZE + ' cartes</button></section>';
+
+    var parts = c.parts || [];
+    if (!parts.length) {
+      h += '<p style="text-align:center;margin-top:34px;color:var(--muted)">Ce cours est en attente d’intégration de son fichier de questions.</p>';
+    }
+    parts.forEach(function(p, pi){
+      h += '<h2 class="part" style="--c:var(--t' + (pi%4+1) + ')">' + esc(p.t) + '</h2>';
+      p.ch.forEach(function(chap){
+        var ouvert = unlocked(chap);
+        h += '<div class="chap"><h3>' + esc(chap.t) + '</h3>' + (ouvert ? '' : '<span class="chip mini">Pro</span>') + '</div><ul class="list">';
+        chap.ls.forEach(function(l){
+          var k = lessonKnown(l), pc = l.c.length ? Math.round(k / l.c.length * 100) : 0;
+          h += '<li class="lrow" style="--c:var(--t' + (pi%4+1) + ')">' +
+            '<button class="lmain" data-a="' + (ouvert ? 'lecon' : 'modalPro') + '" data-id="' + l.id + '">' +
+            '<span class="lbadge">' + esc(l.n) + '</span>' +
+            '<span class="ltxt"><span class="deck-name">' + esc(l.t) + '</span>' +
+            '<span class="deck-meta">' + l.c.length + ' cartes (' + k + ' acquises)</span>' +
+            (ouvert ? '<span class="mini" style="--p:' + pc + '%"><i></i></span>' : '') + '</span></button>' +
+            '<button class="go' + (ouvert ? '' : ' lockd') + '" data-a="' + (ouvert ? 'reviserLecon' : 'modalPro') + '" data-id="' + l.id + '">' + (ouvert ? '▶' : '🔒') + '</button></li>';
+        });
+        h += '</ul>';
+      });
+    });
+    return h + '<p class="foot">Recto – Plateforme d’Examen d’État en RDC (25 % gratuit / 75 % Pro).</p>';
+  }
+
+  function vueLecon(){
+    var idx = indexerLecons(), rec = idx[ui.lessonId];
+    if (!rec || !unlocked(rec.chap)) { ui.view = 'home'; return vueAccueil(); }
+    var l = rec.l, k = lessonKnown(l);
+    var h = subbar(['tab', 'home'], label(l));
+    h += '<section style="margin-top:18px"><p class="sub" style="margin:0">' + esc(rec.chap.t) + '</p>' +
+      '<div class="bar" style="--p:' + Math.round(k / l.c.length * 100) + '%"><i></i></div><p class="sub" style="margin:0">' + plural(l.c.length, 'carte', 'cartes') + ', ' + k + ' acquises</p>' +
+      '<p><button class="btn full" data-a="reviserLecon" data-id="' + l.id + '">▶ Réviser cette leçon</button></p>' +
+      '<ul class="cards">';
+    l.c.forEach(function(c, i){
+      h += '<li><div><div class="q">' + esc(c.q) + '</div><div class="a">' + esc(c.a) + '</div></div>' +
+        (data.prog[l.id + ':' + i] ? '<span class="ok">Acquise</span>' : '') + '</li>';
+    });
+    h += '</ul></section>';
+    return h;
+  }
+
+  function vueProgression(){
+    var tot = courseTotals(), pct = tot.t ? Math.round(tot.k / tot.t * 100) : 0;
+    var h = '<header class="pagehead"><h1>Ma progression</h1><p class="sub">Vos cartes acquises en ' + esc(curCourse().name) + '.</p></header>' +
+      '<div class="center"><div class="ringbox">' + ringSvg(pct, 140, 12, 'ring-dark') + '<div class="lab" style="font-size:30px">' + pct + '%</div></div></div>' +
+      '<div class="stats"><div class="stat"><b>' + tot.k + '</b><span>acquises</span></div><div class="stat"><b>' + (tot.t - tot.k) + '</b><span>restantes</span></div><div class="stat"><b>' + tot.t + '</b><span>total</span></div></div>';
+    return h;
+  }
+
+  function vueReglages(){
+    var h = '<header class="pagehead"><h1>Réglages</h1></header>' +
+      '<div class="shead">Matière</div><div class="group"><div class="srow"><div class="st"><b>Cours actuel</b><span>' + esc(curCourse().name) + '</span></div>' +
+      '<button class="btn small" data-a="modalCours">Changer</button></div></div>' +
+      '<div class="shead">Compte</div><div class="group"><div class="srow"><div class="st"><b>Statut</b><span>' + (data.pro ? 'Recto Pro à vie activé' : 'Version gratuite (25 % des chapitres)') + '</span></div>' +
+      '<button class="btn small' + (data.pro ? ' ghost' : '') + '" data-a="modalPro">' + (data.pro ? 'Mon Compte' : 'Passer à Pro') + '</button></div></div>' +
+      '<div class="shead">ID de cet appareil</div><div class="group"><div class="srow"><div class="st"><b>Identifiant unique</b><span>' + data.devId + '</span></div>' +
+      '<button class="btn small ghost" data-a="copierId">Copier</button></div></div>' +
+      '<div class="shead">Assistance</div><div class="group"><div class="srow"><div class="st"><b>Support WhatsApp officiel</b><span>+243 85 08 00 833</span></div>' +
+      '<a class="btn small ghost" href="https://wa.me/243850800833" target="_blank">Contacter</a></div></div>';
+    return h;
+  }
+
+  function curQ(s){
+    if (!s.cur || s.cur.idx !== s.idx) {
+      var c = s.queue[s.idx];
+      var opts = c.ok.map(function(t){ return { t:t, ok:true }; }).concat(c.ko.map(function(t){ return { t:t, ok:false }; }));
+      s.cur = { idx:s.idx, opts:shuffle(opts), sel:{}, done:false, good:false };
+    }
+    return s.cur;
+  }
+
+  function vueStudy(){
+    var s = ui.study;
+    var h = subbar(['quit'], s.title);
+    if (s.idx >= s.queue.length) {
+      h += '<div class="result"><h2>Session terminée</h2><div class="big">' + s.known + '/' + s.total + '</div>' +
+        '<p class="sub">cartes acquises' + (s.again ? ' (' + plural(s.again, 'carte remise', 'cartes remises') + ' à revoir)' : '') + '</p>' +
+        '<button class="btn full" data-a="restart" style="margin-top:16px">Réviser à nouveau</button>' +
+        '<button class="btn ghost full" data-a="quit" style="margin-top:8px">Retour</button></div>';
+      return h;
+    }
+    var c = s.queue[s.idx], p = Math.round(s.known / s.total * 100);
+    if (c.ok) {
+      var q = curQ(s), multi = c.ok.length > 1;
+      h += '<div class="bar" style="--p:' + p + '%"><i></i></div><p class="sub" style="margin:0">' + s.known + ' sur ' + s.total + ' acquises</p>' +
+        '<div class="qcard"><span class="side" style="font-size:14px;color:var(--muted)">Question</span><p class="qtxt">' + esc(c.q) + '</p></div>' +
+        '<p class="hint">' + (multi ? 'Cochez toutes les assertions exactes.' : 'Cochez la bonne assertion.') + '</p>' +
+        '<div class="opts">';
+      q.opts.forEach(function(o, i){
+        var on = !!q.sel[i], cls = 'opt';
+        if (q.done) {
+          if (o.ok && on) cls += ' good'; else if (o.ok) cls += ' good'; else if (on) cls += ' bad';
+        } else if (on) cls += ' sel';
+        h += '<button class="' + cls + '" data-a="opt" data-id="' + i + '"' + (q.done ? ' disabled' : '') + '>' +
+          '<span class="box"></span><span class="otxt">' + esc(o.t) + '</span></button>';
+      });
+      h += '</div>';
+      if (!q.done) {
+        h += '<button class="btn full" data-a="validerQuiz" style="margin-top:16px">Valider</button>' +
+          '<button class="link" data-a="idk" style="width:100%;text-align:center">Je ne sais pas</button>';
+      } else {
+        h += '<div class="fb ' + (q.good ? 'good' : 'bad') + '">' + (q.good ? 'Bonne réponse !' : 'Voici la réponse :') + '</div>' +
+          '<div class="learn"><span class="side">À retenir</span><p>' + esc(c.a) + '</p></div>' +
+          '<button class="btn full" data-a="suivante" style="margin-top:16px">Question suivante</button>';
+      }
+      return h;
+    }
+    h += '<div class="bar" style="--p:' + p + '%"><i></i></div><p class="sub" style="margin:0">' + s.known + ' sur ' + s.total + ' acquises</p>' +
+      '<div class="scene"><button class="flip" data-a="flip">' +
+      '<span class="face front"><span class="side">Question</span><span class="txt">' + esc(c.q) + '</span></span>' +
+      '<span class="face back"><span class="side">Réponse</span><span class="txt">' + esc(c.a) + '</span></span>' +
+      '</button></div>' +
+      '<p class="hint" id="hint">Touchez la carte pour voir la réponse</p>' +
+      '<div class="answers" id="answers" hidden>' +
+      '<button class="btn bad" data-a="again">À revoir</button>' +
+      '<button class="btn good" data-a="known">Je savais</button></div>';
+    return h;
+  }
+
+  function vueModale(){
+    if (!ui.modal) return '';
+    var h = '<div class="overlay" data-a="fermerModale"><div class="sheet">';
+    if (ui.modal === 'cours') {
+      h += '<h2>Choisir une matière</h2><p class="sub">Toutes les options officielles de l’Exétat RDC :</p>';
+      window.SECTIONS_OFFICIELLES.forEach(function(sec){
+        h += '<div class="sec-group"><div class="sec-title">' + esc(sec.section) + '</div><div class="sec-grid">';
+        sec.cours.forEach(function(co){
+          var dispo = false;
+          getCourses().forEach(function(c){ if(c.id === co.id) dispo = true; });
+          h += '<button class="btn-cours' + (dispo ? ' dispo' : '') + '" data-a="choisirCours" data-id="' + co.id + '"' + (dispo ? '' : ' style="opacity:.55"') + '>' +
+            esc(co.nom) + (dispo ? '<span class="badge">Prêt</span>' : '') + '</button>';
+        });
+        h += '</div></div>';
+      });
+      h += '<button class="btn full ghost" data-a="fermerModale" style="margin-top:14px">Fermer</button>';
+    } else if (ui.modal === 'apify') {
+      h += '<h2>🤖 Chat IA intégré</h2>' +
+        '<div class="pub-ia"><b>Inclus dans Recto Pro :</b> Posez vos questions d’examen, définitions et exercices directement à l’IA. Une vraie économie pour éviter les abonnements mensuels coûteux chez les autres IA.</div>' +
+        '<div class="barre-apify"><input type="text" id="champApify" placeholder="Posez une question à l’IA...">' +
+        '<button class="btn small" data-a="lancerApify">Envoyer</button></div>' +
+        '<div id="zoneResultatApify" style="margin-top:14px;font-size:14.5px;max-height:240px;overflow:auto;line-height:1.5">' + (ui.apifyResult || '') + '</div>' +
+        '<button class="btn full ghost" data-a="fermerModale" style="margin-top:14px">Fermer</button>';
+    } else if (ui.modal === 'pro') {
+      h += '<h2>Passer à Recto Pro</h2>' +
+        '<div class="pub-ia">Paiement unique de <b>10 000 FC</b> à vie (25 % gratuit / 75 % Pro sur toutes les matières). Une vraie économie pour éviter les abonnements mensuels coûteux chez les IA.</div>' +
+        '<div class="id-appareil-box"><div>Votre ID appareil unique :</div><div class="id-val">' + data.devId + '</div><button class="btn small ghost" data-a="copierId" style="margin-top:8px">Copier mon ID</button></div>' +
+        '<h3>Moyens de paiement (RDC) :</h3>' +
+        '<div class="pm"><div class="pm-l"><div class="pm-n">Airtel Money</div><div class="pm-v">0972175034</div></div></div>' +
+        '<div class="pm"><div class="pm-l"><div class="pm-n">Orange Money</div><div class="pm-v">0842403168</div></div></div>' +
+        '<button class="btn full" data-a="payerMaishaPay" style="margin-top:12px">⚡ Payer en ligne avec MaishaPay</button>' +
+        '<a class="btn full ghost" href="https://wa.me/243850800833?text=' + encodeURIComponent('Bonjour, j’ai payé 10 000 FC pour Recto Pro. Mon ID appareil est : ' + data.devId) + '" target="_blank" style="margin-top:8px">Envoyer la preuve sur WhatsApp</a>' +
+        '<h3 style="margin-top:20px">J’ai reçu mon code :</h3>' +
+        '<div class="row"><input type="text" id="codeSecurise" placeholder="Collez votre code de signature ici..."><button class="btn" data-a="validerSignature">Activer</button></div>' +
+        (ui.msg ? '<p class="' + (ui.msg.ok ? 'fb good' : 'err') + '" style="margin-top:8px">' + esc(ui.msg.t) + '</p>' : '') +
+        '<button class="btn full ghost" data-a="fermerModale" style="margin-top:12px">Fermer</button>';
+    }
+    return h + '</div></div>';
+  }
+
+  function render(){
+    applyPrefs();
+    var h = (ui.view === 'lesson' ? vueLecon() : (ui.view === 'progress' ? vueProgression() : (ui.view === 'settings' ? vueReglages() : (ui.view === 'study' ? vueStudy() : vueAccueil()))));
+    var hasBar = ui.view !== 'study';
+    app.className = 'wrap' + (hasBar ? ' hasbar' : '');
+    app.innerHTML = h + barreNavigation() + vueModale();
+  }
+
+  function begin(title, queue, back, src){
+    if (!queue.length) return;
+    ui.study = { title:title, queue:queue, idx:0, known:0, again:0, total:queue.length, back:back, src:src };
+    ui.view = 'study'; render();
+  }
+  function order(items){
+    var u = [], k = []; items.forEach(function(i){ (data.prog[i.k] ? k : u).push(i); });
+    return shuffle(u).concat(shuffle(k));
+  }
+
+  document.addEventListener('click', async function(e){
+    var t = e.target.closest('[data-a]'); if (!t) return;
+    var a = t.dataset.a, id = t.dataset.id;
+    if (a === 'tab') { ui.view = id; render(); }
+    else if (a === 'lecon') { ui.view = 'lesson'; ui.lessonId = id; render(); }
+    else if (a === 'reviserLecon') {
+      var rec = indexerLecons()[id];
+      if (!rec || !unlocked(rec.chap)) { ui.modal = 'pro'; render(); return; }
+      begin(label(rec.l), order(lessonItems(rec.l)), { view: ui.view === 'lesson' ? 'lesson' : 'home', lessonId:id }, { type:'lesson', id:id });
+    }
+    else if (a === 'mix') {
+      var items = [], idx = indexerLecons();
+      Object.keys(idx).forEach(function(i){ if (unlocked(idx[i].chap)) items = items.concat(lessonItems(idx[i].l)); });
+      begin('Révision mixte (' + curCourse().name + ')', order(items).slice(0, MIX_SIZE), { view:'home' }, { type:'mix' });
+    }
+    else if (a === 'flip') {
+      var s = ui.study, btn = document.querySelector('.flip');
+      s.flipped = !s.flipped; btn.classList.toggle('is-flipped', s.flipped);
+      document.getElementById('answers').hidden = !s.flipped;
+      document.getElementById('hint').hidden = s.flipped;
+    }
+    else if (a === 'known') {
+      var s = ui.study, c = s.queue[s.idx]; data.prog[c.k] = 1; save();
+      s.known++; s.idx++; s.flipped = false; render();
+    }
+    else if (a === 'again') {
+      var s = ui.study, c = s.queue[s.idx]; delete data.prog[c.k]; save();
+      s.again++; s.queue.push(c); s.idx++; s.flipped = false; render();
+    }
+    else if (a === 'opt') {
+      var s = ui.study, q = curQ(s), c = s.queue[s.idx];
+      if (q.done) return;
+      if (c.ok.length > 1) { if (q.sel[id]) delete q.sel[id]; else q.sel[id] = true; }
+      else { q.sel = {}; q.sel[id] = true; }
+      render();
+    }
+    else if (a === 'validerQuiz') {
+      var s = ui.study, q = curQ(s), c = s.queue[s.idx];
+      if (q.done || !Object.keys(q.sel).length) return;
+      q.good = q.opts.every(function(o, i){ return o.ok === !!q.sel[i]; });
+      q.done = true;
+      if (q.good) { s.known++; data.prog[c.k] = 1; } else { s.again++; delete data.prog[c.k]; s.queue.push(c); }
+      save(); render();
+    }
+    else if (a === 'idk') {
+      var s = ui.study, q = curQ(s), c = s.queue[s.idx];
+      if (q.done) return;
+      q.done = true; q.good = false; s.again++; delete data.prog[c.k]; s.queue.push(c);
+      save(); render();
+    }
+    else if (a === 'suivante') { ui.study.idx++; render(); }
+    else if (a === 'restart') {
+      var src = ui.study.src;
+      if (src.type === 'lesson') { var r = indexerLecons()[src.id]; begin(label(r.l), order(lessonItems(r.l)), ui.study.back, src); }
+      else render();
+    }
+    else if (a === 'quit') { ui.view = ui.study ? ui.study.back.view : 'home'; ui.study = null; render(); }
+    else if (a === 'modalCours') { ui.modal = 'cours'; render(); }
+    else if (a === 'btnChatIa') {
+      if (!data.pro) { ui.modal = 'pro'; render(); }
+      else { ui.modal = 'apify'; ui.apifyResult = ''; render(); }
+    }
+    else if (a === 'modalPro') { ui.modal = 'pro'; ui.msg = null; render(); }
+    else if (a === 'fermerModale') { ui.modal = null; render(); }
+    else if (a === 'copierId') {
+      navigator.clipboard.writeText(data.devId);
+      alert("Votre ID appareil (" + data.devId + ") a été copié.");
+    }
+    else if (a === 'payerMaishaPay') { window.MAISHAPAY_CONFIG.lancerPaiement(); }
+    else if (a === 'validerSignature') {
+      var val = (document.getElementById('codeSecurise').value || '').trim();
+      if (!val) { ui.msg = { ok: false, t: "Veuillez coller le code reçu." }; render(); return; }
+      var ok = await verifierCodeClient(val);
+      if (ok) {
+        data.pro = true; save();
+        ui.msg = { ok: true, t: "Code authentique ! Recto Pro est activé à vie." };
+        setTimeout(function(){ ui.modal = null; render(); }, 1500);
+      } else {
+        ui.msg = { ok: false, t: "Code invalide pour cet appareil." };
+      }
+      render();
+    }
+    else if (a === 'lancerApify') {
+      var q = document.getElementById('champApify').value;
+      if (q) {
+        document.getElementById('zoneResultatApify').innerHTML = "L’IA réfléchit à votre question...";
+        window.APIFY_CONFIG.interroger(q).then(function(res){
+          ui.apifyResult = res; render();
+        });
+      }
+    }
+    else if (a === 'choisirCours') {
+      var dispo = false; getCourses().forEach(function(c){ if(c.id === id) dispo = true; });
+      if (dispo) { data.course = id; save(); ui.modal = null; render(); }
+      else alert("Cette matière fait partie du programme officiel. Son fichier de questions sera bientôt disponible.");
+    }
+  });
+
+  render();
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', function(){ try { navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {} });
+  }
+})();
+</script>
+</body>
+</html>
