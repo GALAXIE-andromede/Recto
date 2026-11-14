@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A5C78">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="manifest webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -360,6 +360,10 @@ window.LZ = function(n, t, items){
   var KEY = 'recto:v1';
   var MIX_SIZE = 15;
   var memory = null;
+
+  function uid() {
+    return Math.random().toString(36).slice(2, 10);
+  }
 
   function b64uToBytes(s) {
     s = s.replace(/-/g, "+").replace(/_/g, "/");
@@ -737,7 +741,7 @@ window.LZ = function(n, t, items){
         '<a class="btn full ghost" href="https://wa.me/243850800833?text=' + encodeURIComponent('Bonjour, j’ai payé 10 000 FC pour Recto Pro. Mon ID appareil est : ' + data.devId) + '" target="_blank" style="margin-top:8px">Envoyer la preuve sur WhatsApp</a>' +
         '<h3 style="margin-top:20px">J’ai reçu mon code :</h3>' +
         '<div class="row"><input type="text" id="codeSecurise" placeholder="Collez votre code de signature ici..."><button class="btn" data-a="validerSignature">Activer</button></div>' +
-        (ui.msg ? '<p class="' + (ui.msg.ok ? 'fb good' : 'err') + '" style="margin-top:8px">' + esc(ui.msg.t) + '</p>' : '') +
+        (ui.msg ? '<p class="fb ' + (ui.msg.ok ? 'good' : 'bad') + '" style="margin-top:8px">' + esc(ui.msg.t) + '</p>' : '') +
         '<button class="btn full ghost" data-a="fermerModale" style="margin-top:12px">Fermer</button>';
     }
     return h + '</div></div>';
@@ -796,7 +800,12 @@ window.LZ = function(n, t, items){
   }
 
   document.addEventListener('click', async function(e){
-    var t = e.target.closest('[data-a]'); if (!t) return;
+    var overlayEl = e.target.closest('.overlay');
+    var t = e.target.closest('[data-a]'); 
+    if (!t) {
+      if (overlayEl && e.target === overlayEl) { ui.modal = null; render(); }
+      return;
+    }
     var a = t.dataset.a, id = t.dataset.id;
     if (a === 'entrerApp') { ui.view = 'home'; render(); }
     else if (a === 'tab') { ui.view = id; render(); }
@@ -879,6 +888,8 @@ window.LZ = function(n, t, items){
     else if (a === 'restart') {
       var src = ui.study.src;
       if (src.type === 'lesson') { var r = indexerLecons()[src.id]; begin(label(r.l), order(lessonItems(r.l)), ui.study.back, src); }
+      else if (src.type === 'deck') { var d = deckById(src.id); if (d) begin(d.name, order(d.cards.map(function(c){ return { k:'u:'+c.id, q:c.q, a:c.a }; })), ui.study.back, src); }
+      else if (src.type === 'mix') { var items = [], idx = indexerLecons(); Object.keys(idx).forEach(function(i){ if (unlocked(idx[i].chap)) items = items.concat(lessonItems(idx[i].l)); }); begin('Révision mixte (' + curCourse().name + ')', order(items).slice(0, MIX_SIZE), ui.study.back, src); }
       else render();
     }
     else if (a === 'quit') { ui.view = ui.study ? ui.study.back.view : 'home'; ui.study = null; render(); }
