@@ -1,4 +1,4 @@
-// Fichier geographie.js - Cours complet de Géographie 6e année (RDC)
+// Fichier geographie_data.js - Cours complet de Géographie 6e année (RDC)
 function L(n, t, c){ return { id:'g' + n.replace(/[^0-9A-Za-z]/g, '_'), n:n, t:t, c:c }; }
 
 window.COURSE_GEO = [
