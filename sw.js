@@ -1,14 +1,36 @@
-var CACHE = 'recto-v1';
-var CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-180.png'];
+var CACHE = 'recto-v2';
+var CORE = [
+  './',
+  './index.html',
+  './app.html',
+  './manifest.webmanifest',
+  './chimie_data.js',
+  './geographie_data.js',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-180.png'
+];
 
 self.addEventListener('install', function(e){
-  e.waitUntil(caches.open(CACHE).then(function(c){ return c.addAll(CORE); }).then(function(){ return self.skipWaiting(); }));
+  e.waitUntil(
+    caches.open(CACHE).then(function(c){
+      return c.addAll(CORE);
+    }).then(function(){
+      return self.skipWaiting();
+    })
+  );
 });
 
 self.addEventListener('activate', function(e){
-  e.waitUntil(caches.keys().then(function(keys){
-    return Promise.all(keys.filter(function(k){ return k !== CACHE; }).map(function(k){ return caches.delete(k); }));
-  }).then(function(){ return self.clients.claim(); }));
+  e.waitUntil(
+    caches.keys().then(function(keys){
+      return Promise.all(
+        keys.filter(function(k){ return k !== CACHE; }).map(function(k){ return caches.delete(k); })
+      );
+    }).then(function(){
+      return self.clients.claim();
+    })
+  );
 });
 
 self.addEventListener('fetch', function(e){
@@ -16,36 +38,34 @@ self.addEventListener('fetch', function(e){
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
 
-  // Page principale : on affiche tout de suite la version en mémoire, puis on la met à jour en arrière-plan.
-  if (req.mode === 'navigate') {
-    e.respondWith(caches.match('index.html').then(function(cached){
-      var net = fetch(req).then(function(res){
-        if (res && res.ok) { var cp = res.clone(); caches.open(CACHE).then(function(c){ c.put('index.html', cp); }); }
-        return res;
-      }).catch(function(){ return cached; });
-      return cached || net;
-    }));
-    return;
-  }
-
-  // Fichiers du site (icônes, manifeste) : mémoire d'abord.
+  // Stratégie "Cache d'abord, puis réseau" pour tous les fichiers du site
   if (url.origin === self.location.origin) {
-    e.respondWith(caches.match(req).then(function(r){
-      return r || fetch(req).then(function(res){
-        if (res && res.ok) { var cp = res.clone(); caches.open(CACHE).then(function(c){ c.put(req, cp); }); }
-        return res;
-      });
-    }));
+    e.respondWith(
+      caches.match(req).then(function(cached){
+        var net = fetch(req).then(function(res){
+          if (res && res.ok) {
+            var cp = res.clone();
+            caches.open(CACHE).then(function(c){ c.put(req, cp); });
+          }
+          return res;
+        }).catch(function(){
+          return cached;
+        });
+        return cached || net;
+      })
+    );
     return;
   }
 
-  // Polices Google : on les garde pour fonctionner sans connexion.
+  // Polices Google
   if (/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) {
-    e.respondWith(caches.open(CACHE).then(function(c){
-      return c.match(req).then(function(r){
-        var net = fetch(req).then(function(res){ c.put(req, res.clone()); return res; }).catch(function(){ return r; });
-        return r || net;
-      });
-    }));
+    e.respondWith(
+      caches.open(CACHE).then(function(c){
+        return c.match(req).then(function(r){
+          var net = fetch(req).then(function(res){ c.put(req, res.clone()); return res; }).catch(function(){ return r; });
+          return r || net;
+        });
+      })
+    );
   }
 });
