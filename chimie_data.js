@@ -74,9 +74,9 @@ window.RECTO_COURSES = window.RECTO_COURSES || [];
               ["Cochez les assertions exactes sur la masse molaire et la stœchiométrie.", [["La masse molaire atomique d'un élément naturel tient compte de l'abondance isotopique relative de ses différents isotopes.", "La densité d'un gaz par rapport à l'air vaut approximativement d = M / 29."], ["Une mole de n'importe quel solide occupe toujours un volume de 22,4 litres.", "La masse molaire d'un composé dépend de la température de la pièce."]], "À retenir : La masse molaire de l'air sec vaut environ 29 g/mol, d'où la relation classique de densité gazeuse d = M / 29. Seuls les gaz occupent 22,4 L/mol en CNTP."],
               ["Quelle est la densité par rapport à l'air du dioxyde de carbone CO2 (M = 44 g/mol) ?", ["1,52", "0,66", "1,00", "2,00"], "Résolution : d = M / 29 = 44 / 29 = 1,517 ≈ 1,52. Le dioxyde de carbone est environ 1,5 fois plus lourd que l'air, ce qui explique qu'il s'accumule au ras du sol."]
             ])
-            ]
-   },
-   {
+        ]
+     },
+     {
      t: "Chapitre 2 : Fonctions inorganiques & Réactions ioniques",
      free: false,
      ls: [
@@ -140,7 +140,7 @@ window.RECTO_COURSES = window.RECTO_COURSES || [];
               ["Cochez les assertions exactes sur les réactions ioniques totales.", [["L'équation ionique nette doit satisfaire à la conservation de la masse et à celle des charges électriques.", "Une précipitation a lieu dès que le produit des concentrations dépasse le produit de solubilité Ks."], ["Les réactions ioniques en solution aqueuse mettent généralement plusieurs jours pour démarrer.", "Tous les sels de sodium forment des précipités épais dans l'eau froide."]], "À retenir : Les réactions ioniques en solution aqueuse sont quasi-instantanées car elles n'exigent pas de casser au préalable des liaisons covalentes fortes."],
               ["Combien de grammes de précipité d'AgCl (M = 143,5 g/mol) se forment lorsqu'on mélange 100 mL de AgNO3 à 0,1 mol/L et 100 mL de NaCl à 0,1 mol/L ?", ["1,435 g", "2,870 g", "0,717 g", "14,35 g"], "Résolution : n(Ag+) = 0,1 × 0,100 = 0,01 mol. n(Cl-) = 0,1 × 0,100 = 0,01 mol. Stœchiométrie 1:1 : il se forme 0,01 mol d'AgCl. Masse m = 0,01 × 143,5 = 1,435 g."]
             ])
-          ]
+         ]
         },
         {
           t: "Chapitre 3 : Chimie descriptive minérale",
