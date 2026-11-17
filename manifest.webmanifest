@@ -1,9 +1,10 @@
 {
-  "name": "Recto – Géographie 6e année (RDC)",
+  "id": "./app.html",
+  "name": "Recto – Exétat RDC",
   "short_name": "Recto",
-  "description": "Révision de géographie 6e humanités : programme de la RDC et de l’Afrique, questions à cocher.",
+  "description": "Révision Exétat RDC : 32 matières officielles, fiches 3D, méthode assertions et Chat IA intégré.",
   "lang": "fr",
-  "start_url": "./",
+  "start_url": "./app.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
