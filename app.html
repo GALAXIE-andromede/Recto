@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A5C78">
-<link rel="manifest" href="manifest webmanifest">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -47,41 +47,50 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
 body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:var(--fs,17px);line-height:1.5;-webkit-text-size-adjust:100%}
 button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;touch-action:manipulation}
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px}
-.wrap{max-width:560px;margin:0 auto;padding:0 18px 36px}.wrap.hasbar{padding-bottom:110px}
+.wrap{max-width:680px;margin:0 auto;padding:0 18px 36px}.wrap.hasbar{padding-bottom:112px}
 h1,h2,h3{font-family:var(--font-d);margin:0;line-height:1.15;letter-spacing:-.005em}
 h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size:18px;font-weight:700}
 .sub{color:var(--muted);margin:6px 0 0;font-size:15px}
 .ico{display:block;flex:none}
 
 /* Boutons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border-radius:14px;border:2px solid var(--brand);background:var(--brand);color:var(--on-brand);font-weight:700;text-decoration:none}
-.btn.ghost{background:transparent;color:var(--brand)}.btn.small{min-height:40px;padding:0 14px;font-size:15px}.btn.full{display:flex;width:100%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:14px;border:2px solid var(--brand);background:var(--brand);color:var(--on-brand);font-weight:700;text-decoration:none;transition:transform .12s,opacity .15s}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--brand)}.btn.small{min-height:44px;padding:0 14px;font-size:14.5px}.btn.full{display:flex;width:100%}
 .btn.good{background:var(--good-bg);border-color:var(--good);color:var(--good)}.btn.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}.btn.light{background:#fff;border-color:#fff;color:#0A4A62}
 .link{background:none;border:0;padding:8px 0;min-height:44px;color:var(--brand);font-weight:700;text-align:left}.link.danger{color:var(--bad)}
-.chip{border:1.5px solid var(--t3);background:transparent;color:var(--ink);border-radius:999px;min-height:36px;padding:0 14px;font-weight:700;font-size:14px}
-.chip.mini{min-height:30px;padding:0 10px;font-size:13px}
-.chip.selecteur{border-color:var(--brand);background:var(--brand-soft);color:var(--brand);display:inline-flex;align-items:center;gap:6px}
+.chip{border:1.5px solid var(--t3);background:transparent;color:var(--ink);border-radius:999px;min-height:40px;padding:0 14px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.chip.mini{min-height:34px;padding:0 10px;font-size:13px}
+.chip.selecteur{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
 .iconbtn{flex:none;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--ink);display:grid;place-items:center}
 
 /* Barres d'en-tête */
-.appbar{display:flex;align-items:center;gap:10px;padding:14px 0 6px}
-.burger{flex:none;width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--ink);display:grid;place-items:center}
-.ab-t{flex:1;min-width:0}.ab-n{font-family:var(--font-d);font-weight:700;font-size:22px;line-height:1}.ab-s{font-size:13px;color:var(--muted);margin-top:2px}
+.appbar{display:flex;align-items:center;gap:8px;padding:12px 0 6px}
+.burger{flex:none;width:44px;height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--ink);display:grid;place-items:center;font-size:18px}
+.ab-t{flex:1;min-width:0}.ab-n{font-family:var(--font-d);font-weight:700;font-size:22px;line-height:1}.ab-s{font-size:13px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .subbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
 .sb-t{flex:1;min-width:0;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pagehead{padding:18px 0 4px}
+.offline-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;background:var(--bad-bg);color:var(--bad)}
 
 /* Cadre Hero & Anneau */
 .hero{position:relative;overflow:hidden;margin-top:8px;padding:20px;border-radius:24px;color:#fff;background:linear-gradient(140deg,var(--hero1),var(--hero2));box-shadow:var(--shadow)}
 .hero .topo{position:absolute;right:-40px;top:-30px;width:300px;opacity:.16;pointer-events:none;color:#fff}
 .hero-in{position:relative;display:flex;gap:14px;align-items:center;justify-content:space-between}
-.eyebrow{font-size:13px;font-weight:600;opacity:.85}.hero h2{font-size:28px;color:#fff;margin-top:4px}.hero p{margin:6px 0 0;font-size:15px;opacity:.92}.hero .btn{position:relative;margin-top:16px}
+.eyebrow{font-size:13px;font-weight:600;opacity:.85}.hero h2{font-size:26px;color:#fff;margin-top:4px}.hero p{margin:6px 0 0;font-size:15px;opacity:.92}.hero .btn{position:relative;margin-top:14px}
 .ringbox{position:relative;flex:none}.ringbox .lab{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-d);font-weight:700;font-size:19px}
 .rg-bg{stroke:rgba(255,255,255,.28)}.rg-fg{stroke:#fff;transition:stroke-dashoffset .4s}
 .ring-dark .rg-bg{stroke:var(--line)}.ring-dark .rg-fg{stroke:var(--brand)}
 
+/* Barre rapide Recherche + Chat IA dans les cours */
+.course-tools{display:flex;gap:8px;margin-top:14px;align-items:center;flex-wrap:wrap}
+.course-tools input{flex:1;min-width:170px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px;min-height:44px;font-size:15px}
+.ia-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:12px 14px;border-radius:16px;background:var(--brand-soft);border:1.5px solid var(--brand)}
+.ia-strip-t{font-size:14px;line-height:1.3}.ia-strip-t b{display:block;color:var(--brand);font-size:14.5px}
+
 /* Listes de cours & Leçons */
-.part{display:flex;align-items:center;gap:10px;margin:30px 0 0;font-size:20px}
+.part{display:flex;align-items:center;gap:10px;margin:26px 0 0;font-size:20px}
 .part::before{content:"";flex:none;width:6px;height:24px;border-radius:3px;background:var(--c,var(--brand))}
 .chap{margin:16px 2px 0;display:flex;align-items:center;gap:10px;justify-content:space-between}
 .chap h3{flex:1;font-family:var(--font-b);font-size:15px;font-weight:700;color:var(--muted)}
@@ -91,13 +100,13 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .lbadge{flex:none;min-width:42px;height:42px;padding:0 6px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-d);font-weight:700;font-size:14px;color:var(--c,var(--brand));border:2px solid var(--c,var(--brand))}
 .ltxt{flex:1;min-width:0}.deck-name{display:block;font-weight:700;font-size:16px;line-height:1.25;overflow-wrap:anywhere}.deck-meta{display:block;font-size:13px;color:var(--muted);margin-top:1px}
 .mini{display:block;height:4px;border-radius:4px;background:var(--line);margin-top:7px;overflow:hidden}.mini i{display:block;height:100%;background:var(--c,var(--brand));width:var(--p,0%)}
-.go{flex:none;align-self:center;margin:0 12px 0 4px;width:42px;height:42px;border-radius:50%;border:0;background:var(--brand);color:var(--on-brand);display:grid;place-items:center}
+.go{flex:none;align-self:center;margin:0 12px 0 4px;width:44px;height:44px;border-radius:50%;border:0;background:var(--brand);color:var(--on-brand);display:grid;place-items:center}
 .go.lockd{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
 .foot{margin-top:28px;color:var(--muted);font-size:13.5px}
 
 /* Barre d'onglets inférieure */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 20px rgba(14,42,56,.06)}
-.tabs{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
 .tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 7px;background:none;border:0;color:var(--muted);font-size:12px;font-weight:700;min-height:60px}
 .tico{display:grid;place-items:center;width:54px;height:30px;border-radius:15px}
 .tab.on{color:var(--brand)}.tab.on .tico{background:var(--brand-soft)}
@@ -113,7 +122,7 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .answers[hidden]{display:none}
 .result{text-align:center;margin-top:36px}.result .big{font-family:var(--font-d);font-size:56px;font-weight:700;line-height:1;margin:14px 0 6px}
 .qcard{margin-top:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 20px}
-.qtxt{font-family:var(--font-d);font-weight:500;font-size:clamp(19px,5vw,25px);line-height:1.28;margin:6px 0 0}
+.qtxt{font-family:var(--font-d);font-weight:500;font-size:clamp(19px,4.5vw,25px);line-height:1.28;margin:6px 0 0}
 .opts{display:flex;flex-direction:column;gap:10px;margin-top:12px}
 .opt{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:56px;padding:12px 14px;border-radius:16px;border:2px solid var(--line);background:var(--surface);text-align:left}
 .opt.sel{border-color:var(--brand);background:var(--sel)}.opt.good{border-color:var(--good);background:var(--good-bg)}.opt.bad{border-color:var(--bad);background:var(--bad-bg)}
@@ -121,8 +130,6 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .opt.sel .box,.opt.good .box{background:var(--brand);border-color:var(--brand)}
 .opt.sel .box::after,.opt.good .box::after{content:"✓";color:#fff;font-size:15px;font-weight:700}
 .opt.bad .box::after{content:"✕";color:var(--bad);font-size:14px;font-weight:700}
-.assert{margin-top:12px;padding:18px 16px;border:2px solid var(--line);border-radius:16px;font-weight:600;background:var(--surface)}
-.assert.good{border-color:var(--good);background:var(--good-bg)}.assert.bad{border-color:var(--bad);background:var(--bad-bg)}
 .fb{margin-top:16px;padding:12px 14px;border-radius:14px;font-weight:700}.fb.good{background:var(--good-bg);color:var(--good)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
 .learn{margin-top:12px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
 
@@ -143,133 +150,238 @@ textarea{min-height:84px;resize:vertical}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:var(--shadow)}
 .stat b{display:block;font-family:var(--font-d);font-size:24px;line-height:1.1}.stat span{font-size:12px;color:var(--muted)}
 .center{display:flex;justify-content:center;margin-top:18px}
-.prow{padding:14px 16px;border-bottom:1px solid var(--line)}
-.ph{display:flex;justify-content:space-between;gap:10px;font-weight:700}
-.pbar{height:9px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:8px}
-.pbar i{display:block;height:100%;background:var(--c,var(--brand));width:var(--p,0%)}
 .shead{font-size:13px;font-weight:700;color:var(--muted);margin:24px 4px 0}
 .group{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
 .srow{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);min-height:58px;flex-wrap:wrap}
 .srow:last-child{border-bottom:0}.st{flex:1;min-width:140px}.st b{display:block}.st span{font-size:13.5px;color:var(--muted);display:block}
 .seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
-.seg button{border:0;background:none;padding:7px 11px;border-radius:9px;font-weight:600;color:var(--muted);min-height:36px;font-size:14px}
+.seg button{border:0;background:none;padding:7px 11px;border-radius:9px;font-weight:600;color:var(--muted);min-height:38px;font-size:14px}
 .seg button.on{background:var(--brand);color:var(--on-brand)}
 
 /* Tiroir de menu latéral (Drawer) */
 .drawer-backdrop{position:fixed;inset:0;z-index:30;background:rgba(6,20,28,.65);opacity:0;pointer-events:none;transition:opacity .3s}
 .drawer-backdrop.ouvert{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;left:0;bottom:0;width:86%;max-width:380px;z-index:35;background:var(--surface);box-shadow:4px 0 24px rgba(0,0,0,.3);transform:translateX(-100%);transition:transform .3s cubic-bezier(.2,0,0,1);overflow-y:auto;padding:20px 18px}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:88%;max-width:400px;z-index:35;background:var(--surface);box-shadow:4px 0 24px rgba(0,0,0,.3);transform:translateX(-100%);transition:transform .3s cubic-bezier(.2,0,0,1);overflow-y:auto;padding:20px 18px}
 .drawer.ouvert{transform:translateX(0)}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .acc-section{margin-top:12px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface2)}
-.acc-btn{width:100%;padding:12px 14px;background:none;border:0;font-weight:700;font-size:14.5px;text-align:left;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
-.acc-content{display:none;padding:6px 10px 10px;background:var(--surface)}
+.acc-btn{width:100%;min-height:48px;padding:12px 14px;background:none;border:0;font-weight:700;font-size:14.5px;text-align:left;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+.acc-content{display:none;padding:6px 10px 12px;background:var(--surface)}
 .acc-section.on .acc-content{display:block}
-.cours-item{padding:8px 10px;border-radius:8px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.cours-item{padding:8px 10px;border-radius:10px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;min-height:44px}
 .cours-item.actif{background:var(--brand-soft);color:var(--brand)}
+.sec-ia-row{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 
-/* Landing Page Élégante */
-.landing{padding:20px 0 30px}
+/* Landing Page */
+.landing{padding:14px 0 30px}
 .landing-hero{background:linear-gradient(145deg,var(--hero1),var(--hero2));border-radius:28px;padding:28px 22px;color:#fff;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .landing-badge{display:inline-block;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.2);font-size:13px;font-weight:700;margin-bottom:12px}
-.landing-hero h1{font-size:32px;line-height:1.15;color:#fff}
-.landing-hero p{font-size:16px;opacity:.92;margin:12px auto 20px;max-width:440px}
+.landing-hero h1{font-size:30px;line-height:1.15;color:#fff}
+.landing-hero p{font-size:16px;opacity:.92;margin:12px auto 20px;max-width:460px}
 .grid-atouts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+@media (max-width:460px){.grid-atouts{grid-template-columns:1fr}}
 .card-atout{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
 .card-atout b{display:block;font-size:15px;color:var(--ink);margin-top:6px}
 .card-atout span{font-size:13px;color:var(--muted)}
 
-/* Modales */
+/* Modales & Chat IA */
 .overlay{position:fixed;inset:0;z-index:40;background:rgba(6,20,28,.58);display:flex;align-items:flex-end;justify-content:center}
-.sheet{width:100%;max-width:560px;background:var(--surface);border-radius:26px 26px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto}
+.sheet{width:100%;max-width:600px;background:var(--surface);border-radius:26px 26px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));max-height:90vh;overflow:auto}
 .id-appareil-box{background:var(--surface2);border:1.5px dashed var(--brand);border-radius:14px;padding:12px;margin:14px 0;text-align:center}
 .id-val{font-family:monospace;font-size:22px;font-weight:700;letter-spacing:2px;color:var(--brand);margin-top:4px}
 .pub-ia{background:var(--brand-soft);border:1.5px solid var(--brand);border-radius:14px;padding:14px;margin:14px 0;font-size:14.5px;line-height:1.4}
 .pub-ia b{color:var(--brand)}
-.barre-apify{display:flex;gap:8px;margin-top:14px}.barre-apify input{flex:1;border:2px solid var(--line);border-radius:12px;padding:10px 14px}
+.barre-apify{display:flex;gap:8px;margin-top:12px}.barre-apify input{flex:1;border:2px solid var(--line);border-radius:12px;padding:10px 14px;min-height:46px}
+.ia-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.ia-chips button{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;min-height:36px}
+.ia-box{margin-top:14px;font-size:14.5px;max-height:260px;overflow:auto;line-height:1.55;padding:12px;border-radius:14px;background:var(--surface2);border:1px solid var(--line)}
+.ia-local-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
 .pm{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
 .pm-l{flex:1}.pm-n{font-weight:700}.pm-v{font-family:monospace;font-size:13px;color:var(--muted)}
+
+/* Chargement & Toast */
+.loader-box{margin:24px 0;padding:28px 20px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+.spinner{width:34px;height:34px;border:3.5px solid var(--brand-soft);border-top-color:var(--brand);border-radius:50%;margin:0 auto 12px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:60;max-width:92%;background:var(--ink);color:var(--surface);padding:11px 16px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:var(--shadow);text-align:center}
 </style>
 </head>
 <body>
-<div class="wrap" id="app"></div>
+<div class="wrap" id="app">
+  <div class="loader-box" style="margin-top:40px">
+    <div class="spinner"></div>
+    <b>Chargement de Recto…</b>
+    <p class="sub">Préparation de vos cours Exétat RDC</p>
+  </div>
+</div>
 
 <!-- Tiroir latéral gauche déroulant les 8 sections -->
 <div class="drawer-backdrop" id="drawerBackdrop" data-a="fermerTiroir"></div>
-<aside class="drawer" id="drawer">
+<aside class="drawer" id="drawer" aria-label="Sections et matières Exétat">
   <div class="drawer-head">
     <div style="font-family:var(--font-d);font-size:22px;font-weight:700;color:var(--brand)">Sections Exétat</div>
-    <button class="iconbtn" data-a="fermerTiroir">✕</button>
+    <button class="iconbtn" data-a="fermerTiroir" aria-label="Fermer le menu">✕</button>
   </div>
-  <p class="sub">Sélectionnez votre filière pour dérouler les matières :</p>
+  <p class="sub">Sélectionnez votre filière pour dérouler les matières et accéder au Chat IA :</p>
   <div id="tiroirSections"></div>
 </aside>
 
-<!-- ============================================================== -->
-<!-- FICHIERS DE QUESTIONS EXTERNES                                 -->
-<!-- ============================================================== -->
-<script src="geographie_data.js"></script>
-<script src="chimie_data.js"></script>
-
 <script>
+/* ==============================================================
+   REGISTRE GLOBAL & NORMALISATION (AVANT TOUT FICHIER *_data.js)
+   ============================================================== */
+window.RECTO_COURSES = window.RECTO_COURSES || [];
+
+window.LZ = function(n, t, items){
+  return {
+    id: 'c' + n,
+    n: String(n),
+    t: t,
+    c: (items || []).map(function(item){
+      var obj = { q: item[0], a: item[2] };
+      if (item[1] && Array.isArray(item[1][0])) {
+        obj.ok = item[1][0];
+        obj.ko = item[1][1] || [];
+      } else if (Array.isArray(item[1])) {
+        obj.ok = [item[1][0]];
+        obj.ko = item[1].slice(1);
+      }
+      return obj;
+    })
+  };
+};
+
+window.L = function(n, t, c){
+  return { id: 'g' + String(n).replace(/[^0-9A-Za-z]/g, '_'), n: String(n), t: t, c: c || [] };
+};
+
+window.RECTO_NORMALIZE_COURSE = function(cours){
+  if (!cours || !cours.id) return null;
+  return {
+    id: cours.id,
+    name: cours.name || cours.id,
+    sub: cours.sub || '',
+    heroTitle: cours.heroTitle || cours.name,
+    heroSub: cours.heroSub || 'Questions à cocher, puis synthèse à retenir.',
+    parts: (cours.parts || []).map(function(p){
+      return {
+        t: p.t,
+        ch: (p.ch || []).map(function(ch){
+          return {
+            t: ch.t,
+            free: !!ch.free,
+            ls: (ch.ls || []).map(function(l){
+              return {
+                id: String(l.id),
+                n: String(l.n),
+                t: l.t,
+                c: (l.c || []).map(function(item){
+                  if (Array.isArray(item)) return { q: item[0], a: item[1] };
+                  return item;
+                })
+              };
+            })
+          };
+        })
+      };
+    })
+  };
+};
+
 /* ==============================================================
    CLÉ PUBLIQUE ECDSA P-256 (GÉNÉRATEUR DE LICENCES)
    ============================================================== */
-const CLE_PUBLIQUE_SIGNATURE = {
+var CLE_PUBLIQUE_SIGNATURE = {
   kty: "EC", crv: "P-256",
   x: "iaMzb-jlgVKDbEAUk-2GoDha8vP1IYBQV0d2gQ2yfyc",
   y: "kve5zBWh55ZISyQZAyKHjD8WQj8xA9UMmRN9Y5LhgrU"
 };
 
 /* ==============================================================
-   PASSERELLE MAISHAPAY (MOBILE MONEY)
+   PASSERELLE MAISHAPAY (MOBILE MONEY + VÉRIFICATION SERVEUR)
    ============================================================== */
 window.MAISHAPAY_CONFIG = {
   actif: false, // Passer à 'true' dès validation du compte marchand
   cleMarchand: "VOTRE_CLE_MARCHAND_MAISHAPAY",
   prixUnique: 10000,
-  lancerPaiement: function() {
+  lancerPaiement: function(afficherToast) {
     if (!this.actif) {
-      alert("La passerelle automatique MaishaPay sera disponible sous peu. Veuillez utiliser Airtel Money ou Orange Money.");
+      if (afficherToast) afficherToast("MaishaPay automatique bientôt prêt. Utilisez Airtel Money ou Orange Money.");
       return;
     }
     var retour = encodeURIComponent(window.location.origin + window.location.pathname + "?paiement=succes");
-    window.location.href = "https://gateway.maishapay.net/payment?merchant=" + this.cleMarchand + "&amount=" + this.prixUnique + "&currency=CDF&callback=" + retour;
+    window.location.href = "https://gateway.maishapay.net/payment?merchant=" + encodeURIComponent(this.cleMarchand) + "&amount=" + this.prixUnique + "&currency=CDF&callback=" + retour;
   }
 };
 
 /* ==============================================================
-   CHAT IA INTÉGRÉ (APIFY) - ESSAI 7 JOURS GRATUIT
+   CHAT IA INTÉGRÉ (PROXY VERCEL /api/apify + CACHE PERSISTANT)
    ============================================================== */
 window.APIFY_CONFIG = {
-  tokenApi: "VOTRE_TOKEN_APIFY_ICI",
+  endpointProxy: "/api/apify",
+  tokenApi: "", // Laisser vide en production Vercel (la clé reste sur Vercel Env APIFY_TOKEN)
   acteurId: "apify~rag-web-browser",
-  interroger: async function(question) {
-    if (this.tokenApi === "VOTRE_TOKEN_APIFY_ICI") {
-      return "Le service de Chat IA est prêt. Veuillez renseigner votre clé de connexion dans app.html pour activer les réponses de l'IA.";
-    }
+  interroger: async function(question, contexte, signal) {
     try {
-      const rep = await fetch("https://api.apify.com/v2/acts/" + this.acteurId + "/run-sync-get-dataset-items?token=" + this.tokenApi, {
+      var repProxy = await fetch(this.endpointProxy, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: question, maxResults: 2 })
+        body: JSON.stringify({
+          question: question,
+          courseName: (contexte && contexte.courseName) || "",
+          sectionName: (contexte && contexte.sectionName) || ""
+        }),
+        signal: signal
       });
-      const data = await rep.json();
-      return data && data.length ? (data[0].text || data[0].markdown) : "Aucun résultat trouvé pour votre question.";
-    } catch(e) {
-      return "Erreur lors de l'interrogation du Chat IA : " + e.message;
+      if (repProxy.ok) {
+        var jsonProxy = await repProxy.json();
+        if (jsonProxy && jsonProxy.ok && jsonProxy.answer) {
+          return { ok: true, answer: jsonProxy.answer, source: "apify" };
+        }
+      } else if (repProxy.status === 503 && !this.tokenApi) {
+        return {
+          ok: false,
+          answer: "Le Chat IA en ligne attend la configuration de la variable APIFY_TOKEN sur Vercel. En attendant, les fiches officielles correspondantes du cours s’affichent ci-dessous."
+        };
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") {
+        return { ok: false, answer: "La requête a expiré. Vérifiez votre connexion internet et réessayez." };
+      }
     }
+
+    if (!this.tokenApi) {
+      return {
+        ok: false,
+        answer: "Service Chat IA en ligne indisponible pour le moment. Les fiches officielles du programme restent accessibles hors-ligne ci-dessous."
+      };
+    }
+
+    var rep = await fetch("https://api.apify.com/v2/acts/" + encodeURIComponent(this.acteurId) + "/run-sync-get-dataset-items?token=" + encodeURIComponent(this.tokenApi), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: question + (contexte && contexte.courseName ? " " + contexte.courseName : "") + " programme RDC Exétat", maxResults: 2 }),
+      signal: signal
+    });
+    if (!rep.ok) throw new Error("HTTP " + rep.status);
+    var data = await rep.json();
+    var txt = data && data.length ? (data[0].text || data[0].markdown || "") : "";
+    return {
+      ok: !!txt,
+      answer: txt ? String(txt).slice(0, 2200) : "Aucun résultat pertinent trouvé pour cette question.",
+      source: "apify"
+    };
   }
 };
 
 /* ==============================================================
-   CATALOGUE OFFICIEL DES 8 SECTIONS DE L'EXÉTAT RDC
+   CATALOGUE OFFICIEL DES 8 SECTIONS DE L'EXÉTAT RDC (32 COURS)
    ============================================================== */
 window.SECTIONS_OFFICIELLES = [
   {
     section: "Tronc Commun (Général)",
     cours: [
-      { id: "geo", nom: "Géographie", dispo: true },
+      { id: "geo", nom: "Géographie", dispo: true, fichier: "geographie_data.js" },
       { id: "histoire_ecm", nom: "Histoire + E.C.M", dispo: false },
       { id: "francais", nom: "Français", dispo: false },
       { id: "anglais", nom: "Anglais", dispo: false }
@@ -278,7 +390,7 @@ window.SECTIONS_OFFICIELLES = [
   {
     section: "Section Scientifique",
     cours: [
-      { id: "chimie", nom: "Chimie", dispo: true },
+      { id: "chimie", nom: "Chimie", dispo: true, fichier: "chimie_data.js" },
       { id: "maths", nom: "Mathématiques", dispo: false },
       { id: "physique", nom: "Physique", dispo: false },
       { id: "biologie", nom: "Biologie", dispo: false },
@@ -332,7 +444,6 @@ window.SECTIONS_OFFICIELLES = [
   {
     section: "Section Agronomie & Vétérinaire",
     cours: [
-      { id: "mineralogie", nom: "Minéralogie", dispo: false },
       { id: "phytotechnie", nom: "Phytotechnie", dispo: false },
       { id: "zootechnie", nom: "Zootechnie", dispo: false },
       { id: "pedologie", nom: "Pédologie", dispo: false },
@@ -341,28 +452,162 @@ window.SECTIONS_OFFICIELLES = [
   }
 ];
 
-window.LZ = function(n, t, items){
-  return {
-    id: 'c' + n, n: String(n), t: t,
-    c: items.map(function(item){
-      var obj = { q: item[0], a: item[2] };
-      if (Array.isArray(item[1][0])) { obj.ok = item[1][0]; obj.ko = item[1][1]; }
-      else { obj.ok = [item[1][0]]; obj.ko = item[1].slice(1); }
-      return obj;
-    })
-  };
-};
-
 /* ==============================================================
-   APPLICATION RECTO
+   APPLICATION RECTO (CHARGEMENT PARESSEUX + CACHE IA + PWA)
    ============================================================== */
 (function(){
   var KEY = 'recto:v1';
+  var AI_CACHE_KEY = 'recto:ai_cache:v1';
+  var AI_CACHE_MAX = 40;
+  var AI_CACHE_TTL = 7 * 86400000;
+  var MAX_COURSES_IN_MEM = 3;
   var MIX_SIZE = 15;
   var memory = null;
+  var deferredInstallPrompt = null;
+  var toastTimer = null;
 
-  function uid() {
-    return Math.random().toString(36).slice(2, 10);
+  var courseCache = new Map();
+  var loadingPromises = {};
+
+  function getCourseMeta(id){
+    for (var i = 0; i < window.SECTIONS_OFFICIELLES.length; i++) {
+      var sec = window.SECTIONS_OFFICIELLES[i];
+      for (var j = 0; j < sec.cours.length; j++) {
+        if (sec.cours[j].id === id) return { meta: sec.cours[j], section: sec.section };
+      }
+    }
+    return null;
+  }
+
+  function courseFileName(id){
+    var info = getCourseMeta(id);
+    if (info && info.meta.fichier) return info.meta.fichier;
+    return id + '_data.js';
+  }
+
+  function putCourseInCache(rawCourse){
+    var norm = window.RECTO_NORMALIZE_COURSE(rawCourse);
+    if (!norm) return null;
+    if (courseCache.has(norm.id)) courseCache.delete(norm.id);
+    courseCache.set(norm.id, norm);
+    if (courseCache.size > MAX_COURSES_IN_MEM) {
+      var keys = Array.from(courseCache.keys());
+      for (var i = 0; i < keys.length && courseCache.size > MAX_COURSES_IN_MEM; i++) {
+        if (keys[i] !== data.course) courseCache.delete(keys[i]);
+      }
+    }
+    window.RECTO_COURSES = Array.from(courseCache.values());
+    return norm;
+  }
+
+  window.RECTO_REGISTER_COURSE = function(cours){
+    return putCourseInCache(cours);
+  };
+
+  (window.RECTO_COURSES || []).forEach(putCourseInCache);
+
+  function chargerCours(id){
+    if (courseCache.has(id)) {
+      var hit = courseCache.get(id);
+      courseCache.delete(id);
+      courseCache.set(id, hit);
+      return Promise.resolve(hit);
+    }
+    if (loadingPromises[id]) return loadingPromises[id];
+
+    var src = courseFileName(id);
+    loadingPromises[id] = new Promise(function(resolve, reject){
+      var done = false;
+      var script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+
+      var timer = setTimeout(function(){
+        if (done) return;
+        done = true;
+        delete loadingPromises[id];
+        script.remove();
+        reject(new Error("Délai dépassé lors du chargement de " + src));
+      }, 15000);
+
+      script.onload = function(){
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        delete loadingPromises[id];
+
+        (window.RECTO_COURSES || []).forEach(putCourseInCache);
+        if (id === 'geo' && !courseCache.has('geo') && window.COURSE_GEO) {
+          putCourseInCache({
+            id: 'geo',
+            name: 'Géographie',
+            sub: 'RDC et Afrique contemporaine',
+            heroTitle: 'Géographie – Exétat 2027',
+            heroSub: 'Programme officiel de 6e année : RDC et Afrique contemporaine.',
+            parts: window.COURSE_GEO
+          });
+        }
+        var loaded = courseCache.get(id);
+        if (loaded) resolve(loaded);
+        else reject(new Error("Le fichier " + src + " ne contient pas de données valides pour « " + id + " »."));
+      };
+
+      script.onerror = function(){
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        delete loadingPromises[id];
+        script.remove();
+        reject(new Error("Impossible de charger " + src + " (hors-ligne ou fichier absent)."));
+      };
+
+      document.body.appendChild(script);
+    });
+
+    return loadingPromises[id];
+  }
+
+  function uid(){ return Math.random().toString(36).slice(2, 10); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function load(){ try { var r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch(e){} return memory; }
+  function save(){ memory = data; try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
+  function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function plural(n, one, many){ return n + ' ' + (n > 1 ? many : one); }
+  function colorVar(i){ return 'var(--t' + (i % 4 + 1) + ')'; }
+  function label(l){ return /^N/.test(l.n) ? l.t : l.n + '. ' + l.t; }
+
+  function afficherToast(msg){
+    var old = document.getElementById('rectoToast');
+    if (old) old.remove();
+    clearTimeout(toastTimer);
+    var el = document.createElement('div');
+    el.id = 'rectoToast';
+    el.className = 'toast';
+    el.setAttribute('role', 'status');
+    el.textContent = msg;
+    document.body.appendChild(el);
+    toastTimer = setTimeout(function(){ if (el.parentNode) el.remove(); }, 3400);
+  }
+
+  function copierTexte(txt, labelMsg){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function(){
+        afficherToast(labelMsg || "Copié !");
+      }).catch(function(){ fallbackCopy(txt, labelMsg); });
+    } else {
+      fallbackCopy(txt, labelMsg);
+    }
+  }
+  function fallbackCopy(txt, labelMsg){
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
+      afficherToast(labelMsg || "Copié !");
+    } catch(e) {
+      afficherToast("ID : " + txt);
+    }
   }
 
   function b64uToBytes(s) {
@@ -382,15 +627,6 @@ window.LZ = function(n, t, items){
     } catch (e) { return false; }
   }
 
-  function getCourses(){ return window.RECTO_COURSES || []; }
-  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-  function load(){ try { var r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch(e){} return memory; }
-  function save(){ memory = data; try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
-  function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
-  function plural(n, one, many){ return n + ' ' + (n > 1 ? many : one); }
-  function colorVar(i){ return 'var(--t' + (i % 4 + 1) + ')'; }
-  function label(l){ return /^N/.test(l.n) ? l.t : l.n + '. ' + l.t; }
-
   function genererIdAppareil() {
     var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", s = "";
     for (var i = 0; i < 8; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -398,10 +634,107 @@ window.LZ = function(n, t, items){
   }
 
   var data = load() || { pro: false, decks: [], prog: {}, course: "geo", theme: "auto", fs: 0, devId: null, aiFirstUsed: null };
-  if (!data.prog) data.prog = {}; if (!data.decks) data.decks = [];
+  if (!data.prog) data.prog = {};
+  if (!data.decks) data.decks = [];
   if (!data.devId) { data.devId = genererIdAppareil(); save(); }
 
-  // Vérification de l'essai 7 jours Chat IA
+  function migrerProgressionV2(){
+    if (data.migratedV2) return;
+    var next = {}, changed = false;
+    Object.keys(data.prog).forEach(function(k){
+      if (/^g[^:]*:\d+$/.test(k)) { next['geo:' + k] = data.prog[k]; changed = true; }
+      else if (/^c\d+:\d+$/.test(k)) { next['chimie:' + k] = data.prog[k]; changed = true; }
+      else { next[k] = data.prog[k]; }
+    });
+    if (changed) data.prog = next;
+    data.migratedV2 = true;
+    save();
+  }
+  migrerProgressionV2();
+
+  function progKey(courseId, lessonId, idx){
+    return courseId + ':' + lessonId + ':' + idx;
+  }
+  function isKnown(courseId, lessonId, idx){
+    return !!(data.prog[progKey(courseId, lessonId, idx)] || data.prog[lessonId + ':' + idx]);
+  }
+  function markKnown(key, val){
+    if (val) data.prog[key] = 1;
+    else delete data.prog[key];
+    save();
+  }
+
+  var aiMemCache = new Map();
+  function normaliserRequeteIA(q){
+    return String(q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function lireStoreCacheIA(){
+    try {
+      var raw = localStorage.getItem(AI_CACHE_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return (parsed && typeof parsed === 'object') ? parsed : {};
+    } catch(e) { return {}; }
+  }
+  function ecrireStoreCacheIA(obj){
+    try { localStorage.setItem(AI_CACHE_KEY, JSON.stringify(obj)); } catch(e) {}
+  }
+  function obtenirCacheIA(cleCache){
+    var now = Date.now();
+    if (aiMemCache.has(cleCache)) {
+      var m = aiMemCache.get(cleCache);
+      if (now - m.ts < AI_CACHE_TTL) {
+        m.last = now;
+        return m.val;
+      }
+      aiMemCache.delete(cleCache);
+    }
+    var store = lireStoreCacheIA();
+    var rec = store[cleCache];
+    if (rec && (now - rec.ts < AI_CACHE_TTL)) {
+      rec.last = now;
+      aiMemCache.set(cleCache, rec);
+      ecrireStoreCacheIA(store);
+      return rec.val;
+    }
+    return null;
+  }
+  function enregistrerCacheIA(cleCache, val){
+    var now = Date.now();
+    var entry = { val: val, ts: now, last: now };
+    aiMemCache.set(cleCache, entry);
+    var store = lireStoreCacheIA();
+    store[cleCache] = entry;
+    var keys = Object.keys(store);
+    if (keys.length > AI_CACHE_MAX) {
+      keys.sort(function(a, b){ return (store[a].last || 0) - (store[b].last || 0); });
+      for (var i = 0; i < keys.length - AI_CACHE_MAX; i++) delete store[keys[i]];
+    }
+    ecrireStoreCacheIA(store);
+  }
+
+  function rechercherDansCoursLocal(query){
+    var c = courseCache.get(data.course);
+    if (!c || !c.parts) return [];
+    var mots = normaliserRequeteIA(query).split(' ').filter(function(w){ return w.length >= 3; });
+    if (!mots.length) return [];
+    var hits = [];
+    c.parts.forEach(function(p){
+      p.ch.forEach(function(ch){
+        ch.ls.forEach(function(l){
+          l.c.forEach(function(item){
+            var hay = normaliserRequeteIA(l.t + ' ' + item.q + ' ' + item.a);
+            var score = 0;
+            mots.forEach(function(m){ if (hay.indexOf(m) !== -1) score++; });
+            if (score > 0) hits.push({ score: score, lesson: label(l), q: item.q, a: item.a });
+          });
+        });
+      });
+    });
+    hits.sort(function(a, b){ return b.score - a.score; });
+    return hits.slice(0, 3);
+  }
+
   function aiEstEligible() {
     if (data.pro) return { autorise: true, message: "Accès illimité Recto Pro" };
     if (!data.aiFirstUsed) return { autorise: true, message: "Essai gratuit 7 jours (1ère recherche)" };
@@ -410,24 +743,63 @@ window.LZ = function(n, t, items){
     return { autorise: false, message: "Période d'essai de 7 jours terminée" };
   }
 
-  var paramsUrl = new URLSearchParams(window.location.search);
-  if (paramsUrl.get("paiement") === "succes") {
-    data.pro = true; save();
-    window.history.replaceState({}, document.title, window.location.pathname);
-    alert("Félicitations ! Votre paiement a été confirmé. Recto Pro est activé à vie sur cet appareil.");
-  }
+  (function verifierRetourPaiement(){
+    var paramsUrl = new URLSearchParams(window.location.search);
+    if (paramsUrl.get("paiement") === "succes") {
+      var tx = paramsUrl.get("tx") || paramsUrl.get("transaction_id") || paramsUrl.get("reference") || "";
+      window.history.replaceState({}, document.title, window.location.pathname);
+      if (!tx) {
+        afficherToast("Paiement détecté : veuillez entrer votre code d'activation ou contacter WhatsApp avec votre référence.");
+        return;
+      }
+      fetch("/api/maishapay-verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tx: tx })
+      }).then(function(r){ return r.json(); }).then(function(res){
+        if (res && res.ok) {
+          data.pro = true; save();
+          afficherToast("Paiement confirmé ! Recto Pro est activé à vie.");
+          render();
+        } else {
+          afficherToast((res && res.error) || "Vérification MaishaPay en attente. Contactez le support WhatsApp avec la référence " + tx);
+        }
+      }).catch(function(){
+        afficherToast("Impossible de joindre le serveur de vérification. Réessayez ou activez via votre code.");
+      });
+    }
+  })();
 
-  var ui = { view: 'landing', deckId: null, lessonId: null, modal: null, study: null, apifyResult: '', msg: null, last: 'landing', secOuverte: null };
+  var ui = {
+    view: 'landing',
+    deckId: null,
+    lessonId: null,
+    modal: null,
+    study: null,
+    apifyState: { loading: false, query: '', answer: '', fromCache: false, localHits: [] },
+    chatContext: null,
+    msg: null,
+    secOuverte: 0,
+    loadingCourse: null,
+    loadError: null,
+    searchQuery: ''
+  };
+  var activeAiAbort = null;
   var app = document.getElementById('app');
 
   function curCourse(){
-    var cs = getCourses(), id = data.course || "geo";
-    for(var i=0; i<cs.length; i++){ if(cs[i].id === id) return cs[i]; }
-    return cs[0] || { id:"geo", name:"Géographie", parts:[] };
+    var id = data.course || "geo";
+    if (courseCache.has(id)) return courseCache.get(id);
+    var info = getCourseMeta(id);
+    return {
+      id: id,
+      name: info ? info.meta.nom : "Cours",
+      parts: []
+    };
   }
 
   function indexerLecons(){
-    var idx = {}, parts = curCourse().parts || [];
+    var c = curCourse(), idx = {}, parts = c.parts || [];
     parts.forEach(function(p, pi){
       p.ch.forEach(function(chap){
         chap.ls.forEach(function(l){ idx[l.id] = { l: l, chap: chap, pi: pi }; });
@@ -437,8 +809,15 @@ window.LZ = function(n, t, items){
   }
 
   function unlocked(chap){ return chap.free || data.pro; }
-  function lessonItems(l){ return l.c.map(function(c, i){ return { k:l.id + ':' + i, q:c.q, a:c.a, ok:c.ok, ko:c.ko }; }); }
-  function lessonKnown(l){ var n = 0; l.c.forEach(function(c, i){ if(data.prog[l.id + ':' + i]) n++; }); return n; }
+  function lessonItems(l){
+    var cid = curCourse().id;
+    return l.c.map(function(c, i){ return { k: progKey(cid, l.id, i), q: c.q, a: c.a, ok: c.ok, ko: c.ko }; });
+  }
+  function lessonKnown(l){
+    var cid = curCourse().id, n = 0;
+    l.c.forEach(function(c, i){ if (isKnown(cid, l.id, i)) n++; });
+    return n;
+  }
   function courseTotals(){
     var t = 0, k = 0, idx = indexerLecons();
     Object.keys(idx).forEach(function(id){ t += idx[id].l.c.length; k += lessonKnown(idx[id].l); });
@@ -446,14 +825,11 @@ window.LZ = function(n, t, items){
   }
   function deckById(id){ return data.decks.filter(function(d){ return d.id === id; })[0]; }
 
-  /* VRAIES ICÔNES VECTORIELLES D'ORIGINE */
   var ICONS = {
     book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
     layers:'<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>',
     chart:'<path d="M3 3v18h18"/><path d="M8 16v-4"/><path d="M13 16V8"/><path d="M18 16v-7"/>',
     sliders:'<path d="M4 6h9"/><path d="M17 6h3"/><circle cx="15" cy="6" r="2"/><path d="M4 12h3"/><path d="M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 18h9"/><path d="M17 18h3"/><circle cx="15" cy="18" r="2"/>',
-    globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3.5 3.2 3.5 14.8 0 18"/><path d="M12 3c-3.5 3.2-3.5 14.8 0 18"/>',
-    flask:'<path d="M10 2v7.31L4.2 18.5A2 2 0 0 0 6 21h12a2 2 0 0 0 1.8-2.5L14 9.31V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/>',
     back:'<path d="m15 6-6 6 6 6"/>',
     lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
     play:'<path d="m8 5 11 7-11 7z" fill="currentColor"/>',
@@ -472,14 +848,15 @@ window.LZ = function(n, t, items){
 
   function barreHaut(){
     var c = curCourse();
+    var horsLigne = (navigator.onLine === false) ? '<span class="offline-pill">Hors-ligne</span>' : '';
     return '<header class="appbar">' +
       '<button class="burger" data-a="ouvrirTiroir" aria-label="Menu des sections">☰</button>' +
       '<div class="ab-t">' +
         '<div class="ab-n">Recto</div>' +
-        '<div class="ab-s"><button class="chip mini selecteur" data-a="ouvrirTiroir">' + esc(c.name) + ' ▾</button></div>' +
+        '<div class="ab-s"><button class="chip mini selecteur" data-a="ouvrirTiroir">' + esc(c.name) + ' ▾</button>' + horsLigne + '</div>' +
       '</div>' +
       '<button class="btn small' + (data.pro ? ' light' : ' ghost') + '" data-a="btnChatIa" style="padding:0 10px;font-size:13px">🤖 Chat IA</button>' +
-      '<button class="chip" data-a="modalPro" style="margin-left:4px">' + (data.pro ? 'Pro à vie' : 'Activer Pro') + '</button>' +
+      '<button class="chip mini" data-a="modalPro">' + (data.pro ? 'Pro à vie' : 'Pro') + '</button>' +
     '</header>';
   }
 
@@ -502,11 +879,20 @@ window.LZ = function(n, t, items){
     el.style.setProperty('--fs', ['17px', '19px', '21px'][data.fs || 0]);
   }
 
-  /* ================== LANDING PAGE PERCUTANTE ================== */
+  function totalCoursCatalogue(){
+    var n = 0;
+    window.SECTIONS_OFFICIELLES.forEach(function(s){ n += s.cours.length; });
+    return n;
+  }
+
   function vueLanding(){
+    var nbCours = totalCoursCatalogue();
+    var installBtn = deferredInstallPrompt
+      ? '<button class="btn ghost full" data-a="installerPwa" style="margin-top:10px">📲 Installer Recto sur votre écran d’accueil</button>'
+      : '';
     return '<div class="landing">' +
       '<header class="appbar">' +
-        '<button class="burger" data-a="ouvrirTiroir">☰</button>' +
+        '<button class="burger" data-a="ouvrirTiroir" aria-label="Ouvrir le menu des sections">☰</button>' +
         '<div class="ab-t"><div class="ab-n">Recto</div><div class="ab-s">Examen d’État RDC 2027</div></div>' +
         '<button class="btn small ghost" data-a="btnChatIa">🤖 Chat IA</button>' +
       '</header>' +
@@ -516,18 +902,19 @@ window.LZ = function(n, t, items){
         '<p>L’application complète de révision par questions à cocher, synthèses clés et résolution détaillée des calculs. 100 % hors-ligne.</p>' +
         '<button class="btn light full" data-a="entrerApp" style="font-size:18px;min-height:56px">🚀 Lancer mes révisions</button>' +
       '</div>' +
+      installBtn +
       '<div class="grid-atouts">' +
         '<div class="card-atout">' +
-          '<div style="font-size:24px">📖</div><b>28 Matières Officielles</b>' +
-          '<span>Toutes les filières : Scientifique, Littéraire, Pédagogie, Commerciale, Agronomie...</span>' +
+          '<div style="font-size:24px">📖</div><b>' + nbCours + ' Matières Officielles</b>' +
+          '<span>Toutes les 8 filières : Scientifique, Littéraire, Pédagogie, Commerciale, Agronomie…</span>' +
         '</div>' +
         '<div class="card-atout">' +
           '<div style="font-size:24px">⚡</div><b>100 % Hors-Ligne</b>' +
-          '<span>Révisez partout sans consommer vos mégas. Zéro connexion requise.</span>' +
+          '<span>Chargement à la carte ultra-léger : chaque matière ouverte reste disponible sans mégas.</span>' +
         '</div>' +
         '<div class="card-atout">' +
           '<div style="font-size:24px">🤖</div><b>Chat IA Intégré</b>' +
-          '<span>Posez vos questions d’examen directement à l’IA. 7 jours d’essai gratuit !</span>' +
+          '<span>Accessible dans chaque section avec cache intelligent et recherche instantanée. 7 jours gratuits !</span>' +
         '</div>' +
         '<div class="card-atout">' +
           '<div style="font-size:24px">🎯</div><b>Méthode Assertions</b>' +
@@ -540,51 +927,89 @@ window.LZ = function(n, t, items){
   }
 
   function vueAccueil(){
-    var c = curCourse(), tot = courseTotals(), pct = tot.t ? Math.round(tot.k / tot.t * 100) : 0;
+    var c = curCourse();
+    if (ui.loadingCourse === c.id) {
+      return barreHaut() +
+        '<div class="loader-box"><div class="spinner"></div><b>Chargement de ' + esc(c.name) + '…</b><p class="sub">Téléchargement léger du module de cours</p></div>';
+    }
+    if (ui.loadError) {
+      return barreHaut() +
+        '<div class="loader-box"><p style="color:var(--bad);font-weight:700;margin:0">' + esc(ui.loadError) + '</p>' +
+        '<button class="btn full" data-a="rechargerCours" style="margin-top:14px">Réessayer</button>' +
+        '<button class="btn ghost full" data-a="ouvrirTiroir" style="margin-top:8px">Choisir une autre matière</button></div>';
+    }
+
+    var tot = courseTotals(), pct = tot.t ? Math.round(tot.k / tot.t * 100) : 0;
     var h = barreHaut() +
       '<section class="hero">' + TOPO + '<div class="hero-in"><div>' +
       '<div class="eyebrow">Programme officiel RDC</div><h2>' + esc(c.heroTitle || c.name) + '</h2>' +
       '<p>' + esc(c.heroSub || 'Questions à cocher, puis synthèse à retenir.') + '</p></div>' +
       '<div class="ringbox">' + ringSvg(pct, 84, 8, '') + '<div class="lab">' + pct + '%</div></div></div>' +
-      '<button class="btn light full" data-a="mix" style="margin-top:14px">' + ico('shuffle', 20) + ' Révision mixte de ' + MIX_SIZE + ' cartes</button></section>';
+      '<button class="btn light full" data-a="mix" style="margin-top:14px"' + (tot.t ? '' : ' disabled') + '>' + ico('shuffle', 20) + ' Révision mixte de ' + MIX_SIZE + ' cartes</button></section>';
+
+    var info = getCourseMeta(c.id);
+    h += '<div class="ia-strip">' +
+      '<div class="ia-strip-t"><b>🤖 Chat IA — ' + esc(c.name) + '</b><span>' + esc(info ? info.section : 'Assistant Exétat') + '</span></div>' +
+      '<button class="btn small" data-a="btnChatIaCours" data-id="' + esc(c.id) + '">Poser une question</button>' +
+    '</div>';
 
     var parts = c.parts || [];
     if (!parts.length) {
-      h += '<p class="empty" style="text-align:center;margin:30px 0;padding:24px;border:2px dashed var(--line);border-radius:18px">Ce cours est programmé mais son fichier de questions (ex: ' + c.id + '_data.js) n’est pas encore déposé.</p>';
+      h += '<p class="empty" style="text-align:center;margin:24px 0;padding:24px;border:2px dashed var(--line);border-radius:18px">Ce cours est programmé mais son fichier de questions (' + esc(courseFileName(c.id)) + ') n’est pas encore déposé.</p>';
+    } else {
+      h += '<div class="course-tools"><input type="text" id="filtreLecons" placeholder="Filtrer une leçon de ' + esc(c.name) + '…" value="' + esc(ui.searchQuery) + '" aria-label="Filtrer les leçons"></div>';
     }
+
+    var filtre = normaliserRequeteIA(ui.searchQuery);
+    var totalTrouve = 0;
+
     parts.forEach(function(p, pi){
-      h += '<h2 class="part" style="--c:' + colorVar(pi) + '">' + esc(p.t) + '</h2>';
+      var partHtml = '';
       p.ch.forEach(function(chap){
         var ouvert = unlocked(chap);
-        h += '<div class="chap"><h3>' + esc(chap.t) + '</h3>' + (ouvert ? '' : '<span class="chip mini">Pro</span>') + '</div><ul class="list">';
-        chap.ls.forEach(function(l){
+        var lsFiltrees = chap.ls.filter(function(l){
+          if (!filtre) return true;
+          return normaliserRequeteIA(l.n + ' ' + l.t + ' ' + chap.t).indexOf(filtre) !== -1;
+        });
+        if (!lsFiltrees.length) return;
+        totalTrouve += lsFiltrees.length;
+        partHtml += '<div class="chap"><h3>' + esc(chap.t) + '</h3>' + (ouvert ? '' : '<span class="chip mini">Pro</span>') + '</div><ul class="list">';
+        lsFiltrees.forEach(function(l){
           var k = lessonKnown(l), pc = l.c.length ? Math.round(k / l.c.length * 100) : 0;
-          h += '<li class="lrow" style="--c:' + colorVar(pi) + '">' +
-            '<button class="lmain" data-a="' + (ouvert ? 'lecon' : 'modalPro') + '" data-id="' + l.id + '">' +
+          partHtml += '<li class="lrow" style="--c:' + colorVar(pi) + '">' +
+            '<button class="lmain" data-a="' + (ouvert ? 'lecon' : 'modalPro') + '" data-id="' + esc(l.id) + '">' +
             '<span class="lbadge">' + (/^N/.test(l.n) ? ico('star', 16) : esc(l.n)) + '</span>' +
             '<span class="ltxt"><span class="deck-name">' + esc(l.t) + '</span>' +
             '<span class="deck-meta">' + plural(l.c.length, 'carte', 'cartes') + (ouvert ? ', ' + k + ' acquises' : ', réservé à Pro') + '</span>' +
             (ouvert ? '<span class="mini" style="--p:' + pc + '%"><i></i></span>' : '') + '</span></button>' +
-            '<button class="go' + (ouvert ? '' : ' lockd') + '" data-a="' + (ouvert ? 'reviserLecon' : 'modalPro') + '" data-id="' + l.id + '">' + (ouvert ? ico('play', 18) : ico('lock', 18)) + '</button></li>';
+            '<button class="go' + (ouvert ? '' : ' lockd') + '" data-a="' + (ouvert ? 'reviserLecon' : 'modalPro') + '" data-id="' + esc(l.id) + '" aria-label="' + (ouvert ? 'Réviser ' + esc(l.t) : 'Débloquer Pro') + '">' + (ouvert ? ico('play', 18) : ico('lock', 18)) + '</button></li>';
         });
-        h += '</ul>';
+        partHtml += '</ul>';
       });
+      if (partHtml) {
+        h += '<h2 class="part" style="--c:' + colorVar(pi) + '">' + esc(p.t) + '</h2>' + partHtml;
+      }
     });
+
+    if (parts.length && filtre && totalTrouve === 0) {
+      h += '<p class="sub" style="text-align:center;margin:24px 0">Aucune leçon ne correspond à « ' + esc(ui.searchQuery) + ' ».</p>';
+    }
+
     return h + '<p class="foot">Recto – Plateforme d’Examen d’État en RDC.</p>';
   }
 
   function vueLecon(){
     var idx = indexerLecons(), rec = idx[ui.lessonId];
     if (!rec || !unlocked(rec.chap)) { ui.view = 'home'; return vueAccueil(); }
-    var l = rec.l, k = lessonKnown(l);
+    var l = rec.l, k = lessonKnown(l), cid = curCourse().id;
     var h = subbar(['tab', 'home'], label(l));
     h += '<section style="margin-top:18px"><p class="sub" style="margin:0">' + esc(rec.chap.t) + '</p>' +
       '<div class="bar" style="--p:' + Math.round(k / l.c.length * 100) + '%"><i></i></div><p class="sub" style="margin:0">' + plural(l.c.length, 'carte', 'cartes') + ', ' + k + ' acquises</p>' +
-      '<p><button class="btn full" data-a="reviserLecon" data-id="' + l.id + '">' + ico('play', 18) + ' Réviser cette leçon</button></p>' +
+      '<p><button class="btn full" data-a="reviserLecon" data-id="' + esc(l.id) + '">' + ico('play', 18) + ' Réviser cette leçon</button></p>' +
       '<ul class="cards">';
     l.c.forEach(function(c, i){
       h += '<li><div><div class="q">' + esc(c.q) + '</div><div class="a">' + esc(c.a) + '</div></div>' +
-        (data.prog[l.id + ':' + i] ? '<span class="ok">Acquise</span>' : '') + '</li>';
+        (isKnown(cid, l.id, i) ? '<span class="ok">Acquise</span>' : '') + '</li>';
     });
     h += '</ul></section>';
     return h;
@@ -596,9 +1021,9 @@ window.LZ = function(n, t, items){
     else {
       h += '<ul class="list">';
       data.decks.forEach(function(d, i){
-        h += '<li class="lrow" style="--c:' + colorVar(i) + '"><button class="lmain" data-a="openDeck" data-id="' + d.id + '"><span class="lbadge">' + (i + 1) + '</span>' +
+        h += '<li class="lrow" style="--c:' + colorVar(i) + '"><button class="lmain" data-a="openDeck" data-id="' + esc(d.id) + '"><span class="lbadge">' + (i + 1) + '</span>' +
           '<span class="ltxt"><span class="deck-name">' + esc(d.name) + '</span><span class="deck-meta">' + plural(d.cards.length, 'carte', 'cartes') + '</span></span></button>' +
-          '<button class="go" data-a="studyDeck" data-id="' + d.id + '"' + (d.cards.length ? '' : ' disabled style="opacity:.4"') + '>' + ico('play', 18) + '</button></li>';
+          '<button class="go" data-a="studyDeck" data-id="' + esc(d.id) + '"' + (d.cards.length ? '' : ' disabled style="opacity:.4"') + ' aria-label="Étudier ' + esc(d.name) + '">' + ico('play', 18) + '</button></li>';
       });
       h += '</ul>';
     }
@@ -618,7 +1043,7 @@ window.LZ = function(n, t, items){
       h += '<ul class="cards">';
       d.cards.forEach(function(c){
         h += '<li><div><div class="q">' + esc(c.q) + '</div><div class="a">' + esc(c.a) + '</div></div>' +
-          '<button class="link danger" data-a="delCard" data-id="' + c.id + '">Supprimer</button></li>';
+          '<button class="link danger" data-a="delCard" data-id="' + esc(c.id) + '">Supprimer</button></li>';
       });
       h += '</ul>';
     }
@@ -631,10 +1056,9 @@ window.LZ = function(n, t, items){
 
   function vueProgression(){
     var tot = courseTotals(), pct = tot.t ? Math.round(tot.k / tot.t * 100) : 0;
-    var h = '<header class="pagehead"><h1>Ma progression</h1><p class="sub">Vos cartes acquises en ' + esc(curCourse().name) + '.</p></header>' +
+    return '<header class="pagehead"><h1>Ma progression</h1><p class="sub">Vos cartes acquises en ' + esc(curCourse().name) + '.</p></header>' +
       '<div class="center"><div class="ringbox">' + ringSvg(pct, 140, 12, 'ring-dark') + '<div class="lab" style="font-size:30px">' + pct + '%</div></div></div>' +
       '<div class="stats"><div class="stat"><b>' + tot.k + '</b><span>acquises</span></div><div class="stat"><b>' + (tot.t - tot.k) + '</b><span>restantes</span></div><div class="stat"><b>' + tot.t + '</b><span>total</span></div></div>';
-    return h;
   }
 
   function vueReglages(){
@@ -651,10 +1075,18 @@ window.LZ = function(n, t, items){
       '<div class="srow"><div class="st"><b>Taille du texte</b><span>Pour lire plus confortablement</span></div>' + seg('fs', String(data.fs || 0), [['0', 'Normal'], ['1', 'Grand'], ['2', 'Très grand']]) + '</div></div>' +
       '<div class="shead">Compte</div><div class="group"><div class="srow"><div class="st"><b>Statut</b><span>' + (data.pro ? 'Recto Pro à vie activé' : 'Version gratuite (Chapitres 1 ouverts)') + '</span></div>' +
       '<button class="btn small' + (data.pro ? ' ghost' : '') + '" data-a="modalPro">' + (data.pro ? 'Mon Compte' : 'Passer à Pro') + '</button></div></div>' +
-      '<div class="shead">ID de cet appareil</div><div class="group"><div class="srow"><div class="st"><b>Identifiant unique</b><span>' + data.devId + '</span></div>' +
-      '<button class="btn small ghost" data-a="copierId">Copier</button></div></div>' +
+      '<div class="shead">ID de cet appareil</div><div class="group"><div class="srow"><div class="st"><b>Identifiant unique</b><span>' + esc(data.devId) + '</span></div>' +
+      '<button class="btn small ghost" data-a="copierId">Copier</button></div></div>';
+
+    if (deferredInstallPrompt) {
+      h += '<div class="shead">Application hors-ligne</div><div class="group"><div class="srow"><div class="st"><b>Installer Recto</b><span>Accès direct sans navigateur</span></div>' +
+        '<button class="btn small" data-a="installerPwa">Installer</button></div></div>';
+    }
+
+    h += '<div class="shead">Performance & Cache</div><div class="group"><div class="srow"><div class="st"><b>Cache du Chat IA</b><span>Vider les réponses IA mémorisées</span></div>' +
+      '<button class="btn small ghost" data-a="viderCacheIa">Vider</button></div></div>' +
       '<div class="shead">Assistance</div><div class="group"><div class="srow"><div class="st"><b>Support WhatsApp officiel</b><span>+243 85 08 00 833</span></div>' +
-      '<a class="btn small ghost" href="https://wa.me/243850800833" target="_blank">Contacter</a></div></div>';
+      '<a class="btn small ghost" href="https://wa.me/243850800833" target="_blank" rel="noopener">Contacter</a></div></div>';
     return h;
   }
 
@@ -687,7 +1119,7 @@ window.LZ = function(n, t, items){
       q.opts.forEach(function(o, i){
         var on = !!q.sel[i], cls = 'opt';
         if (q.done) {
-          if (o.ok && on) cls += ' good'; else if (o.ok) cls += ' good'; else if (on) cls += ' bad';
+          if (o.ok) cls += ' good'; else if (on) cls += ' bad';
         } else if (on) cls += ' sel';
         h += '<button class="' + cls + '" data-a="opt" data-id="' + i + '"' + (q.done ? ' disabled' : '') + '>' +
           '<span class="box"></span><span class="otxt">' + esc(o.t) + '</span></button>';
@@ -697,22 +1129,55 @@ window.LZ = function(n, t, items){
         h += '<button class="btn full" data-a="validerQuiz" style="margin-top:16px">Valider</button>' +
           '<button class="link" data-a="idk" style="width:100%;text-align:center">Je ne sais pas</button>';
       } else {
-        h += '<div class="fb ' + (q.good ? 'good' : 'bad') + '">' + (q.good ? 'Bonne réponse !' : 'Voici la réponse :') + '</div>' +
-          '<div class="learn"><span class="side">À retenir</span><p>' + esc(c.a) + '</p></div>' +
-          '<button class="btn full" data-a="suivante" style="margin-top:16px">Question suivante</button>';
+        h += '<div class="fb ' + (q.good ? 'good' : 'bad') + '">' + (q.good ? 'Bonne réponse !' : 'À revoir') + '</div>' +
+          '<div class="learn"><b>Synthèse :</b><p style="margin:6px 0 0">' + esc(c.a) + '</p></div>' +
+          '<button class="btn full" data-a="suivante" style="margin-top:14px">Question suivante</button>';
       }
       return h;
     }
+
     h += '<div class="bar" style="--p:' + p + '%"><i></i></div><p class="sub" style="margin:0">' + s.known + ' sur ' + s.total + ' acquises</p>' +
-      '<div class="scene"><button class="flip" data-a="flip">' +
-      '<span class="face front"><span class="side">Question</span><span class="txt">' + esc(c.q) + '</span></span>' +
-      '<span class="face back"><span class="side">Réponse</span><span class="txt">' + esc(c.a) + '</span></span>' +
+      '<div class="scene"><button class="flip' + (s.flipped ? ' is-flipped' : '') + '" data-a="flip">' +
+        '<span class="face front"><span class="eyebrow" style="color:var(--muted)">Question</span><span class="qtxt">' + esc(c.q) + '</span></span>' +
+        '<span class="face back"><span class="eyebrow">Réponse</span><span class="txt">' + esc(c.a) + '</span></span>' +
       '</button></div>' +
-      '<p class="hint" id="hint">Touchez la carte pour voir la réponse</p>' +
-      '<div class="answers" id="answers" hidden>' +
+      '<p class="hint" id="hint"' + (s.flipped ? ' hidden' : '') + '>Touchez la carte pour voir la réponse</p>' +
+      '<div class="answers" id="answers"' + (s.flipped ? '' : ' hidden') + '>' +
       '<button class="btn bad" data-a="again">À revoir</button>' +
       '<button class="btn good" data-a="known">Je savais</button></div>';
     return h;
+  }
+
+  function contenuZoneApifyHtml(){
+    var st = ui.apifyState;
+    if (st.loading) {
+      return '<div style="display:flex;align-items:center;gap:10px"><div class="spinner" style="margin:0;width:22px;height:22px"></div><span>L’IA recherche dans le programme Exétat…</span></div>';
+    }
+    if (!st.answer && (!st.localHits || !st.localHits.length)) {
+      return '<span class="sub">Posez une notion, une formule ou un chapitre d’examen. Les réponses sont mises en cache pour vos révisions hors-ligne.</span>';
+    }
+    var out = '';
+    if (st.answer) {
+      out += '<div>' + (st.fromCache ? '<span class="chip mini" style="margin-bottom:8px">⚡ Réponse depuis le cache</span><br>' : '') +
+        esc(st.answer).replace(/\n/g, '<br>') + '</div>';
+    }
+    if (st.localHits && st.localHits.length) {
+      out += '<div style="margin-top:12px"><b style="font-size:13px;color:var(--brand)">📚 Fiches officielles correspondantes (' + esc(curCourse().name) + ') :</b>';
+      st.localHits.forEach(function(hit){
+        out += '<div class="ia-local-card"><div style="font-size:12px;color:var(--muted)">' + esc(hit.lesson) + '</div>' +
+          '<div style="font-weight:700;margin-top:2px">' + esc(hit.q) + '</div>' +
+          '<div style="margin-top:4px">' + esc(hit.a) + '</div></div>';
+      });
+      out += '</div>';
+    }
+    return out;
+  }
+
+  function majZoneApify(){
+    var z = document.getElementById('zoneResultatApify');
+    if (z) z.innerHTML = contenuZoneApifyHtml();
+    var btn = document.getElementById('btnLancerApify');
+    if (btn) btn.disabled = !!ui.apifyState.loading;
   }
 
   function vueModale(){
@@ -720,25 +1185,35 @@ window.LZ = function(n, t, items){
     var h = '<div class="overlay" data-a="fermerModale"><div class="sheet">';
     if (ui.modal === 'apify') {
       var statAi = aiEstEligible();
+      var ctxLabel = (ui.chatContext && ui.chatContext.sectionName)
+        ? ui.chatContext.sectionName + (ui.chatContext.courseName ? ' · ' + ui.chatContext.courseName : '')
+        : curCourse().name;
       h += '<h2>🤖 Chat IA intégré</h2>' +
+        '<p class="sub" style="margin-top:4px">Contexte actif : <b>' + esc(ctxLabel) + '</b></p>' +
         '<div class="pub-ia"><b>Paiement unique de 10 000 FC à vie :</b> Une vraie économie pour éviter les abonnements mensuels coûteux chez les autres IA.<br><br><b>Statut :</b> ' + esc(statAi.message) + '</div>';
       if (statAi.autorise) {
-        h += '<div class="barre-apify"><input type="text" id="champApify" placeholder="Posez votre question d’examen à l’IA...">' +
-          '<button class="btn small" data-a="lancerApify">Envoyer</button></div>' +
-          '<div id="zoneResultatApify" style="margin-top:14px;font-size:14.5px;max-height:220px;overflow:auto;line-height:1.5">' + (ui.apifyResult || '') + '</div>';
+        h += '<div class="barre-apify">' +
+          '<input type="text" id="champApify" placeholder="Posez votre question d’examen à l’IA..." value="' + esc(ui.apifyState.query) + '">' +
+          '<button class="btn small" id="btnLancerApify" data-a="lancerApify"' + (ui.apifyState.loading ? ' disabled' : '') + '>Envoyer</button></div>' +
+          '<div class="ia-chips">' +
+            '<button data-a="suggestionIa" data-id="Expliquer les points clés de ">Points clés</button>' +
+            '<button data-a="suggestionIa" data-id="Donner des exercices types Exétat sur ">Exercices Exétat</button>' +
+            '<button data-a="suggestionIa" data-id="Quels sont les pièges fréquents sur ">Pièges Exétat</button>' +
+          '</div>' +
+          '<div id="zoneResultatApify" class="ia-box">' + contenuZoneApifyHtml() + '</div>';
       } else {
         h += '<button class="btn full" data-a="modalPro">Débloquer Recto Pro à 10 000 FC</button>';
       }
       h += '<button class="btn full ghost" data-a="fermerModale" style="margin-top:14px">Fermer</button>';
     } else if (ui.modal === 'pro') {
       h += '<h2>Passer à Recto Pro</h2>' +
-        '<div class="pub-ia">Paiement unique de <b>10 000 FC</b> à vie. Une vraie économie pour éviter les abonnements mensuels coûteux chez les IA.</div>' +
-        '<div class="id-appareil-box"><div>Votre ID appareil unique :</div><div class="id-val">' + data.devId + '</div><button class="btn small ghost" data-a="copierId" style="margin-top:8px">Copier mon ID</button></div>' +
+        '<div class="pub-ia">Paiement unique de <b>10 000 FC</b> à vie. Une vraie économie pour éviter les abonnements mensuels coûteux chez les autres IA.</div>' +
+        '<div class="id-appareil-box"><div>Votre ID appareil unique :</div><div class="id-val">' + esc(data.devId) + '</div><button class="btn small ghost" data-a="copierId" style="margin-top:8px">Copier mon ID</button></div>' +
         '<h3>Moyens de paiement (RDC) :</h3>' +
         '<div class="pm"><div class="pm-l"><div class="pm-n">Airtel Money</div><div class="pm-v">0972175034</div></div></div>' +
         '<div class="pm"><div class="pm-l"><div class="pm-n">Orange Money</div><div class="pm-v">0842403168</div></div></div>' +
         '<button class="btn full" data-a="payerMaishaPay" style="margin-top:12px">⚡ Payer en ligne avec MaishaPay</button>' +
-        '<a class="btn full ghost" href="https://wa.me/243850800833?text=' + encodeURIComponent('Bonjour, j’ai payé 10 000 FC pour Recto Pro. Mon ID appareil est : ' + data.devId) + '" target="_blank" style="margin-top:8px">Envoyer la preuve sur WhatsApp</a>' +
+        '<a class="btn full ghost" href="https://wa.me/243850800833?text=' + encodeURIComponent('Bonjour, j’ai payé 10 000 FC pour Recto Pro. Mon ID appareil est : ' + data.devId) + '" target="_blank" rel="noopener" style="margin-top:8px">Envoyer la preuve sur WhatsApp</a>' +
         '<h3 style="margin-top:20px">J’ai reçu mon code :</h3>' +
         '<div class="row"><input type="text" id="codeSecurise" placeholder="Collez votre code de signature ici..."><button class="btn" data-a="validerSignature">Activer</button></div>' +
         (ui.msg ? '<p class="fb ' + (ui.msg.ok ? 'good' : 'bad') + '" style="margin-top:8px">' + esc(ui.msg.t) + '</p>' : '') +
@@ -759,38 +1234,49 @@ window.LZ = function(n, t, items){
         '</button>' +
         '<div class="acc-content">';
       sec.cours.forEach(function(c){
-        var estActif = (curCourse().id === c.id);
-        var estDispo = false;
-        getCourses().forEach(function(co){ if (co.id === c.id) estDispo = true; });
+        var estActif = (data.course === c.id);
+        var estDispo = !!c.dispo || courseCache.has(c.id);
         html += '<div class="cours-item' + (estActif ? ' actif' : '') + '">' +
           '<span>' + esc(c.nom) + '</span>' +
-          (estDispo ? '<button class="btn small" data-a="choisirCours" data-id="' + c.id + '" style="min-height:32px;padding:0 8px;font-size:12px">Ouvrir</button>'
-                    : '<span style="font-size:11px;color:var(--muted)">Bientôt</span>') +
+          (estDispo
+            ? '<button class="btn small" data-a="choisirCours" data-id="' + esc(c.id) + '" style="min-height:36px;padding:0 12px;font-size:13px">Ouvrir</button>'
+            : '<span style="font-size:12px;color:var(--muted)">Bientôt</span>') +
         '</div>';
       });
-      html += '</div></div>';
+      html += '<div class="sec-ia-row">' +
+        '<button class="btn small ghost full" data-a="btnChatIaSection" data-id="' + idx + '" style="min-height:40px;font-size:13.5px">🤖 Chat IA — ' + esc(sec.section) + '</button>' +
+      '</div></div></div>';
     });
     container.innerHTML = html;
   }
 
   function render(){
-    applyPrefs();
-    var h = (ui.view === 'landing') ? vueLanding() :
-      (ui.view === 'lesson' ? vueLecon() :
-      (ui.view === 'decks' ? vueDecks() :
-      (ui.view === 'deck' ? vueDeckDetail() :
-      (ui.view === 'progress' ? vueProgression() :
-      (ui.view === 'settings' ? vueReglages() :
-      (ui.view === 'study' ? vueStudy() : vueAccueil()))))));
-    
-    var aBarreOnglets = (ui.view !== 'landing' && ui.view !== 'study');
-    app.className = 'wrap' + (aBarreOnglets ? ' hasbar' : '');
-    app.innerHTML = h + (aBarreOnglets ? barreNavigation() : '') + vueModale();
-    majTiroirSections();
+    try {
+      applyPrefs();
+      var h = (ui.view === 'landing') ? vueLanding() :
+        (ui.view === 'lesson' ? vueLecon() :
+        (ui.view === 'decks' ? vueDecks() :
+        (ui.view === 'deck' ? vueDeckDetail() :
+        (ui.view === 'progress' ? vueProgression() :
+        (ui.view === 'settings' ? vueReglages() :
+        (ui.view === 'study' ? vueStudy() : vueAccueil()))))));
+
+      var aBarreOnglets = (ui.view !== 'landing' && ui.view !== 'study');
+      app.className = 'wrap' + (aBarreOnglets ? ' hasbar' : '');
+      app.innerHTML = h + (aBarreOnglets ? barreNavigation() : '') + vueModale();
+      majTiroirSections();
+    } catch (err) {
+      app.className = 'wrap';
+      app.innerHTML = '<div class="loader-box"><h2>Une erreur est survenue</h2><p class="sub">' + esc(err && err.message ? err.message : 'Erreur inattendue') + '</p>' +
+        '<button class="btn full" data-a="revenirAccueil" style="margin-top:16px">Revenir à l’accueil</button></div>';
+    }
   }
 
   function begin(title, queue, back, src){
-    if (!queue.length) return;
+    if (!queue.length) {
+      afficherToast("Aucune carte disponible pour cette session.");
+      return;
+    }
     ui.study = { title:title, queue:queue, idx:0, known:0, again:0, total:queue.length, back:back, src:src };
     ui.view = 'study'; render();
   }
@@ -799,16 +1285,131 @@ window.LZ = function(n, t, items){
     return shuffle(u).concat(shuffle(k));
   }
 
+  async function ouvrirCoursParId(id){
+    data.course = id;
+    save();
+    ui.loadingCourse = id;
+    ui.loadError = null;
+    ui.searchQuery = '';
+    ui.view = 'home';
+    document.getElementById('drawer').classList.remove('ouvert');
+    document.getElementById('drawerBackdrop').classList.remove('ouvert');
+    render();
+
+    try {
+      await chargerCours(id);
+      ui.loadingCourse = null;
+      ui.loadError = null;
+      render();
+    } catch (err) {
+      ui.loadingCourse = null;
+      ui.loadError = err.message || "Erreur lors du chargement du cours.";
+      render();
+    }
+  }
+
+  async function executerRechercheIA(questionTexte){
+    var q = String(questionTexte || '').trim();
+    if (!q || ui.apifyState.loading) return;
+
+    var statAi = aiEstEligible();
+    if (!statAi.autorise) {
+      ui.modal = 'pro';
+      render();
+      return;
+    }
+
+    if (!data.aiFirstUsed) { data.aiFirstUsed = Date.now(); save(); }
+
+    var ctx = ui.chatContext || { courseId: curCourse().id, courseName: curCourse().name, sectionName: '' };
+    var cleCache = (ctx.courseId || ctx.sectionName || 'global') + '|' + normaliserRequeteIA(q);
+    var localHits = rechercherDansCoursLocal(q);
+
+    var cached = obtenirCacheIA(cleCache);
+    if (cached) {
+      ui.apifyState = { loading: false, query: q, answer: cached, fromCache: true, localHits: localHits };
+      majZoneApify();
+      return;
+    }
+
+    if (navigator.onLine === false) {
+      ui.apifyState = {
+        loading: false,
+        query: q,
+        answer: localHits.length
+          ? "Vous êtes hors-ligne. Voici les fiches officielles correspondantes déjà disponibles sur votre appareil :"
+          : "Vous êtes hors-ligne et cette question n’est pas encore en cache. Reconnectez-vous pour interroger le Chat IA.",
+        fromCache: false,
+        localHits: localHits
+      };
+      majZoneApify();
+      return;
+    }
+
+    if (activeAiAbort) activeAiAbort.abort();
+    activeAiAbort = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var abortTimer = activeAiAbort ? setTimeout(function(){ activeAiAbort.abort(); }, 22000) : null;
+
+    ui.apifyState = { loading: true, query: q, answer: '', fromCache: false, localHits: localHits };
+    majZoneApify();
+
+    try {
+      var res = await window.APIFY_CONFIG.interroger(q, ctx, activeAiAbort ? activeAiAbort.signal : undefined);
+      if (abortTimer) clearTimeout(abortTimer);
+      if (res && res.ok && res.answer) {
+        enregistrerCacheIA(cleCache, res.answer);
+      }
+      ui.apifyState = { loading: false, query: q, answer: (res && res.answer) || "Aucune réponse reçue.", fromCache: false, localHits: localHits };
+      majZoneApify();
+    } catch (err) {
+      if (abortTimer) clearTimeout(abortTimer);
+      ui.apifyState = {
+        loading: false,
+        query: q,
+        answer: "Impossible de joindre le Chat IA (" + (err && err.message ? err.message : 'erreur réseau') + ").",
+        fromCache: false,
+        localHits: localHits
+      };
+      majZoneApify();
+    }
+  }
+
+  document.addEventListener('input', function(e){
+    if (e.target && e.target.id === 'filtreLecons') {
+      ui.searchQuery = e.target.value;
+      var pos = e.target.selectionStart;
+      render();
+      var el = document.getElementById('filtreLecons');
+      if (el) { el.focus(); try { el.setSelectionRange(pos, pos); } catch(_){} }
+    } else if (e.target && e.target.id === 'champApify') {
+      ui.apifyState.query = e.target.value;
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && e.target && e.target.id === 'champApify') {
+      e.preventDefault();
+      executerRechercheIA(e.target.value);
+    }
+  });
+
   document.addEventListener('click', async function(e){
     var overlayEl = e.target.closest('.overlay');
-    var t = e.target.closest('[data-a]'); 
+    var t = e.target.closest('[data-a]');
     if (!t) {
       if (overlayEl && e.target === overlayEl) { ui.modal = null; render(); }
       return;
     }
     var a = t.dataset.a, id = t.dataset.id;
-    if (a === 'entrerApp') { ui.view = 'home'; render(); }
-    else if (a === 'tab') { ui.view = id; render(); }
+
+    if (a === 'revenirAccueil') { ui.view = 'landing'; ui.modal = null; ui.loadError = null; render(); }
+    else if (a === 'entrerApp') { await ouvrirCoursParId(data.course || 'geo'); }
+    else if (a === 'rechargerCours') { await ouvrirCoursParId(data.course || 'geo'); }
+    else if (a === 'tab') {
+      ui.view = id;
+      if (id === 'home' && !courseCache.has(data.course)) await ouvrirCoursParId(data.course || 'geo');
+      else render();
+    }
     else if (a === 'lecon') { ui.view = 'lesson'; ui.lessonId = id; render(); }
     else if (a === 'ouvrirTiroir') {
       document.getElementById('drawer').classList.add('ouvert');
@@ -857,11 +1458,11 @@ window.LZ = function(n, t, items){
       document.getElementById('hint').hidden = s.flipped;
     }
     else if (a === 'known') {
-      var s = ui.study, c = s.queue[s.idx]; data.prog[c.k] = 1; save();
+      var s = ui.study, c = s.queue[s.idx]; markKnown(c.k, true);
       s.known++; s.idx++; s.flipped = false; render();
     }
     else if (a === 'again') {
-      var s = ui.study, c = s.queue[s.idx]; delete data.prog[c.k]; save();
+      var s = ui.study, c = s.queue[s.idx]; markKnown(c.k, false);
       s.again++; s.queue.push(c); s.idx++; s.flipped = false; render();
     }
     else if (a === 'opt') {
@@ -876,13 +1477,13 @@ window.LZ = function(n, t, items){
       if (q.done || !Object.keys(q.sel).length) return;
       q.good = q.opts.every(function(o, i){ return o.ok === !!q.sel[i]; });
       q.done = true;
-      if (q.good) { s.known++; data.prog[c.k] = 1; } else { s.again++; delete data.prog[c.k]; s.queue.push(c); }
-      save(); render();
+      if (q.good) { s.known++; markKnown(c.k, true); } else { s.again++; markKnown(c.k, false); s.queue.push(c); }
+      render();
     }
     else if (a === 'idk') {
       var s = ui.study, q = curQ(s), c = s.queue[s.idx];
-      q.done = true; q.good = false; s.again++; delete data.prog[c.k]; s.queue.push(c);
-      save(); render();
+      q.done = true; q.good = false; s.again++; markKnown(c.k, false); s.queue.push(c);
+      render();
     }
     else if (a === 'suivante') { ui.study.idx++; render(); }
     else if (a === 'restart') {
@@ -893,19 +1494,36 @@ window.LZ = function(n, t, items){
       else render();
     }
     else if (a === 'quit') { ui.view = ui.study ? ui.study.back.view : 'home'; ui.study = null; render(); }
-    else if (a === 'btnChatIa') {
+    else if (a === 'btnChatIa' || a === 'btnChatIaCours' || a === 'btnChatIaSection') {
       var statAi = aiEstEligible();
-      if (!statAi.autorise) { ui.modal = 'pro'; }
-      else { ui.modal = 'apify'; ui.apifyResult = ''; }
+      if (!statAi.autorise) { ui.modal = 'pro'; render(); return; }
+      if (a === 'btnChatIaSection') {
+        var secObj = window.SECTIONS_OFFICIELLES[+id];
+        ui.chatContext = { sectionName: secObj ? secObj.section : '', courseName: '', courseId: '' };
+        document.getElementById('drawer').classList.remove('ouvert');
+        document.getElementById('drawerBackdrop').classList.remove('ouvert');
+      } else {
+        var info = getCourseMeta(curCourse().id);
+        ui.chatContext = { courseId: curCourse().id, courseName: curCourse().name, sectionName: info ? info.section : '' };
+      }
+      ui.apifyState = { loading: false, query: '', answer: '', fromCache: false, localHits: [] };
+      ui.modal = 'apify';
       render();
+      var ch = document.getElementById('champApify'); if (ch) ch.focus();
+    }
+    else if (a === 'suggestionIa') {
+      var ch = document.getElementById('champApify');
+      var themeTxt = (ui.chatContext && (ui.chatContext.courseName || ui.chatContext.sectionName)) || curCourse().name;
+      if (ch) {
+        ch.value = id + themeTxt + ' : ';
+        ui.apifyState.query = ch.value;
+        ch.focus();
+      }
     }
     else if (a === 'modalPro') { ui.modal = 'pro'; ui.msg = null; render(); }
     else if (a === 'fermerModale') { ui.modal = null; render(); }
-    else if (a === 'copierId') {
-      navigator.clipboard.writeText(data.devId);
-      alert("Votre ID appareil unique (" + data.devId + ") a été copié.");
-    }
-    else if (a === 'payerMaishaPay') { window.MAISHAPAY_CONFIG.lancerPaiement(); }
+    else if (a === 'copierId') { copierTexte(data.devId, "ID appareil copié : " + data.devId); }
+    else if (a === 'payerMaishaPay') { window.MAISHAPAY_CONFIG.lancerPaiement(afficherToast); }
     else if (a === 'validerSignature') {
       var val = (document.getElementById('codeSecurise').value || '').trim();
       if (!val) { ui.msg = { ok: false, t: "Veuillez coller le code reçu." }; render(); return; }
@@ -920,31 +1538,50 @@ window.LZ = function(n, t, items){
       render();
     }
     else if (a === 'lancerApify') {
-      var q = document.getElementById('champApify').value.trim();
-      if (q) {
-        if (!data.aiFirstUsed) { data.aiFirstUsed = Date.now(); save(); }
-        document.getElementById('zoneResultatApify').innerHTML = "L’IA réfléchit à votre question...";
-        window.APIFY_CONFIG.interroger(q).then(function(res){
-          ui.apifyResult = res; render();
-        });
-      }
+      var champ = document.getElementById('champApify');
+      await executerRechercheIA(champ ? champ.value : ui.apifyState.query);
     }
     else if (a === 'choisirCours') {
-      var dispo = false; getCourses().forEach(function(c){ if(c.id === id) dispo = true; });
-      if (dispo) {
-        data.course = id; save();
-        document.getElementById('drawer').classList.remove('ouvert');
-        document.getElementById('drawerBackdrop').classList.remove('ouvert');
-        ui.view = 'home'; render();
+      var metaInfo = getCourseMeta(id);
+      if (metaInfo && (metaInfo.meta.dispo || courseCache.has(id))) {
+        await ouvrirCoursParId(id);
       } else {
-        alert("Cette matière fait partie du programme officiel. Son fichier de questions sera bientôt disponible.");
+        afficherToast("Cette matière fait partie du programme officiel. Son fichier de questions sera bientôt disponible.");
       }
+    }
+    else if (a === 'installerPwa') {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        render();
+      }
+    }
+    else if (a === 'viderCacheIa') {
+      aiMemCache.clear();
+      try { localStorage.removeItem(AI_CACHE_KEY); } catch(err){}
+      afficherToast("Cache du Chat IA vidé.");
     }
   });
 
+  window.addEventListener('online', function(){ if (ui.view !== 'study') render(); });
+  window.addEventListener('offline', function(){ if (ui.view !== 'study') render(); });
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    if (ui.view === 'landing' || ui.view === 'settings') render();
+  });
+  window.addEventListener('error', function(){
+    if (!app.innerHTML || app.innerHTML.indexOf('Chargement de Recto') !== -1) render();
+  });
+
   render();
-  if ('serviceWorker' in navigator && location.protocol === 'https:') {
-    window.addEventListener('load', function(){ try { navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {} });
+  chargerCours(data.course || 'geo').catch(function(){});
+
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+    window.addEventListener('load', function(){
+      try { navigator.serviceWorker.register('./sw.js').catch(function(){}); } catch (e) {}
+    });
   }
 })();
 </script>
