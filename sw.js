@@ -1,71 +1,70 @@
-var CACHE = 'recto-v2';
-var CORE = [
-  './',
-  './index.html',
+const CACHE_NAME = 'recto-v2';
+const SHELL_ASSETS = [
   './app.html',
   './manifest.webmanifest',
-  './chimie_data.js',
-  './geographie_data.js',
+  './icon-180.png',
   './icon-192.png',
-  './icon-512.png',
-  './icon-180.png'
+  './icon-512.png'
 ];
 
-self.addEventListener('install', function(e){
-  e.waitUntil(
-    caches.open(CACHE).then(function(c){
-      return c.addAll(CORE);
-    }).then(function(){
-      return self.skipWaiting();
-    })
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_ASSETS)).catch(() => {})
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', function(e){
-  e.waitUntil(
-    caches.keys().then(function(keys){
-      return Promise.all(
-        keys.filter(function(k){ return k !== CACHE; }).map(function(k){ return caches.delete(k); })
-      );
-    }).then(function(){
-      return self.clients.claim();
-    })
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+      )
+    )
   );
+  self.clients.claim();
 });
 
-self.addEventListener('fetch', function(e){
-  var req = e.request;
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
   if (req.method !== 'GET') return;
-  var url = new URL(req.url);
 
-  // Stratégie "Cache d'abord, puis réseau" pour tous les fichiers du site
-  if (url.origin === self.location.origin) {
-    e.respondWith(
-      caches.match(req).then(function(cached){
-        var net = fetch(req).then(function(res){
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+
+  // Ne jamais mettre en cache les appels API dynamiques
+  if (url.pathname.startsWith('/api/')) return;
+
+  // Navigation & app.html : Network-First avec fallback hors-ligne
+  if (req.mode === 'navigate' || url.pathname.endsWith('/app.html') || url.pathname === '/') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
           if (res && res.ok) {
-            var cp = res.clone();
-            caches.open(CACHE).then(function(c){ c.put(req, cp); });
+            const copy = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put('./app.html', copy));
           }
           return res;
-        }).catch(function(){
-          return cached;
-        });
-        return cached || net;
-      })
+        })
+        .catch(() => caches.match('./app.html').then((r) => r || caches.match(req)))
     );
     return;
   }
 
-  // Polices Google
-  if (/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) {
-    e.respondWith(
-      caches.open(CACHE).then(function(c){
-        return c.match(req).then(function(r){
-          var net = fetch(req).then(function(res){ c.put(req, res.clone()); return res; }).catch(function(){ return r; });
-          return r || net;
-        });
-      })
-    );
-  }
+  // Fichiers de cours (*_data.js) et ressources statiques : Stale-While-Revalidate
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      const networkFetch = fetch(req)
+        .then((res) => {
+          if (res && res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => null);
+
+      return cached || networkFetch;
+    })
+  );
 });
