@@ -83,16 +83,30 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .rg-bg{stroke:rgba(255,255,255,.28)}.rg-fg{stroke:#fff;transition:stroke-dashoffset .4s}
 .ring-dark .rg-bg{stroke:var(--line)}.ring-dark .rg-fg{stroke:var(--brand)}
 
-/* Barre rapide Recherche + Chat IA dans les cours */
+/* Barre rapide Recherche + Chat IA + Objectif & Modes */
+.streak-bar{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.streak-pill{flex:1;min-width:96px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:var(--shadow)}
+.streak-pill b{font-family:var(--font-d);font-size:16px;line-height:1.15;color:var(--brand)}
+.streak-pill span{font-size:11.5px;color:var(--muted);margin-top:2px}
+.quick-modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+@media (max-width:440px){.quick-modes{grid-template-columns:1fr}}
+.qmode-btn{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:48px;padding:10px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);text-align:left;font-weight:700;font-size:14px;box-shadow:var(--shadow)}
+.qmode-btn span.qm-sub{display:block;font-size:12px;font-weight:600;color:var(--muted)}
+.qmode-btn .qm-badge{flex:none;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;background:var(--brand-soft);color:var(--brand)}
+.qmode-btn.warn .qm-badge{background:var(--bad-bg);color:var(--bad)}
 .course-tools{display:flex;gap:8px;margin-top:14px;align-items:center;flex-wrap:wrap}
 .course-tools input{flex:1;min-width:170px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px;min-height:44px;font-size:15px}
 .ia-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:12px 14px;border-radius:16px;background:var(--brand-soft);border:1.5px solid var(--brand)}
 .ia-strip-t{font-size:14px;line-height:1.3}.ia-strip-t b{display:block;color:var(--brand);font-size:14.5px}
 
+/* Rendu scientifique des formules */
+.sci sub,.sci sup{font-size:.73em;line-height:0;font-weight:700}
+.sci sub{vertical-align:sub}.sci sup{vertical-align:super}
+
 /* Listes de cours & Leçons */
 .part{display:flex;align-items:center;gap:10px;margin:26px 0 0;font-size:20px}
 .part::before{content:"";flex:none;width:6px;height:24px;border-radius:3px;background:var(--c,var(--brand))}
-.chap{margin:16px 2px 0;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.chap{margin:16px 2px 0;display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
 .chap h3{flex:1;font-family:var(--font-b);font-size:15px;font-weight:700;color:var(--muted)}
 .list{list-style:none;margin:8px 0 0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
 .lrow{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}.lrow:last-child{border-bottom:0}
@@ -103,6 +117,7 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .go{flex:none;align-self:center;margin:0 12px 0 4px;width:44px;height:44px;border-radius:50%;border:0;background:var(--brand);color:var(--on-brand);display:grid;place-items:center}
 .go.lockd{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
 .foot{margin-top:28px;color:var(--muted);font-size:13.5px}
+.bonus-banner{margin-top:8px;padding:10px 12px;border-radius:14px;background:var(--brand-soft);border:1px dashed var(--brand);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13.5px}
 
 /* Barre d'onglets inférieure */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 20px rgba(14,42,56,.06)}
@@ -111,7 +126,7 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .tico{display:grid;place-items:center;width:54px;height:30px;border-radius:15px}
 .tab.on{color:var(--brand)}.tab.on .tico{background:var(--brand-soft)}
 
-/* Cartes 3D & Quiz */
+/* Cartes 3D, Quiz & Examen */
 .scene{margin-top:18px;perspective:1200px}
 .flip{position:relative;display:block;width:100%;min-height:340px;padding:0;border:0;background:none;transform-style:preserve-3d;transition:transform .55s;text-align:center}
 .flip.is-flipped{transform:rotateY(180deg)}
@@ -120,8 +135,12 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .hint{text-align:center;color:var(--muted);font-size:15px;margin:12px 0 0}
 .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .answers[hidden]{display:none}
-.result{text-align:center;margin-top:36px}.result .big{font-family:var(--font-d);font-size:56px;font-weight:700;line-height:1;margin:14px 0 6px}
+.result{text-align:center;margin-top:28px}.result .big{font-family:var(--font-d);font-size:52px;font-weight:700;line-height:1;margin:12px 0 6px}
 .qcard{margin-top:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 20px}
+.qhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.qtools{display:flex;align-items:center;gap:6px}
+.qtool{min-width:38px;height:38px;padding:0 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.qtool.fav{border-color:var(--t3);color:var(--t3);background:var(--brand-soft)}
 .qtxt{font-family:var(--font-d);font-weight:500;font-size:clamp(19px,4.5vw,25px);line-height:1.28;margin:6px 0 0}
 .opts{display:flex;flex-direction:column;gap:10px;margin-top:12px}
 .opt{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:56px;padding:12px 14px;border-radius:16px;border:2px solid var(--line);background:var(--surface);text-align:left}
@@ -132,6 +151,13 @@ h1{font-size:28px;font-weight:700}h2{font-size:24px;font-weight:700}h3{font-size
 .opt.bad .box::after{content:"✕";color:var(--bad);font-size:14px;font-weight:700}
 .fb{margin-top:16px;padding:12px 14px;border-radius:14px;font-weight:700}.fb.good{background:var(--good-bg);color:var(--good)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
 .learn{margin-top:12px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.timer-pill{flex:none;padding:5px 11px;border-radius:999px;font-family:monospace;font-size:14px;font-weight:700;background:var(--brand-soft);color:var(--brand)}
+.timer-pill.low{background:var(--bad-bg);color:var(--bad)}
+.exam-recap{text-align:left;margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.exam-item{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+.exam-item.bad{border-left:4px solid var(--bad)}.exam-item.good{border-left:4px solid var(--good)}
+.synth-sheet{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.synth-card{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
 
 /* Formulaires & Cartes personnelles */
 label{display:block;font-weight:700;margin:14px 0 6px}
@@ -150,6 +176,14 @@ textarea{min-height:84px;resize:vertical}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:var(--shadow)}
 .stat b{display:block;font-family:var(--font-d);font-size:24px;line-height:1.1}.stat span{font-size:12px;color:var(--muted)}
 .center{display:flex;justify-content:center;margin-top:18px}
+.prow-btn{display:block;width:100%;padding:14px 16px;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;color:var(--ink)}
+.list li:last-child .prow-btn{border-bottom:0}
+.ph{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.ph b{font-size:15.5px;line-height:1.3}
+.ph .ppct{font-family:var(--font-d);font-weight:700;font-size:16px;color:var(--brand);white-space:nowrap}
+.pbar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:8px}
+.pbar>i{display:block;height:100%;border-radius:99px;background:var(--c,var(--brand));width:var(--p,0%);transition:width .35s ease}
+.pmeta{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:12.5px;color:var(--muted)}
 .shead{font-size:13px;font-weight:700;color:var(--muted);margin:24px 4px 0}
 .group{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
 .srow{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);min-height:58px;flex-wrap:wrap}
@@ -165,11 +199,17 @@ textarea{min-height:84px;resize:vertical}
 .drawer.ouvert{transform:translateX(0)}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .acc-section{margin-top:12px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface2)}
-.acc-btn{width:100%;min-height:48px;padding:12px 14px;background:none;border:0;font-weight:700;font-size:14.5px;text-align:left;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+.acc-btn{width:100%;min-height:52px;padding:11px 14px;background:none;border:0;font-weight:700;font-size:14.5px;text-align:left;display:flex;flex-direction:column;align-items:stretch;gap:7px;color:var(--ink)}
+.acc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%}
+.acc-meta{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.sec-pbar{display:block;width:100%;height:5px;border-radius:99px;background:var(--line);overflow:hidden}
+.sec-pbar>i{display:block;height:100%;border-radius:99px;transition:width .35s ease}
 .acc-content{display:none;padding:6px 10px 12px;background:var(--surface)}
 .acc-section.on .acc-content{display:block}
-.cours-item{padding:8px 10px;border-radius:10px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;min-height:44px}
+.cours-item{padding:8px 10px;border-radius:10px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px;min-height:46px}
 .cours-item.actif{background:var(--brand-soft);color:var(--brand)}
+.cours-info{flex:1;min-width:0}
+.cours-sub{display:block;font-size:11.5px;font-weight:600;color:var(--muted);margin-top:2px}
 .sec-ia-row{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 
 /* Landing Page */
@@ -194,8 +234,12 @@ textarea{min-height:84px;resize:vertical}
 .barre-apify{display:flex;gap:8px;margin-top:12px}.barre-apify input{flex:1;border:2px solid var(--line);border-radius:12px;padding:10px 14px;min-height:46px}
 .ia-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .ia-chips button{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;min-height:36px}
-.ia-box{margin-top:14px;font-size:14.5px;max-height:260px;overflow:auto;line-height:1.55;padding:12px;border-radius:14px;background:var(--surface2);border:1px solid var(--line)}
+.ia-box{margin-top:14px;font-size:14.5px;max-height:300px;overflow:auto;line-height:1.55;padding:12px;border-radius:14px;background:var(--surface2);border:1px solid var(--line)}
+.ia-msg{padding:10px 12px;border-radius:12px;margin-bottom:8px;background:var(--surface);border:1px solid var(--line)}
+.ia-msg.user{background:var(--brand-soft);border-color:var(--brand);font-weight:600}
+.ia-msg-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
 .ia-local-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
+input[type=date]{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 10px;min-height:42px;font:inherit;color:var(--ink)}
 .pm{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
 .pm-l{flex:1}.pm-n{font-weight:700}.pm-v{font-family:monospace;font-size:13px;color:var(--muted)}
 
@@ -205,7 +249,7 @@ textarea{min-height:84px;resize:vertical}
 @keyframes spin{to{transform:rotate(360deg)}}
 .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:60;max-width:92%;background:var(--ink);color:var(--surface);padding:11px 16px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:var(--shadow);text-align:center}
 </style>
-</head>
+<script src="/_aistudio-iframe.js?v=29045eb3"></script></head>
 <body>
 <div class="wrap" id="app">
   <div class="loader-box" style="margin-top:40px">
@@ -322,6 +366,7 @@ window.APIFY_CONFIG = {
   tokenApi: "", // Laisser vide en production Vercel (la clé reste sur Vercel Env APIFY_TOKEN)
   acteurId: "apify~rag-web-browser",
   interroger: async function(question, contexte, signal) {
+    // 1. Priorité au proxy sécurisé Vercel (/api/apify)
     try {
       var repProxy = await fetch(this.endpointProxy, {
         method: "POST",
@@ -350,6 +395,7 @@ window.APIFY_CONFIG = {
       }
     }
 
+    // 2. Fallback optionnel uniquement si un token local est défini en test
     if (!this.tokenApi) {
       return {
         ok: false,
@@ -459,15 +505,20 @@ window.SECTIONS_OFFICIELLES = [
   var KEY = 'recto:v1';
   var AI_CACHE_KEY = 'recto:ai_cache:v1';
   var AI_CACHE_MAX = 40;
-  var AI_CACHE_TTL = 7 * 86400000;
-  var MAX_COURSES_IN_MEM = 3;
+  var AI_CACHE_TTL = 7 * 86400000; // 7 jours
+  var MAX_COURSES_IN_MEM = 3; // Évite de saturer la RAM mobile quand beaucoup de cours seront ajoutés
   var MIX_SIZE = 15;
   var memory = null;
   var deferredInstallPrompt = null;
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  var isIOS = /iphone|ipad|ipod/.test((window.navigator.userAgent || '').toLowerCase());
   var toastTimer = null;
 
+  /* --- Cache LRU en mémoire pour les cours --- */
   var courseCache = new Map();
   var loadingPromises = {};
+  var BASE_COURSE_TOTALS = { geo: 350, chimie: 1200 };
+  var courseTotalsMem = {};
 
   function getCourseMeta(id){
     for (var i = 0; i < window.SECTIONS_OFFICIELLES.length; i++) {
@@ -485,15 +536,38 @@ window.SECTIONS_OFFICIELLES = [
     return id + '_data.js';
   }
 
+  function countCourseQuestions(norm){
+    var totalQ = 0;
+    (norm && norm.parts || []).forEach(function(p){
+      (p.ch || []).forEach(function(ch){
+        (ch.ls || []).forEach(function(l){
+          totalQ += (l.c || []).length;
+        });
+      });
+    });
+    return totalQ;
+  }
+
   function putCourseInCache(rawCourse){
     var norm = window.RECTO_NORMALIZE_COURSE(rawCourse);
     if (!norm) return null;
     if (courseCache.has(norm.id)) courseCache.delete(norm.id);
     courseCache.set(norm.id, norm);
+    var totalQ = countCourseQuestions(norm);
+    courseTotalsMem[norm.id] = totalQ;
+    if (typeof data !== 'undefined' && data) {
+      if (!data.courseTotalsCache) data.courseTotalsCache = {};
+      if (data.courseTotalsCache[norm.id] !== totalQ) {
+        data.courseTotalsCache[norm.id] = totalQ;
+        save();
+      }
+    }
+    // Garder au maximum MAX_COURSES_IN_MEM cours lourds en RAM (sans évincer le cours actif)
+    var activeId = (typeof data !== 'undefined' && data) ? data.course : 'geo';
     if (courseCache.size > MAX_COURSES_IN_MEM) {
       var keys = Array.from(courseCache.keys());
       for (var i = 0; i < keys.length && courseCache.size > MAX_COURSES_IN_MEM; i++) {
-        if (keys[i] !== data.course) courseCache.delete(keys[i]);
+        if (keys[i] !== activeId) courseCache.delete(keys[i]);
       }
     }
     window.RECTO_COURSES = Array.from(courseCache.values());
@@ -504,6 +578,7 @@ window.SECTIONS_OFFICIELLES = [
     return putCourseInCache(cours);
   };
 
+  // Absorber d'éventuels cours déjà enregistrés avant le démarrage
   (window.RECTO_COURSES || []).forEach(putCourseInCache);
 
   function chargerCours(id){
@@ -536,6 +611,7 @@ window.SECTIONS_OFFICIELLES = [
         clearTimeout(timer);
         delete loadingPromises[id];
 
+        // Support rétrocompatible si un fichier utilise window.COURSE_GEO ou window.RECTO_COURSES.push
         (window.RECTO_COURSES || []).forEach(putCourseInCache);
         if (id === 'geo' && !courseCache.has('geo') && window.COURSE_GEO) {
           putCourseInCache({
@@ -548,7 +624,12 @@ window.SECTIONS_OFFICIELLES = [
           });
         }
         var loaded = courseCache.get(id);
-        if (loaded) resolve(loaded);
+        if (loaded) {
+          if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            try { navigator.serviceWorker.controller.postMessage({ type: 'CACHE_COURSE', url: './' + src }); } catch(_){}
+          }
+          resolve(loaded);
+        }
         else reject(new Error("Le fichier " + src + " ne contient pas de données valides pour « " + id + " »."));
       };
 
@@ -567,14 +648,76 @@ window.SECTIONS_OFFICIELLES = [
     return loadingPromises[id];
   }
 
+  /* --- Utilitaires, Formules scientifiques & Synthèse vocale --- */
   function uid(){ return Math.random().toString(36).slice(2, 10); }
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function formatSci(s){
+    var out = esc(s);
+    // Flèches & opérateurs scientifiques
+    out = out.replace(/&lt;=&gt;|&lt;-&gt;/g, ' &#8652; ')
+      .replace(/-&gt;|=&gt;/g, ' &rarr; ')
+      .replace(/&gt;=/g, '&ge;')
+      .replace(/&lt;=/g, '&le;')
+      .replace(/!=/g, '&ne;')
+      .replace(/\+\/-/g, '&plusmn;');
+    // Exposants explicites ^(val) ou ^val (ions, puissances de 10, x^2, mol^-1)
+    out = out.replace(/\^\(([^)]+)\)/g, '<sup>$1</sup>');
+    out = out.replace(/\^([+-]?\d+[+-]?|[+-])/g, '<sup>$1</sup>');
+    out = out.replace(/([A-Za-zÀ-ÿ0-9\)])\^([a-zA-Z0-9+-]+)/g, '$1<sup>$2</sup>');
+    // Unités SI carrées et cubes (m2, km2, cm3, s2)
+    out = out.replace(/\b(km|hm|dam|dm|cm|mm|m|s)([23])\b/g, '$1<sup>$2</sup>');
+    // Couches électroniques complètes (K2 L8 M1...)
+    out = out.replace(/(?:\b[KLMNO]\d{1,2}\s+)+[KLMNO]\d{1,2}\b/g, function(seq){
+      return seq.replace(/([KLMNO])(\d{1,2})/g, '$1<sup>$2</sup>');
+    });
+    // Indices chimiques après parenthèse fermante : (OH)2, (PO4)2
+    out = out.replace(/\)(\d+)/g, ')<sub>$1</sub>');
+    // Composés chimiques complets (avec ou sans parenthèses : Ca3(PO4)2, H2SO4, Fe2O3) + molécules simples
+    out = out.replace(/\b(?:(?:[A-Z][a-z]?\d*){2,}|[A-Z][a-z]?\d+(?=\()|(?:H2|O2|N2|Cl2|Br2|I2|F2|CO2|CO3|SO2|SO3|SO4|NO2|NO3|PO4|NH3|NH4|CH4|H3O))\b/g, function(tok){
+      return tok.replace(/([A-Za-z])(\d+)/g, '$1<sub>$2</sub>');
+    });
+    // Charges d'ions collées après indice ou formule : NH4+, SO4(2-), PO4(3-)
+    out = out.replace(/(<\/sub>)([+-])(?=\s|$|[,.;:)])/g, '$1<sup>$2</sup>');
+    out = out.replace(/(<\/sub>)\((\d+[+-]|[+-])\)/g, '$1<sup>$2</sup>');
+    return '<span class="sci">' + out + '</span>';
+  }
   function load(){ try { var r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch(e){} return memory; }
   function save(){ memory = data; try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} }
   function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
   function plural(n, one, many){ return n + ' ' + (n > 1 ? many : one); }
   function colorVar(i){ return 'var(--t' + (i % 4 + 1) + ')'; }
   function label(l){ return /^N/.test(l.n) ? l.t : l.n + '. ' + l.t; }
+  var speechActive = false;
+  function stopSpeech(){
+    try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch(_){}
+    speechActive = false;
+  }
+  function parlerTexte(txt){
+    if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') {
+      afficherToast("Lecture vocale non supportée sur ce navigateur.");
+      return;
+    }
+    if (speechActive) {
+      stopSpeech();
+      afficherToast("Lecture vocale arrêtée.");
+      return;
+    }
+    try {
+      window.speechSynthesis.cancel();
+      var clean = String(txt || '').replace(/->/g, ' donne ').replace(/<=>/g, ' équilibre ').replace(/\s+/g, ' ').trim();
+      var u = new SpeechSynthesisUtterance(clean.slice(0, 2400));
+      u.lang = 'fr-FR';
+      u.rate = 0.96;
+      speechActive = true;
+      u.onend = function(){ speechActive = false; };
+      u.onerror = function(){ speechActive = false; };
+      window.speechSynthesis.speak(u);
+      afficherToast("Lecture vocale en cours (touchez à nouveau pour arrêter).");
+    } catch(e) {
+      speechActive = false;
+      afficherToast("Impossible de démarrer la lecture vocale.");
+    }
+  }
 
   function afficherToast(msg){
     var old = document.getElementById('rectoToast');
@@ -633,9 +776,20 @@ window.SECTIONS_OFFICIELLES = [
     return s.slice(0, 4) + "-" + s.slice(4);
   }
 
-  var data = load() || { pro: false, decks: [], prog: {}, course: "geo", theme: "auto", fs: 0, devId: null, aiFirstUsed: null };
+  /* --- État persistant + Migration des clés de progression --- */
+  var data = load() || { pro: false, decks: [], prog: {}, courseTotalsCache: {}, course: "geo", theme: "auto", fs: 0, devId: null, aiFirstUsed: null };
   if (!data.prog) data.prog = {};
   if (!data.decks) data.decks = [];
+  if (!data.courseTotalsCache) data.courseTotalsCache = {};
+  if (!data.mistakes) data.mistakes = {};
+  if (!data.srs) data.srs = {};
+  if (!data.favs) data.favs = {};
+  if (!data.bonusUnlocked) data.bonusUnlocked = {};
+  if (!data.streak) data.streak = { count: 0, lastDay: '', todayCount: 0, goal: 15 };
+  if (!data.examDate) data.examDate = '2027-06-21';
+  Object.keys(courseTotalsMem).forEach(function(cid){
+    data.courseTotalsCache[cid] = courseTotalsMem[cid];
+  });
   if (!data.devId) { data.devId = genererIdAppareil(); save(); }
 
   function migrerProgressionV2(){
@@ -652,18 +806,104 @@ window.SECTIONS_OFFICIELLES = [
   }
   migrerProgressionV2();
 
+  function todayStr(offsetDays){
+    var d = new Date(Date.now() + (offsetDays || 0) * 86400000);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function getTodayCount(){
+    var tod = todayStr(0);
+    if (data.streak.lastDay === tod) return data.streak.todayCount || 0;
+    return 0;
+  }
+  function getStreakCount(){
+    var tod = todayStr(0), yest = todayStr(-1);
+    if (data.streak.lastDay === tod || data.streak.lastDay === yest) return data.streak.count || 0;
+    return 0;
+  }
+  function daysUntilExam(){
+    var target = new Date((data.examDate || '2027-06-21') + 'T08:00:00');
+    if (isNaN(target.getTime())) return 0;
+    return Math.max(0, Math.ceil((target.getTime() - Date.now()) / 86400000));
+  }
   function progKey(courseId, lessonId, idx){
     return courseId + ':' + lessonId + ':' + idx;
   }
   function isKnown(courseId, lessonId, idx){
     return !!(data.prog[progKey(courseId, lessonId, idx)] || data.prog[lessonId + ':' + idx]);
   }
+  function isFav(key){ return !!(data.favs && data.favs[key]); }
+  function toggleFav(key){
+    if (data.favs[key]) delete data.favs[key];
+    else data.favs[key] = 1;
+    save();
+  }
   function markKnown(key, val){
-    if (val) data.prog[key] = 1;
-    else delete data.prog[key];
+    var now = Date.now();
+    var tod = todayStr(0), yest = todayStr(-1);
+    if (data.streak.lastDay !== tod) {
+      data.streak.count = (data.streak.lastDay === yest) ? ((data.streak.count || 0) + 1) : 1;
+      data.streak.lastDay = tod;
+      data.streak.todayCount = 0;
+    }
+    data.streak.todayCount = (data.streak.todayCount || 0) + 1;
+
+    if (val) {
+      data.prog[key] = 1;
+      if (data.mistakes[key]) delete data.mistakes[key];
+      var curBox = (data.srs[key] && data.srs[key].box) ? data.srs[key].box : 0;
+      var nextBox = Math.min(4, curBox + 1);
+      var days = [1, 3, 7, 14][nextBox - 1];
+      data.srs[key] = { box: nextBox, nextAt: now + days * 86400000 };
+    } else {
+      delete data.prog[key];
+      data.mistakes[key] = { count: ((data.mistakes[key] && data.mistakes[key].count) || 0) + 1, lastWrong: now };
+      data.srs[key] = { box: 1, nextAt: now + 86400000 };
+    }
     save();
   }
 
+  function courseProgressStats(courseId){
+    var k = 0, t = 0;
+    if (courseCache.has(courseId)) {
+      var c = courseCache.get(courseId);
+      (c.parts || []).forEach(function(p){
+        (p.ch || []).forEach(function(ch){
+          (ch.ls || []).forEach(function(l){
+            var items = l.c || [];
+            t += items.length;
+            items.forEach(function(_, i){ if (isKnown(courseId, l.id, i)) k++; });
+          });
+        });
+      });
+    } else {
+      var prefix = courseId + ':';
+      Object.keys(data.prog).forEach(function(pk){
+        if (pk.indexOf(prefix) === 0 && data.prog[pk]) k++;
+      });
+      t = courseTotalsMem[courseId] || (data.courseTotalsCache && data.courseTotalsCache[courseId]) || BASE_COURSE_TOTALS[courseId] || 0;
+      if (t > 0 && k > t) k = t;
+    }
+    return { k: k, t: t, pct: t ? Math.round(k / t * 100) : 0 };
+  }
+
+  function sectionProgressStats(sec){
+    var k = 0, t = 0, coursDispo = 0;
+    (sec.cours || []).forEach(function(c){
+      if (c.dispo || courseCache.has(c.id)) coursDispo++;
+      var st = courseProgressStats(c.id);
+      k += st.k;
+      t += st.t;
+    });
+    return {
+      k: k,
+      t: t,
+      pct: t ? Math.round(k / t * 100) : 0,
+      coursDispo: coursDispo,
+      coursTotal: (sec.cours || []).length
+    };
+  }
+
+  /* --- Cache IA Multi-Niveaux (RAM + localStorage LRU/TTL) --- */
   var aiMemCache = new Map();
   function normaliserRequeteIA(q){
     return String(q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -735,6 +975,7 @@ window.SECTIONS_OFFICIELLES = [
     return hits.slice(0, 3);
   }
 
+  // Vérification de l'essai 7 jours Chat IA
   function aiEstEligible() {
     if (data.pro) return { autorise: true, message: "Accès illimité Recto Pro" };
     if (!data.aiFirstUsed) return { autorise: true, message: "Essai gratuit 7 jours (1ère recherche)" };
@@ -743,6 +984,7 @@ window.SECTIONS_OFFICIELLES = [
     return { autorise: false, message: "Période d'essai de 7 jours terminée" };
   }
 
+  /* --- Vérification sécurisée du retour MaishaPay --- */
   (function verifierRetourPaiement(){
     var paramsUrl = new URLSearchParams(window.location.search);
     if (paramsUrl.get("paiement") === "succes") {
@@ -774,9 +1016,11 @@ window.SECTIONS_OFFICIELLES = [
     view: 'landing',
     deckId: null,
     lessonId: null,
+    lessonMode: 'cards',
     modal: null,
     study: null,
     apifyState: { loading: false, query: '', answer: '', fromCache: false, localHits: [] },
+    chatHistory: [],
     chatContext: null,
     msg: null,
     secOuverte: 0,
@@ -785,6 +1029,7 @@ window.SECTIONS_OFFICIELLES = [
     searchQuery: ''
   };
   var activeAiAbort = null;
+  var examTimerId = null;
   var app = document.getElementById('app');
 
   function curCourse(){
@@ -808,10 +1053,37 @@ window.SECTIONS_OFFICIELLES = [
     return idx;
   }
 
-  function unlocked(chap){ return chap.free || data.pro; }
-  function lessonItems(l){
+  function unlocked(chap){
     var cid = curCourse().id;
-    return l.c.map(function(c, i){ return { k: progKey(cid, l.id, i), q: c.q, a: c.a, ok: c.ok, ko: c.ko }; });
+    return !!(chap.free || data.pro || (data.bonusUnlocked && data.bonusUnlocked[cid] === chap.t));
+  }
+  function lessonItems(l, chapTitle){
+    var cid = curCourse().id;
+    return l.c.map(function(c, i){ return { k: progKey(cid, l.id, i), chapTitle: chapTitle || '', lessonTitle: label(l), q: c.q, a: c.a, ok: c.ok, ko: c.ko }; });
+  }
+  function unlockedCourseItems(){
+    var items = [], c = curCourse();
+    (c.parts || []).forEach(function(p){
+      (p.ch || []).forEach(function(chap){
+        if (unlocked(chap)) {
+          (chap.ls || []).forEach(function(l){ items = items.concat(lessonItems(l, chap.t)); });
+        }
+      });
+    });
+    return items;
+  }
+  function courseMistakeItems(){
+    return unlockedCourseItems().filter(function(it){ return !!(data.mistakes && data.mistakes[it.k]); });
+  }
+  function courseSrsDueItems(){
+    var now = Date.now();
+    return unlockedCourseItems().filter(function(it){
+      var s = data.srs && data.srs[it.k];
+      return s && s.nextAt <= now;
+    });
+  }
+  function courseFavItems(){
+    return unlockedCourseItems().filter(function(it){ return isFav(it.k); });
   }
   function lessonKnown(l){
     var cid = curCourse().id, n = 0;
@@ -824,7 +1096,20 @@ window.SECTIONS_OFFICIELLES = [
     return { t: t, k: k };
   }
   function deckById(id){ return data.decks.filter(function(d){ return d.id === id; })[0]; }
+  function saveAiCardToDeck(q, a){
+    var name = 'Fiches IA Exétat';
+    var d = data.decks.filter(function(dk){ return dk.name === name; })[0];
+    if (!d) {
+      d = { id: uid(), name: name, cards: [] };
+      data.decks.unshift(d);
+    }
+    var exists = d.cards.some(function(c){ return c.q === q; });
+    if (!exists) d.cards.unshift({ id: uid(), q: q, a: a });
+    save();
+    afficherToast('Ajoutée au paquet « ' + name + ' » !');
+  }
 
+  /* VRAIES ICÔNES VECTORIELLES */
   var ICONS = {
     book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
     layers:'<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>',
@@ -885,11 +1170,17 @@ window.SECTIONS_OFFICIELLES = [
     return n;
   }
 
+  /* ================== LANDING PAGE ================== */
   function vueLanding(){
     var nbCours = totalCoursCatalogue();
-    var installBtn = deferredInstallPrompt
-      ? '<button class="btn ghost full" data-a="installerPwa" style="margin-top:10px">📲 Installer Recto sur votre écran d’accueil</button>'
-      : '';
+    var installBtn = '';
+    if (!isStandalone) {
+      if (deferredInstallPrompt) {
+        installBtn = '<button class="btn ghost full" data-a="installerPwa" style="margin-top:10px">📲 Installer Recto sur votre écran d’accueil</button>';
+      } else if (isIOS) {
+        installBtn = '<button class="btn ghost full" data-a="aideIosPwa" style="margin-top:10px">📲 Installer sur iPhone / iPad (hors-ligne)</button>';
+      }
+    }
     return '<div class="landing">' +
       '<header class="appbar">' +
         '<button class="burger" data-a="ouvrirTiroir" aria-label="Ouvrir le menu des sections">☰</button>' +
@@ -947,6 +1238,13 @@ window.SECTIONS_OFFICIELLES = [
       '<div class="ringbox">' + ringSvg(pct, 84, 8, '') + '<div class="lab">' + pct + '%</div></div></div>' +
       '<button class="btn light full" data-a="mix" style="margin-top:14px"' + (tot.t ? '' : ' disabled') + '>' + ico('shuffle', 20) + ' Révision mixte de ' + MIX_SIZE + ' cartes</button></section>';
 
+    var streak = getStreakCount(), todCount = getTodayCount(), goal = (data.streak && data.streak.goal) || 15, jRestants = daysUntilExam();
+    h += '<div class="streak-bar">' +
+      '<div class="streak-pill"><b>🔥 ' + plural(streak, 'jour', 'jours') + '</b><span>Série active</span></div>' +
+      '<div class="streak-pill"><b>🎯 ' + todCount + '/' + goal + '</b><span>Objectif du jour</span></div>' +
+      '<div class="streak-pill"><b>⏳ J-' + jRestants + '</b><span>Exétat RDC</span></div>' +
+    '</div>';
+
     var info = getCourseMeta(c.id);
     h += '<div class="ia-strip">' +
       '<div class="ia-strip-t"><b>🤖 Chat IA — ' + esc(c.name) + '</b><span>' + esc(info ? info.section : 'Assistant Exétat') + '</span></div>' +
@@ -957,11 +1255,22 @@ window.SECTIONS_OFFICIELLES = [
     if (!parts.length) {
       h += '<p class="empty" style="text-align:center;margin:24px 0;padding:24px;border:2px dashed var(--line);border-radius:18px">Ce cours est programmé mais son fichier de questions (' + esc(courseFileName(c.id)) + ') n’est pas encore déposé.</p>';
     } else {
+      var nbErr = courseMistakeItems().length;
+      var nbSrs = courseSrsDueItems().length;
+      var nbFav = courseFavItems().length;
+      h += '<div class="quick-modes">' +
+        '<button class="qmode-btn" data-a="lancerExamen"><div><b>📝 Examen blanc</b><span class="qm-sub">20 questions · 15 min</span></div><span class="qm-badge">Exétat</span></button>' +
+        '<button class="qmode-btn" data-a="lancerSrs"' + (nbSrs ? '' : ' disabled style="opacity:.6"') + '><div><b>🔁 Rappel espacé</b><span class="qm-sub">Cartes dues aujourd’hui</span></div><span class="qm-badge">' + (nbSrs || 'À jour') + '</span></button>' +
+        (nbErr ? '<button class="qmode-btn warn" data-a="lancerErreurs"><div><b>🎯 Mes erreurs</b><span class="qm-sub">À corriger en priorité</span></div><span class="qm-badge">' + nbErr + '</span></button>' : '') +
+        (nbFav ? '<button class="qmode-btn" data-a="lancerFavoris"><div><b>⭐ Mes favoris</b><span class="qm-sub">Fiches épinglées</span></div><span class="qm-badge">' + nbFav + '</span></button>' : '') +
+      '</div>';
       h += '<div class="course-tools"><input type="text" id="filtreLecons" placeholder="Filtrer une leçon de ' + esc(c.name) + '…" value="' + esc(ui.searchQuery) + '" aria-label="Filtrer les leçons"></div>';
     }
 
     var filtre = normaliserRequeteIA(ui.searchQuery);
     var totalTrouve = 0;
+    var bonusDejaUtilise = !!(data.bonusUnlocked && data.bonusUnlocked[c.id]);
+    var bonusEligible = (!data.pro && !bonusDejaUtilise && tot.k >= 10);
 
     parts.forEach(function(p, pi){
       var partHtml = '';
@@ -973,7 +1282,13 @@ window.SECTIONS_OFFICIELLES = [
         });
         if (!lsFiltrees.length) return;
         totalTrouve += lsFiltrees.length;
-        partHtml += '<div class="chap"><h3>' + esc(chap.t) + '</h3>' + (ouvert ? '' : '<span class="chip mini">Pro</span>') + '</div><ul class="list">';
+        var estBonus = (!chap.free && !data.pro && ouvert);
+        partHtml += '<div class="chap"><h3>' + esc(chap.t) + '</h3>' + (ouvert ? (estBonus ? '<span class="chip mini">Bonus débloqué</span>' : '') : '<span class="chip mini">Pro</span>') + '</div>';
+        if (!ouvert && bonusEligible) {
+          partHtml += '<div class="bonus-banner"><span><b>🎁 Défi 10 cartes réussi !</b> Débloquez ce chapitre gratuitement.</span>' +
+            '<button class="btn small" data-a="debloquerBonus" data-id="' + esc(chap.t) + '" style="min-height:38px;padding:0 12px;font-size:13px">Débloquer</button></div>';
+        }
+        partHtml += '<ul class="list">';
         lsFiltrees.forEach(function(l){
           var k = lessonKnown(l), pc = l.c.length ? Math.round(k / l.c.length * 100) : 0;
           partHtml += '<li class="lrow" style="--c:' + colorVar(pi) + '">' +
@@ -1005,14 +1320,40 @@ window.SECTIONS_OFFICIELLES = [
     var h = subbar(['tab', 'home'], label(l));
     h += '<section style="margin-top:18px"><p class="sub" style="margin:0">' + esc(rec.chap.t) + '</p>' +
       '<div class="bar" style="--p:' + Math.round(k / l.c.length * 100) + '%"><i></i></div><p class="sub" style="margin:0">' + plural(l.c.length, 'carte', 'cartes') + ', ' + k + ' acquises</p>' +
-      '<p><button class="btn full" data-a="reviserLecon" data-id="' + esc(l.id) + '">' + ico('play', 18) + ' Réviser cette leçon</button></p>' +
-      '<ul class="cards">';
-    l.c.forEach(function(c, i){
-      h += '<li><div><div class="q">' + esc(c.q) + '</div><div class="a">' + esc(c.a) + '</div></div>' +
-        (isKnown(cid, l.id, i) ? '<span class="ok">Acquise</span>' : '') + '</li>';
-    });
-    h += '</ul></section>';
-    return h;
+      '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">' +
+        '<button class="btn" style="flex:1;min-width:160px" data-a="reviserLecon" data-id="' + esc(l.id) + '">' + ico('play', 18) + ' Réviser cette leçon</button>' +
+        '<button class="btn ghost small" data-a="toggleLessonMode">' + (ui.lessonMode === 'synth' ? '📋 Voir les questions' : '📖 Fiche synthèse') + '</button>' +
+        '<button class="btn ghost small" data-a="ecouterLecon" data-id="' + esc(l.id) + '">🔊 Écouter</button>' +
+      '</div>';
+
+    if (ui.lessonMode === 'synth') {
+      h += '<div class="synth-sheet">';
+      l.c.forEach(function(c, i){
+        var fk = progKey(cid, l.id, i);
+        h += '<article class="synth-card">' +
+          '<div class="qhead"><b style="font-size:13px;color:var(--brand)">Point clé #' + (i + 1) + '</b>' +
+          '<button class="qtool' + (isFav(fk) ? ' fav' : '') + '" data-a="toggleFav" data-id="' + esc(fk) + '" aria-label="Favori">' + (isFav(fk) ? '★' : '☆') + '</button></div>' +
+          '<div style="font-weight:700">' + formatSci(c.q) + '</div>' +
+          '<div style="margin-top:6px;color:var(--muted)">' + formatSci(c.a) + '</div>' +
+        '</article>';
+      });
+      h += '</div>';
+    } else {
+      h += '<ul class="cards">';
+      l.c.forEach(function(c, i){
+        var fk = progKey(cid, l.id, i);
+        h += '<li><div style="flex:1;min-width:0"><div class="q">' + formatSci(c.q) + '</div><div class="a">' + formatSci(c.a) + '</div></div>' +
+          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none">' +
+            (isKnown(cid, l.id, i) ? '<span class="ok">Acquise</span>' : '') +
+            '<div style="display:flex;gap:4px">' +
+              '<button class="qtool" data-a="ecouterTxt" data-id="' + esc(fk) + '" aria-label="Écouter">🔊</button>' +
+              '<button class="qtool' + (isFav(fk) ? ' fav' : '') + '" data-a="toggleFav" data-id="' + esc(fk) + '" aria-label="Favori">' + (isFav(fk) ? '★' : '☆') + '</button>' +
+            '</div>' +
+          '</div></li>';
+      });
+      h += '</ul>';
+    }
+    return h + '</section>';
   }
 
   function vueDecks(){
@@ -1042,7 +1383,7 @@ window.SECTIONS_OFFICIELLES = [
     else {
       h += '<ul class="cards">';
       d.cards.forEach(function(c){
-        h += '<li><div><div class="q">' + esc(c.q) + '</div><div class="a">' + esc(c.a) + '</div></div>' +
+        h += '<li><div><div class="q">' + formatSci(c.q) + '</div><div class="a">' + formatSci(c.a) + '</div></div>' +
           '<button class="link danger" data-a="delCard" data-id="' + esc(c.id) + '">Supprimer</button></li>';
       });
       h += '</ul>';
@@ -1055,10 +1396,35 @@ window.SECTIONS_OFFICIELLES = [
   }
 
   function vueProgression(){
-    var tot = courseTotals(), pct = tot.t ? Math.round(tot.k / tot.t * 100) : 0;
-    return '<header class="pagehead"><h1>Ma progression</h1><p class="sub">Vos cartes acquises en ' + esc(curCourse().name) + '.</p></header>' +
+    var tot = courseProgressStats(curCourse().id), pct = tot.pct;
+    var globalK = 0, globalT = 0;
+    var sectionsHtml = window.SECTIONS_OFFICIELLES.map(function(sec, idx){
+      var sp = sectionProgressStats(sec);
+      globalK += sp.k;
+      globalT += sp.t;
+      var rightTxt = sp.t ? (sp.pct + '%') : 'Bientôt';
+      var detailTxt = sp.t
+        ? (sp.k + ' / ' + sp.t + ' cartes acquises')
+        : 'Fichiers de cours à venir';
+      return '<li><button class="prow-btn" data-a="ouvrirSection" data-id="' + idx + '">' +
+        '<div class="ph"><b>' + esc(sec.section) + '</b><span class="ppct">' + rightTxt + '</span></div>' +
+        '<div class="pbar" style="--c:' + colorVar(idx) + ';--p:' + sp.pct + '%"><i></i></div>' +
+        '<div class="pmeta"><span>' + detailTxt + '</span><span>' + sp.coursDispo + '/' + sp.coursTotal + ' matières prêtes</span></div>' +
+      '</button></li>';
+    }).join('');
+    var globalPct = globalT ? Math.round(globalK / globalT * 100) : 0;
+
+    return '<header class="pagehead"><h1>Ma progression</h1><p class="sub">Vos cartes acquises en ' + esc(curCourse().name) + ' et dans les 8 sections officielles.</p></header>' +
       '<div class="center"><div class="ringbox">' + ringSvg(pct, 140, 12, 'ring-dark') + '<div class="lab" style="font-size:30px">' + pct + '%</div></div></div>' +
-      '<div class="stats"><div class="stat"><b>' + tot.k + '</b><span>acquises</span></div><div class="stat"><b>' + (tot.t - tot.k) + '</b><span>restantes</span></div><div class="stat"><b>' + tot.t + '</b><span>total</span></div></div>';
+      '<div class="stats"><div class="stat"><b>' + tot.k + '</b><span>acquises</span></div><div class="stat"><b>' + (tot.t - tot.k) + '</b><span>restantes</span></div><div class="stat"><b>' + tot.t + '</b><span>total</span></div></div>' +
+      '<div class="streak-bar" style="margin-top:14px">' +
+        '<div class="streak-pill"><b>🔥 ' + plural(getStreakCount(), 'jour', 'jours') + '</b><span>Série</span></div>' +
+        '<div class="streak-pill"><b>🎯 ' + getTodayCount() + '/' + ((data.streak && data.streak.goal) || 15) + '</b><span>Aujourd’hui</span></div>' +
+        '<div class="streak-pill"><b>⏳ J-' + daysUntilExam() + '</b><span>Exétat</span></div>' +
+      '</div>' +
+      '<section style="margin-top:24px"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px">' +
+      '<h2>Progression par section</h2><span class="sub" style="margin:0;font-weight:700;color:var(--brand)">Global : ' + globalPct + '% (' + globalK + '/' + globalT + ')</span></div>' +
+      '<ul class="list">' + sectionsHtml + '</ul></section>';
   }
 
   function vueReglages(){
@@ -1070,17 +1436,23 @@ window.SECTIONS_OFFICIELLES = [
     var h = '<header class="pagehead"><h1>Réglages</h1></header>' +
       '<div class="shead">Matière</div><div class="group"><div class="srow"><div class="st"><b>Cours actuel</b><span>' + esc(curCourse().name) + '</span></div>' +
       '<button class="btn small" data-a="ouvrirTiroir">Changer</button></div></div>' +
+      '<div class="shead">Objectif & Examen d’État</div><div class="group">' +
+      '<div class="srow"><div class="st"><b>Objectif quotidien</b><span>Nombre de cartes par jour</span></div>' + seg('setGoal', String((data.streak && data.streak.goal) || 15), [['10','10'],['15','15'],['25','25'],['40','40']]) + '</div>' +
+      '<div class="srow"><div class="st"><b>Date de l’Exétat</b><span>Pour le compte à rebours</span></div><input type="date" id="champDateExetat" value="' + esc(data.examDate || '2027-06-21') + '" aria-label="Date de l’Exétat"></div></div>' +
       '<div class="shead">Apparence</div><div class="group">' +
       '<div class="srow"><div class="st"><b>Thème</b><span>Clair, sombre ou automatique</span></div>' + seg('theme', data.theme || 'auto', [['auto', 'Auto'], ['light', 'Clair'], ['dark', 'Sombre']]) + '</div>' +
       '<div class="srow"><div class="st"><b>Taille du texte</b><span>Pour lire plus confortablement</span></div>' + seg('fs', String(data.fs || 0), [['0', 'Normal'], ['1', 'Grand'], ['2', 'Très grand']]) + '</div></div>' +
       '<div class="shead">Compte</div><div class="group"><div class="srow"><div class="st"><b>Statut</b><span>' + (data.pro ? 'Recto Pro à vie activé' : 'Version gratuite (Chapitres 1 ouverts)') + '</span></div>' +
       '<button class="btn small' + (data.pro ? ' ghost' : '') + '" data-a="modalPro">' + (data.pro ? 'Mon Compte' : 'Passer à Pro') + '</button></div></div>' +
+      '<div class="shead">Sauvegarde & Transfert (hors-ligne)</div><div class="group">' +
+      '<div class="srow"><div class="st"><b>Exporter ma progression</b><span>Conserver cartes, favoris et paquets (.json)</span></div><button class="btn small ghost" data-a="exporterSauvegarde">Exporter</button></div>' +
+      '<div class="srow"><div class="st"><b>Importer une sauvegarde</b><span>Restaurer depuis un fichier .json</span></div><label class="btn small ghost" style="margin:0;cursor:pointer">Importer<input type="file" id="importSauvegarde" accept=".json,application/json" style="display:none"></label></div></div>' +
       '<div class="shead">ID de cet appareil</div><div class="group"><div class="srow"><div class="st"><b>Identifiant unique</b><span>' + esc(data.devId) + '</span></div>' +
       '<button class="btn small ghost" data-a="copierId">Copier</button></div></div>';
 
-    if (deferredInstallPrompt) {
+    if (!isStandalone && (deferredInstallPrompt || isIOS)) {
       h += '<div class="shead">Application hors-ligne</div><div class="group"><div class="srow"><div class="st"><b>Installer Recto</b><span>Accès direct sans navigateur</span></div>' +
-        '<button class="btn small" data-a="installerPwa">Installer</button></div></div>';
+        '<button class="btn small" data-a="' + (deferredInstallPrompt ? 'installerPwa' : 'aideIosPwa') + '">Installer</button></div></div>';
     }
 
     h += '<div class="shead">Performance & Cache</div><div class="group"><div class="srow"><div class="st"><b>Cache du Chat IA</b><span>Vider les réponses IA mémorisées</span></div>' +
@@ -1099,8 +1471,61 @@ window.SECTIONS_OFFICIELLES = [
     return s.cur;
   }
 
+  function formatChrono(sec){
+    sec = Math.max(0, Math.floor(sec || 0));
+    var m = Math.floor(sec / 60), r = sec % 60;
+    return String(m).padStart(2, '0') + ':' + String(r).padStart(2, '0');
+  }
+
   function vueStudy(){
     var s = ui.study;
+    if (s.mode === 'exam') {
+      var chronoHtml = !s.finished
+        ? '<span id="examTimer" class="timer-pill' + (s.secsLeft <= 60 ? ' low' : '') + '">⏱ ' + formatChrono(s.secsLeft) + '</span>'
+        : '';
+      var h = '<header class="subbar"><button class="iconbtn" data-a="quit" aria-label="Quitter l’examen">' + ico('back', 20) + '</button>' +
+        '<h1 class="sb-t">' + esc(s.title) + '</h1>' + chronoHtml + '</header>';
+      if (s.finished) {
+        var examPct = s.total ? Math.round(s.known / s.total * 100) : 0;
+        var reussi = examPct >= 50;
+        var chapsRates = {};
+        (s.results || []).forEach(function(r){ if (!r.good && r.chap) chapsRates[r.chap] = (chapsRates[r.chap] || 0) + 1; });
+        var chapsKeys = Object.keys(chapsRates);
+        h += '<div class="result"><h2>Bulletin Examen Blanc Exétat</h2><div class="big" style="color:' + (reussi ? 'var(--good)' : 'var(--bad)') + '">' + examPct + ' %</div>' +
+          '<p class="sub"><b>' + s.known + ' / ' + s.total + '</b> bonnes réponses · ' + (reussi ? '✅ Seuil de réussite Exétat atteint' : '⚠️ Sous les 50 % — À renforcer') + '</p>';
+        if (chapsKeys.length) {
+          h += '<div class="pub-ia" style="text-align:left"><b>Chapitres à retravailler en priorité :</b><ul style="margin:6px 0 0;padding-left:18px">' +
+            chapsKeys.map(function(ch){ return '<li>' + esc(ch) + ' (' + chapsRates[ch] + ' erreur' + (chapsRates[ch] > 1 ? 's' : '') + ')</li>'; }).join('') +
+          '</ul></div>';
+        }
+        h += '<div class="exam-recap">' + (s.results || []).map(function(r, idx){
+          return '<div class="exam-item ' + (r.good ? 'good' : 'bad') + '">' +
+            '<div style="font-size:12px;font-weight:700;color:' + (r.good ? 'var(--good)' : 'var(--bad)') + '">Question ' + (idx + 1) + ' · ' + (r.good ? 'Correcte' : 'À revoir') + '</div>' +
+            '<div style="font-weight:700;margin-top:4px">' + formatSci(r.q) + '</div>' +
+            '<div style="margin-top:6px;font-size:14px;color:var(--muted)">' + formatSci(r.a) + '</div>' +
+          '</div>';
+        }).join('') + '</div>' +
+          '<button class="btn full" data-a="lancerExamen" style="margin-top:16px">Nouvel examen blanc</button>' +
+          '<button class="btn ghost full" data-a="quit" style="margin-top:8px">Retour au programme</button></div>';
+        return h;
+      }
+      var ce = s.queue[s.idx], pe = Math.round(s.idx / s.total * 100);
+      var qe = curQ(s), multiE = ce.ok && ce.ok.length > 1;
+      h += '<div class="bar" style="--p:' + pe + '%"><i></i></div><p class="sub" style="margin:0">Question ' + (s.idx + 1) + ' sur ' + s.total + '</p>' +
+        '<div class="qcard"><div class="qhead"><span class="side" style="font-size:13px;color:var(--muted)">Conditions d’examen</span>' +
+        '<div class="qtools"><button class="qtool' + (isFav(ce.k) ? ' fav' : '') + '" data-a="toggleFav" data-id="' + esc(ce.k) + '" aria-label="Favori">' + (isFav(ce.k) ? '★' : '☆') + '</button></div></div>' +
+        '<p class="qtxt">' + formatSci(ce.q) + '</p></div>' +
+        '<p class="hint">' + (multiE ? 'Cochez toutes les assertions exactes.' : 'Cochez votre réponse.') + '</p>' +
+        '<div class="opts">';
+      qe.opts.forEach(function(o, i){
+        h += '<button class="opt' + (qe.sel[i] ? ' sel' : '') + '" data-a="opt" data-id="' + i + '"><span class="box"></span><span class="otxt">' + formatSci(o.t) + '</span></button>';
+      });
+      h += '</div>' +
+        '<button class="btn full" data-a="examSuivante" style="margin-top:16px">' + (s.idx + 1 >= s.total ? 'Terminer et corriger' : 'Valider et passer à la suivante') + '</button>' +
+        '<button class="link" data-a="examTerminer" style="width:100%;text-align:center">Terminer l’examen maintenant</button>';
+      return h;
+    }
+
     var h = subbar(['quit'], s.title);
     if (s.idx >= s.queue.length) {
       h += '<div class="result"><h2>Session terminée</h2><div class="big">' + s.known + '/' + s.total + '</div>' +
@@ -1113,7 +1538,10 @@ window.SECTIONS_OFFICIELLES = [
     if (c.ok && c.ok.length) {
       var q = curQ(s), multi = c.ok.length > 1;
       h += '<div class="bar" style="--p:' + p + '%"><i></i></div><p class="sub" style="margin:0">' + s.known + ' sur ' + s.total + ' acquises</p>' +
-        '<div class="qcard"><span class="side" style="font-size:14px;color:var(--muted)">Question</span><p class="qtxt">' + esc(c.q) + '</p></div>' +
+        '<div class="qcard"><div class="qhead"><span class="side" style="font-size:14px;color:var(--muted)">Question</span>' +
+        '<div class="qtools"><button class="qtool" data-a="ecouterCarte" aria-label="Écouter la question">🔊</button>' +
+        '<button class="qtool' + (isFav(c.k) ? ' fav' : '') + '" data-a="toggleFav" data-id="' + esc(c.k) + '" aria-label="Favori">' + (isFav(c.k) ? '★' : '☆') + '</button></div></div>' +
+        '<p class="qtxt">' + formatSci(c.q) + '</p></div>' +
         '<p class="hint">' + (multi ? 'Cochez toutes les assertions exactes.' : 'Cochez la bonne assertion.') + '</p>' +
         '<div class="opts">';
       q.opts.forEach(function(o, i){
@@ -1122,7 +1550,7 @@ window.SECTIONS_OFFICIELLES = [
           if (o.ok) cls += ' good'; else if (on) cls += ' bad';
         } else if (on) cls += ' sel';
         h += '<button class="' + cls + '" data-a="opt" data-id="' + i + '"' + (q.done ? ' disabled' : '') + '>' +
-          '<span class="box"></span><span class="otxt">' + esc(o.t) + '</span></button>';
+          '<span class="box"></span><span class="otxt">' + formatSci(o.t) + '</span></button>';
       });
       h += '</div>';
       if (!q.done) {
@@ -1130,16 +1558,20 @@ window.SECTIONS_OFFICIELLES = [
           '<button class="link" data-a="idk" style="width:100%;text-align:center">Je ne sais pas</button>';
       } else {
         h += '<div class="fb ' + (q.good ? 'good' : 'bad') + '">' + (q.good ? 'Bonne réponse !' : 'À revoir') + '</div>' +
-          '<div class="learn"><b>Synthèse :</b><p style="margin:6px 0 0">' + esc(c.a) + '</p></div>' +
+          '<div class="learn"><div class="qhead"><b>Synthèse :</b><button class="qtool" data-a="ecouterSynthese" aria-label="Écouter la synthèse">🔊</button></div><p style="margin:6px 0 0">' + formatSci(c.a) + '</p></div>' +
           '<button class="btn full" data-a="suivante" style="margin-top:14px">Question suivante</button>';
       }
       return h;
     }
 
     h += '<div class="bar" style="--p:' + p + '%"><i></i></div><p class="sub" style="margin:0">' + s.known + ' sur ' + s.total + ' acquises</p>' +
+      '<div style="display:flex;justify-content:flex-end;gap:6px;margin-top:10px">' +
+        '<button class="qtool" data-a="ecouterCarte" aria-label="Écouter">🔊 Écouter</button>' +
+        '<button class="qtool' + (isFav(c.k) ? ' fav' : '') + '" data-a="toggleFav" data-id="' + esc(c.k) + '" aria-label="Favori">' + (isFav(c.k) ? '★ Favori' : '☆ Favori') + '</button>' +
+      '</div>' +
       '<div class="scene"><button class="flip' + (s.flipped ? ' is-flipped' : '') + '" data-a="flip">' +
-        '<span class="face front"><span class="eyebrow" style="color:var(--muted)">Question</span><span class="qtxt">' + esc(c.q) + '</span></span>' +
-        '<span class="face back"><span class="eyebrow">Réponse</span><span class="txt">' + esc(c.a) + '</span></span>' +
+        '<span class="face front"><span class="eyebrow" style="color:var(--muted)">Question</span><span class="qtxt">' + formatSci(c.q) + '</span></span>' +
+        '<span class="face back"><span class="eyebrow">Réponse</span><span class="txt">' + formatSci(c.a) + '</span></span>' +
       '</button></div>' +
       '<p class="hint" id="hint"' + (s.flipped ? ' hidden' : '') + '>Touchez la carte pour voir la réponse</p>' +
       '<div class="answers" id="answers"' + (s.flipped ? '' : ' hidden') + '>' +
@@ -1150,23 +1582,26 @@ window.SECTIONS_OFFICIELLES = [
 
   function contenuZoneApifyHtml(){
     var st = ui.apifyState;
-    if (st.loading) {
-      return '<div style="display:flex;align-items:center;gap:10px"><div class="spinner" style="margin:0;width:22px;height:22px"></div><span>L’IA recherche dans le programme Exétat…</span></div>';
-    }
-    if (!st.answer && (!st.localHits || !st.localHits.length)) {
-      return '<span class="sub">Posez une notion, une formule ou un chapitre d’examen. Les réponses sont mises en cache pour vos révisions hors-ligne.</span>';
-    }
     var out = '';
-    if (st.answer) {
-      out += '<div>' + (st.fromCache ? '<span class="chip mini" style="margin-bottom:8px">⚡ Réponse depuis le cache</span><br>' : '') +
-        esc(st.answer).replace(/\n/g, '<br>') + '</div>';
+    if (ui.chatHistory && ui.chatHistory.length) {
+      ui.chatHistory.forEach(function(msg, idx){
+        out += '<div class="ia-msg user">' + esc(msg.q) + '</div>';
+        out += '<div class="ia-msg">' + (msg.fromCache ? '<span class="chip mini" style="margin-bottom:6px">⚡ Depuis le cache</span><br>' : '') +
+          formatSci(msg.a).replace(/\n/g, '<br>') +
+          '<div class="ia-msg-actions"><button class="btn small ghost" data-a="sauverIaCarte" data-id="' + idx + '" style="min-height:36px;padding:0 10px;font-size:12.5px">+ Enregistrer dans Mes Paquets</button></div></div>';
+      });
+    }
+    if (st.loading) {
+      out += '<div style="display:flex;align-items:center;gap:10px;padding:8px 0"><div class="spinner" style="margin:0;width:22px;height:22px"></div><span>L’IA recherche dans le programme Exétat…</span></div>';
+    } else if (!out && (!st.localHits || !st.localHits.length)) {
+      return '<span class="sub">Posez une notion, une formule ou un chapitre d’examen. Les réponses sont mises en cache et peuvent être transformées en fiches personnelles.</span>';
     }
     if (st.localHits && st.localHits.length) {
-      out += '<div style="margin-top:12px"><b style="font-size:13px;color:var(--brand)">📚 Fiches officielles correspondantes (' + esc(curCourse().name) + ') :</b>';
+      out += '<div style="margin-top:10px"><b style="font-size:13px;color:var(--brand)">📚 Fiches officielles correspondantes (' + esc(curCourse().name) + ') :</b>';
       st.localHits.forEach(function(hit){
         out += '<div class="ia-local-card"><div style="font-size:12px;color:var(--muted)">' + esc(hit.lesson) + '</div>' +
-          '<div style="font-weight:700;margin-top:2px">' + esc(hit.q) + '</div>' +
-          '<div style="margin-top:4px">' + esc(hit.a) + '</div></div>';
+          '<div style="font-weight:700;margin-top:2px">' + formatSci(hit.q) + '</div>' +
+          '<div style="margin-top:4px">' + formatSci(hit.a) + '</div></div>';
       });
       out += '</div>';
     }
@@ -1175,7 +1610,10 @@ window.SECTIONS_OFFICIELLES = [
 
   function majZoneApify(){
     var z = document.getElementById('zoneResultatApify');
-    if (z) z.innerHTML = contenuZoneApifyHtml();
+    if (z) {
+      z.innerHTML = contenuZoneApifyHtml();
+      z.scrollTop = z.scrollHeight;
+    }
     var btn = document.getElementById('btnLancerApify');
     if (btn) btn.disabled = !!ui.apifyState.loading;
   }
@@ -1188,7 +1626,8 @@ window.SECTIONS_OFFICIELLES = [
       var ctxLabel = (ui.chatContext && ui.chatContext.sectionName)
         ? ui.chatContext.sectionName + (ui.chatContext.courseName ? ' · ' + ui.chatContext.courseName : '')
         : curCourse().name;
-      h += '<h2>🤖 Chat IA intégré</h2>' +
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h2>🤖 Chat IA intégré</h2>' +
+        (ui.chatHistory.length ? '<button class="link" data-a="effacerChat" style="min-height:36px;padding:0 6px;font-size:13px">Effacer</button>' : '') + '</div>' +
         '<p class="sub" style="margin-top:4px">Contexte actif : <b>' + esc(ctxLabel) + '</b></p>' +
         '<div class="pub-ia"><b>Paiement unique de 10 000 FC à vie :</b> Une vraie économie pour éviter les abonnements mensuels coûteux chez les autres IA.<br><br><b>Statut :</b> ' + esc(statAi.message) + '</div>';
       if (statAi.autorise) {
@@ -1218,6 +1657,11 @@ window.SECTIONS_OFFICIELLES = [
         '<div class="row"><input type="text" id="codeSecurise" placeholder="Collez votre code de signature ici..."><button class="btn" data-a="validerSignature">Activer</button></div>' +
         (ui.msg ? '<p class="fb ' + (ui.msg.ok ? 'good' : 'bad') + '" style="margin-top:8px">' + esc(ui.msg.t) + '</p>' : '') +
         '<button class="btn full ghost" data-a="fermerModale" style="margin-top:12px">Fermer</button>';
+    } else if (ui.modal === 'ios') {
+      h += '<h2>📲 Installer Recto sur iPhone / iPad</h2>' +
+        '<p class="sub">Pour réviser 100 % hors-ligne depuis votre écran d’accueil :</p>' +
+        '<div class="pub-ia">1. Touchez le bouton <b>Partager</b> (carré avec flèche vers le haut) dans Safari.<br><br>2. Faites défiler et touchez <b>Sur l’écran d’accueil</b>.</div>' +
+        '<button class="btn full" data-a="fermerModale">Compris</button>';
     }
     return h + '</div></div>';
   }
@@ -1228,16 +1672,24 @@ window.SECTIONS_OFFICIELLES = [
     var html = '';
     window.SECTIONS_OFFICIELLES.forEach(function(sec, idx){
       var ouvert = (ui.secOuverte === idx);
+      var sp = sectionProgressStats(sec);
+      var secMeta = sp.t ? (sp.pct + '% · ' + sp.k + '/' + sp.t) : (sp.coursDispo + '/' + sp.coursTotal + ' dispo');
       html += '<div class="acc-section' + (ouvert ? ' on' : '') + '">' +
         '<button class="acc-btn" data-a="basculerSection" data-id="' + idx + '">' +
-          '<span>' + esc(sec.section) + '</span><span>' + (ouvert ? '▲' : '▼') + '</span>' +
+          '<span class="acc-top"><span>' + esc(sec.section) + '</span><span class="acc-meta">' + secMeta + ' ' + (ouvert ? '▲' : '▼') + '</span></span>' +
+          '<span class="sec-pbar" aria-hidden="true"><i style="width:' + sp.pct + '%;background:' + colorVar(idx) + '"></i></span>' +
         '</button>' +
         '<div class="acc-content">';
       sec.cours.forEach(function(c){
         var estActif = (data.course === c.id);
         var estDispo = !!c.dispo || courseCache.has(c.id);
+        var cp = estDispo ? courseProgressStats(c.id) : null;
         html += '<div class="cours-item' + (estActif ? ' actif' : '') + '">' +
-          '<span>' + esc(c.nom) + '</span>' +
+          '<div class="cours-info"><span>' + esc(c.nom) + '</span>' +
+          (cp && cp.t
+            ? '<span class="cours-sub">' + cp.pct + '% · ' + cp.k + '/' + cp.t + ' cartes</span><span class="sec-pbar" style="margin-top:4px;height:4px" aria-hidden="true"><i style="width:' + cp.pct + '%;background:' + colorVar(idx) + '"></i></span>'
+            : '') +
+          '</div>' +
           (estDispo
             ? '<button class="btn small" data-a="choisirCours" data-id="' + esc(c.id) + '" style="min-height:36px;padding:0 12px;font-size:13px">Ouvrir</button>'
             : '<span style="font-size:12px;color:var(--muted)">Bientôt</span>') +
@@ -1272,12 +1724,55 @@ window.SECTIONS_OFFICIELLES = [
     }
   }
 
-  function begin(title, queue, back, src){
+  function clearExamTimer(){
+    if (examTimerId) { clearInterval(examTimerId); examTimerId = null; }
+  }
+
+  function finishExam(){
+    clearExamTimer();
+    stopSpeech();
+    if (!ui.study || ui.study.mode !== 'exam') return;
+    ui.study.finished = true;
+    render();
+  }
+
+  function begin(title, queue, back, src, opts){
+    clearExamTimer();
+    stopSpeech();
     if (!queue.length) {
       afficherToast("Aucune carte disponible pour cette session.");
       return;
     }
-    ui.study = { title:title, queue:queue, idx:0, known:0, again:0, total:queue.length, back:back, src:src };
+    opts = opts || {};
+    ui.study = {
+      title: title,
+      queue: queue,
+      idx: 0,
+      known: 0,
+      again: 0,
+      total: queue.length,
+      back: back,
+      src: src,
+      mode: opts.mode || 'study',
+      secsLeft: opts.secsLeft || 0,
+      results: [],
+      finished: false
+    };
+    if (ui.study.mode === 'exam') {
+      examTimerId = setInterval(function(){
+        if (!ui.study || ui.study.mode !== 'exam' || ui.study.finished) { clearExamTimer(); return; }
+        ui.study.secsLeft--;
+        var el = document.getElementById('examTimer');
+        if (el) {
+          el.textContent = '⏱ ' + formatChrono(ui.study.secsLeft);
+          if (ui.study.secsLeft <= 60) el.classList.add('low');
+        }
+        if (ui.study.secsLeft <= 0) {
+          afficherToast("Temps écoulé ! Correction automatique de l’examen.");
+          finishExam();
+        }
+      }, 1000);
+    }
     ui.view = 'study'; render();
   }
   function order(items){
@@ -1325,27 +1820,33 @@ window.SECTIONS_OFFICIELLES = [
     var cleCache = (ctx.courseId || ctx.sectionName || 'global') + '|' + normaliserRequeteIA(q);
     var localHits = rechercherDansCoursLocal(q);
 
+    function pushHistory(ans, fromCache){
+      ui.chatHistory.push({ q: q, a: ans, fromCache: !!fromCache });
+      if (ui.chatHistory.length > 15) ui.chatHistory = ui.chatHistory.slice(-15);
+    }
+
+    // 1. Vérifier le cache multi-niveaux avant tout appel réseau
     var cached = obtenirCacheIA(cleCache);
     if (cached) {
-      ui.apifyState = { loading: false, query: q, answer: cached, fromCache: true, localHits: localHits };
+      pushHistory(cached, true);
+      ui.apifyState = { loading: false, query: '', answer: cached, fromCache: true, localHits: localHits };
       majZoneApify();
+      var inp = document.getElementById('champApify'); if (inp) inp.value = '';
       return;
     }
 
+    // 2. Si hors-ligne : répondre instantanément avec les fiches locales du cours
     if (navigator.onLine === false) {
-      ui.apifyState = {
-        loading: false,
-        query: q,
-        answer: localHits.length
-          ? "Vous êtes hors-ligne. Voici les fiches officielles correspondantes déjà disponibles sur votre appareil :"
-          : "Vous êtes hors-ligne et cette question n’est pas encore en cache. Reconnectez-vous pour interroger le Chat IA.",
-        fromCache: false,
-        localHits: localHits
-      };
+      var offMsg = localHits.length
+        ? "Vous êtes hors-ligne. Voici les fiches officielles correspondantes déjà disponibles sur votre appareil :"
+        : "Vous êtes hors-ligne et cette question n’est pas encore en cache. Reconnectez-vous pour interroger le Chat IA.";
+      pushHistory(offMsg, false);
+      ui.apifyState = { loading: false, query: '', answer: offMsg, fromCache: false, localHits: localHits };
       majZoneApify();
       return;
     }
 
+    // 3. Appel API avec AbortController (timeout 22s)
     if (activeAiAbort) activeAiAbort.abort();
     activeAiAbort = typeof AbortController !== 'undefined' ? new AbortController() : null;
     var abortTimer = activeAiAbort ? setTimeout(function(){ activeAiAbort.abort(); }, 22000) : null;
@@ -1356,23 +1857,59 @@ window.SECTIONS_OFFICIELLES = [
     try {
       var res = await window.APIFY_CONFIG.interroger(q, ctx, activeAiAbort ? activeAiAbort.signal : undefined);
       if (abortTimer) clearTimeout(abortTimer);
+      var ans = (res && res.answer) || "Aucune réponse reçue.";
       if (res && res.ok && res.answer) {
         enregistrerCacheIA(cleCache, res.answer);
       }
-      ui.apifyState = { loading: false, query: q, answer: (res && res.answer) || "Aucune réponse reçue.", fromCache: false, localHits: localHits };
+      pushHistory(ans, false);
+      ui.apifyState = { loading: false, query: '', answer: ans, fromCache: false, localHits: localHits };
+      var ch2 = document.getElementById('champApify'); if (ch2) ch2.value = '';
       majZoneApify();
     } catch (err) {
       if (abortTimer) clearTimeout(abortTimer);
-      ui.apifyState = {
-        loading: false,
-        query: q,
-        answer: "Impossible de joindre le Chat IA (" + (err && err.message ? err.message : 'erreur réseau') + ").",
-        fromCache: false,
-        localHits: localHits
-      };
+      var errMsg = "Impossible de joindre le Chat IA (" + (err && err.message ? err.message : 'erreur réseau') + ").";
+      pushHistory(errMsg, false);
+      ui.apifyState = { loading: false, query: q, answer: errMsg, fromCache: false, localHits: localHits };
       majZoneApify();
     }
   }
+
+  /* --- Gestion des événements --- */
+  document.addEventListener('change', function(e){
+    if (e.target && e.target.id === 'champDateExetat') {
+      if (e.target.value) {
+        data.examDate = e.target.value;
+        save();
+        afficherToast("Date de l’Exétat mise à jour.");
+      }
+    } else if (e.target && e.target.id === 'importSauvegarde') {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(){
+        try {
+          var parsed = JSON.parse(String(reader.result || ''));
+          if (!parsed || typeof parsed !== 'object' || !parsed.prog) throw new Error('Format invalide');
+          data.prog = parsed.prog || data.prog;
+          if (Array.isArray(parsed.decks)) data.decks = parsed.decks;
+          if (parsed.mistakes) data.mistakes = parsed.mistakes;
+          if (parsed.srs) data.srs = parsed.srs;
+          if (parsed.favs) data.favs = parsed.favs;
+          if (parsed.streak) data.streak = parsed.streak;
+          if (parsed.bonusUnlocked) data.bonusUnlocked = parsed.bonusUnlocked;
+          if (parsed.examDate) data.examDate = parsed.examDate;
+          if (parsed.courseTotalsCache) data.courseTotalsCache = parsed.courseTotalsCache;
+          if (parsed.pro && parsed.devId === data.devId) data.pro = true;
+          save();
+          afficherToast("Sauvegarde restaurée avec succès !");
+          render();
+        } catch(err) {
+          afficherToast("Fichier de sauvegarde invalide.");
+        }
+      };
+      reader.readAsText(file);
+    }
+  });
 
   document.addEventListener('input', function(e){
     if (e.target && e.target.id === 'filtreLecons') {
@@ -1402,15 +1939,50 @@ window.SECTIONS_OFFICIELLES = [
     }
     var a = t.dataset.a, id = t.dataset.id;
 
-    if (a === 'revenirAccueil') { ui.view = 'landing'; ui.modal = null; ui.loadError = null; render(); }
+    if (a === 'revenirAccueil') { clearExamTimer(); stopSpeech(); ui.view = 'landing'; ui.modal = null; ui.loadError = null; render(); }
     else if (a === 'entrerApp') { await ouvrirCoursParId(data.course || 'geo'); }
     else if (a === 'rechargerCours') { await ouvrirCoursParId(data.course || 'geo'); }
     else if (a === 'tab') {
+      clearExamTimer(); stopSpeech();
       ui.view = id;
       if (id === 'home' && !courseCache.has(data.course)) await ouvrirCoursParId(data.course || 'geo');
       else render();
     }
-    else if (a === 'lecon') { ui.view = 'lesson'; ui.lessonId = id; render(); }
+    else if (a === 'lecon') { stopSpeech(); ui.view = 'lesson'; ui.lessonMode = 'cards'; ui.lessonId = id; render(); }
+    else if (a === 'toggleLessonMode') { ui.lessonMode = (ui.lessonMode === 'synth') ? 'cards' : 'synth'; render(); }
+    else if (a === 'ecouterLecon') {
+      var recL = indexerLecons()[id];
+      if (recL) {
+        var fullTxt = recL.l.c.map(function(it, n){ return 'Question ' + (n + 1) + '. ' + it.q + '. Réponse : ' + it.a; }).join('. ');
+        parlerTexte(fullTxt);
+      }
+    }
+    else if (a === 'ecouterTxt') {
+      var partsKey = String(id || '').split(':');
+      var lid = partsKey[1], qIdx = +partsKey[2];
+      var recT = indexerLecons()[lid];
+      if (recT && recT.l && recT.l.c[qIdx]) {
+        var cardT = recT.l.c[qIdx];
+        parlerTexte(cardT.q + '. ' + cardT.a);
+      }
+    }
+    else if (a === 'ecouterCarte') {
+      if (ui.study && ui.study.queue[ui.study.idx]) parlerTexte(ui.study.queue[ui.study.idx].q);
+    }
+    else if (a === 'ecouterSynthese') {
+      if (ui.study && ui.study.queue[ui.study.idx]) parlerTexte(ui.study.queue[ui.study.idx].a);
+    }
+    else if (a === 'toggleFav') {
+      toggleFav(id);
+      afficherToast(isFav(id) ? "Ajoutée aux favoris ★" : "Retirée des favoris");
+      render();
+    }
+    else if (a === 'debloquerBonus') {
+      data.bonusUnlocked[curCourse().id] = id;
+      save();
+      afficherToast("Chapitre bonus débloqué pour " + curCourse().name + " !");
+      render();
+    }
     else if (a === 'ouvrirTiroir') {
       document.getElementById('drawer').classList.add('ouvert');
       document.getElementById('drawerBackdrop').classList.add('ouvert');
@@ -1422,15 +1994,53 @@ window.SECTIONS_OFFICIELLES = [
     else if (a === 'basculerSection') {
       var sIdx = +id; ui.secOuverte = (ui.secOuverte === sIdx) ? null : sIdx; majTiroirSections();
     }
+    else if (a === 'ouvrirSection') {
+      ui.secOuverte = +id;
+      majTiroirSections();
+      document.getElementById('drawer').classList.add('ouvert');
+      document.getElementById('drawerBackdrop').classList.add('ouvert');
+    }
     else if (a === 'reviserLecon') {
       var rec = indexerLecons()[id];
       if (!rec || !unlocked(rec.chap)) { ui.modal = 'pro'; render(); return; }
-      begin(label(rec.l), order(lessonItems(rec.l)), { view: ui.view === 'lesson' ? 'lesson' : 'home', lessonId:id }, { type:'lesson', id:id });
+      begin(label(rec.l), order(lessonItems(rec.l, rec.chap.t)), { view: ui.view === 'lesson' ? 'lesson' : 'home', lessonId:id }, { type:'lesson', id:id });
     }
     else if (a === 'mix') {
-      var items = [], idx = indexerLecons();
-      Object.keys(idx).forEach(function(i){ if (unlocked(idx[i].chap)) items = items.concat(lessonItems(idx[i].l)); });
+      var items = unlockedCourseItems();
       begin('Révision mixte (' + curCourse().name + ')', order(items).slice(0, MIX_SIZE), { view:'home' }, { type:'mix' });
+    }
+    else if (a === 'lancerExamen') {
+      var exItems = shuffle(unlockedCourseItems().filter(function(it){ return it.ok && it.ok.length; })).slice(0, 20);
+      if (!exItems.length) exItems = shuffle(unlockedCourseItems()).slice(0, 20);
+      begin('Examen blanc · ' + curCourse().name, exItems, { view:'home' }, { type:'exam' }, { mode:'exam', secsLeft: Math.max(300, exItems.length * 45) });
+    }
+    else if (a === 'lancerSrs') {
+      begin('Rappel espacé (' + curCourse().name + ')', shuffle(courseSrsDueItems()), { view:'home' }, { type:'srs' });
+    }
+    else if (a === 'lancerErreurs') {
+      begin('Mes erreurs (' + curCourse().name + ')', shuffle(courseMistakeItems()), { view:'home' }, { type:'mistakes' });
+    }
+    else if (a === 'lancerFavoris') {
+      begin('Mes favoris (' + curCourse().name + ')', shuffle(courseFavItems()), { view:'home' }, { type:'favs' });
+    }
+    else if (a === 'setGoal') {
+      data.streak.goal = +id || 15; save(); render();
+    }
+    else if (a === 'exporterSauvegarde') {
+      try {
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'recto-sauvegarde-' + todayStr(0) + '.json';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 3000);
+        afficherToast("Sauvegarde exportée !");
+      } catch(err) {
+        afficherToast("Impossible d’exporter sur cet appareil.");
+      }
     }
     else if (a === 'theme') { data.theme = id; save(); render(); }
     else if (a === 'fs') { data.fs = +id; save(); render(); }
@@ -1472,6 +2082,26 @@ window.SECTIONS_OFFICIELLES = [
       else { q.sel = {}; q.sel[id] = true; }
       render();
     }
+    else if (a === 'examSuivante') {
+      var s = ui.study, q = curQ(s), c = s.queue[s.idx];
+      var hasSel = Object.keys(q.sel).length > 0;
+      var good = hasSel && q.opts.every(function(o, i){ return o.ok === !!q.sel[i]; });
+      markKnown(c.k, good);
+      if (good) s.known++; else s.again++;
+      s.results.push({ q: c.q, a: c.a, good: good, chap: c.chapTitle });
+      s.idx++;
+      if (s.idx >= s.queue.length) finishExam();
+      else render();
+    }
+    else if (a === 'examTerminer') {
+      var s = ui.study;
+      for (var ei = s.idx; ei < s.queue.length; ei++) {
+        var ec = s.queue[ei];
+        s.again++;
+        s.results.push({ q: ec.q, a: ec.a, good: false, chap: ec.chapTitle });
+      }
+      finishExam();
+    }
     else if (a === 'validerQuiz') {
       var s = ui.study, q = curQ(s), c = s.queue[s.idx];
       if (q.done || !Object.keys(q.sel).length) return;
@@ -1485,15 +2115,18 @@ window.SECTIONS_OFFICIELLES = [
       q.done = true; q.good = false; s.again++; markKnown(c.k, false); s.queue.push(c);
       render();
     }
-    else if (a === 'suivante') { ui.study.idx++; render(); }
+    else if (a === 'suivante') { stopSpeech(); ui.study.idx++; render(); }
     else if (a === 'restart') {
       var src = ui.study.src;
-      if (src.type === 'lesson') { var r = indexerLecons()[src.id]; begin(label(r.l), order(lessonItems(r.l)), ui.study.back, src); }
+      if (src.type === 'lesson') { var r = indexerLecons()[src.id]; begin(label(r.l), order(lessonItems(r.l, r.chap.t)), ui.study.back, src); }
       else if (src.type === 'deck') { var d = deckById(src.id); if (d) begin(d.name, order(d.cards.map(function(c){ return { k:'u:'+c.id, q:c.q, a:c.a }; })), ui.study.back, src); }
-      else if (src.type === 'mix') { var items = [], idx = indexerLecons(); Object.keys(idx).forEach(function(i){ if (unlocked(idx[i].chap)) items = items.concat(lessonItems(idx[i].l)); }); begin('Révision mixte (' + curCourse().name + ')', order(items).slice(0, MIX_SIZE), ui.study.back, src); }
+      else if (src.type === 'mix') { begin('Révision mixte (' + curCourse().name + ')', order(unlockedCourseItems()).slice(0, MIX_SIZE), ui.study.back, src); }
+      else if (src.type === 'srs') { begin('Rappel espacé (' + curCourse().name + ')', shuffle(courseSrsDueItems()), ui.study.back, src); }
+      else if (src.type === 'mistakes') { begin('Mes erreurs (' + curCourse().name + ')', shuffle(courseMistakeItems()), ui.study.back, src); }
+      else if (src.type === 'favs') { begin('Mes favoris (' + curCourse().name + ')', shuffle(courseFavItems()), ui.study.back, src); }
       else render();
     }
-    else if (a === 'quit') { ui.view = ui.study ? ui.study.back.view : 'home'; ui.study = null; render(); }
+    else if (a === 'quit') { clearExamTimer(); stopSpeech(); ui.view = ui.study ? ui.study.back.view : 'home'; ui.study = null; render(); }
     else if (a === 'btnChatIa' || a === 'btnChatIaCours' || a === 'btnChatIaSection') {
       var statAi = aiEstEligible();
       if (!statAi.autorise) { ui.modal = 'pro'; render(); return; }
@@ -1510,6 +2143,14 @@ window.SECTIONS_OFFICIELLES = [
       ui.modal = 'apify';
       render();
       var ch = document.getElementById('champApify'); if (ch) ch.focus();
+    }
+    else if (a === 'sauverIaCarte') {
+      var mItem = ui.chatHistory[+id];
+      if (mItem) saveAiCardToDeck(mItem.q, mItem.a);
+    }
+    else if (a === 'effacerChat') {
+      ui.chatHistory = [];
+      majZoneApify();
     }
     else if (a === 'suggestionIa') {
       var ch = document.getElementById('champApify');
@@ -1557,6 +2198,10 @@ window.SECTIONS_OFFICIELLES = [
         render();
       }
     }
+    else if (a === 'aideIosPwa') {
+      ui.modal = 'ios';
+      render();
+    }
     else if (a === 'viderCacheIa') {
       aiMemCache.clear();
       try { localStorage.removeItem(AI_CACHE_KEY); } catch(err){}
@@ -1576,6 +2221,7 @@ window.SECTIONS_OFFICIELLES = [
   });
 
   render();
+  // Préchargement silencieux du dernier cours utilisé pour une ouverture instantanée
   chargerCours(data.course || 'geo').catch(function(){});
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
