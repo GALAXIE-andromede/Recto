@@ -84,7 +84,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() =>
           caches.match(req).then((r) => r || caches.match('./app.html')).then((r) =>
-            r || new Response('<h1>Mode hors-ligne</h1><p>Ouvrez app.html en ligne une première fois pour l’enregistrer.</p>', {
+            r || new Response('<h1>Mode hors-ligne</h1><p>Ouvrez app.html en ligne une premiÃ¨re fois pour lâ€™enregistrer.</p>', {
               status: 503,
               headers: { 'Content-Type': 'text/html; charset=utf-8' }
             })
@@ -94,7 +94,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Fichiers de cours (*_data.js) : Stale-While-Revalidate dans le cache dédié des cours
+  // Fichiers de cours (*_data.js) : Stale-While-Revalidate dans le cache dÃ©diÃ© des cours
   if (/_data\.js$/i.test(url.pathname)) {
     event.respondWith(
       caches.open(COURSES_CACHE).then((cache) =>
@@ -114,7 +114,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Autres assets statiques (manifest, icônes, etc.) : Cache-First avec mise à jour en arrière-plan
+  // Autres assets statiques (manifest, icÃ´nes, etc.) : Cache-First avec mise Ã  jour en arriÃ¨re-plan
   event.respondWith(
     caches.open(SHELL_CACHE).then((cache) =>
       cache.match(req).then((cached) => {
