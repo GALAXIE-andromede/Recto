@@ -398,60 +398,57 @@ window.MAISHAPAY_CONFIG = {
    CHAT IA INTÉGRÉ (PROXY VERCEL /api/apify + CACHE PERSISTANT)
    ============================================================== */
 window.APIFY_CONFIG = {
-  endpointProxy: "/api/apify",
-  tokenApi: "", // Laisser vide en production Vercel (la clé reste sur Vercel Env APIFY_TOKEN)
+  endpointProxy: "/api/chat",
+  fallbackProxy: "/api/apify",
+  tokenApi: "",
   acteurId: "apify~rag-web-browser",
   interroger: async function(question, contexte, signal) {
-    // 1. Priorité au proxy sécurisé Vercel (/api/apify)
-    try {
-      var repProxy = await fetch(this.endpointProxy, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: question,
-          courseName: (contexte && contexte.courseName) || "",
-          sectionName: (contexte && contexte.sectionName) || ""
-        }),
-        signal: signal
-      });
-      if (repProxy.ok) {
-        var jsonProxy = await repProxy.json();
-        if (jsonProxy && jsonProxy.ok && jsonProxy.answer) {
-          return { ok: true, answer: jsonProxy.answer, source: "apify" };
-        }
-      } else if (repProxy.status === 503 && !this.tokenApi) {
-        return {
-          ok: false,
-          answer: "Le Chat IA en ligne attend la configuration de la variable APIFY_TOKEN sur Vercel. En attendant, les fiches officielles correspondantes du cours s’affichent ci-dessous."
-        };
-      }
-    } catch (e) {
-      if (e && e.name === "AbortError") {
-        return { ok: false, answer: "La requête a expiré. Vérifiez votre connexion internet et réessayez." };
-      }
-    }
-
-    // 2. Fallback optionnel uniquement si un token local est défini en test
-    if (!this.tokenApi) {
-      return {
-        ok: false,
-        answer: "Service Chat IA en ligne indisponible pour le moment. Les fiches officielles du programme restent accessibles hors-ligne ci-dessous."
-      };
-    }
-
-    var rep = await fetch("https://api.apify.com/v2/acts/" + encodeURIComponent(this.acteurId) + "/run-sync-get-dataset-items?token=" + encodeURIComponent(this.tokenApi), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: question + (contexte && contexte.courseName ? " " + contexte.courseName : "") + " programme RDC Exétat", maxResults: 2 }),
-      signal: signal
+    var payload = JSON.stringify({
+      question: question,
+      courseName: (contexte && contexte.courseName) || "",
+      sectionName: (contexte && contexte.sectionName) || ""
     });
-    if (!rep.ok) throw new Error("HTTP " + rep.status);
-    var data = await rep.json();
-    var txt = data && data.length ? (data[0].text || data[0].markdown || "") : "";
+    var endpoints = [this.endpointProxy];
+    if (this.fallbackProxy && this.fallbackProxy !== this.endpointProxy) {
+      endpoints.push(this.fallbackProxy);
+    }
+
+    for (var i = 0; i < endpoints.length; i++) {
+      try {
+        var repProxy = await fetch(endpoints[i], {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          signal: signal
+        });
+        if (repProxy.status === 404 && i < endpoints.length - 1) {
+          continue;
+        }
+        var jsonProxy = null;
+        try { jsonProxy = await repProxy.json(); } catch (_) {}
+        var ans = jsonProxy && (jsonProxy.answer || jsonProxy.text || jsonProxy.reply || jsonProxy.message);
+        if (repProxy.ok && ans && (!jsonProxy || jsonProxy.ok !== false)) {
+          return { ok: true, answer: String(ans), source: "ai" };
+        }
+        if (repProxy.status === 503) {
+          return {
+            ok: false,
+            answer: (jsonProxy && jsonProxy.error) || "Le Chat IA en ligne attend la configuration de la clé API (GEMINI_API_KEY) sur Vercel. En attendant, les fiches officielles correspondantes du cours s’affichent ci-dessous."
+          };
+        }
+        if (jsonProxy && jsonProxy.error) {
+          return { ok: false, answer: String(jsonProxy.error) };
+        }
+      } catch (e) {
+        if (e && e.name === "AbortError") {
+          return { ok: false, answer: "La requête a expiré. Vérifiez votre connexion internet et réessayez." };
+        }
+      }
+    }
+
     return {
-      ok: !!txt,
-      answer: txt ? String(txt).slice(0, 2200) : "Aucun résultat pertinent trouvé pour cette question.",
-      source: "apify"
+      ok: false,
+      answer: "Service Chat IA en ligne indisponible pour le moment. Les fiches officielles du programme restent accessibles hors-ligne ci-dessous."
     };
   }
 };
@@ -1662,7 +1659,7 @@ window.SECTIONS_OFFICIELLES = [
 
   function vueModale(){
     if (!ui.modal) return '';
-    var h = '<div class="overlay" data-a="fermerModale"><div class="sheet">';
+    var h = '<div class="overlay"><div class="sheet">';
     if (ui.modal === 'apify') {
       var statAi = aiEstEligible();
       var ctxLabel = (ui.chatContext && ui.chatContext.sectionName)
