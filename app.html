@@ -399,29 +399,34 @@ window.MAISHAPAY_CONFIG = {
    ============================================================== */
 window.APIFY_CONFIG = {
   endpointProxy: "/api/chat",
+  vercelProxy: "https://recto-rdc.vercel.app/api/chat",
   fallbackProxy: "/api/apify",
-  tokenApi: "",
-  acteurId: "apify~rag-web-browser",
   interroger: async function(question, contexte, signal) {
     var payload = JSON.stringify({
       question: question,
       courseName: (contexte && contexte.courseName) || "",
-      sectionName: (contexte && contexte.sectionName) || ""
+      sectionName: (contexte && contexte.sectionName) || "",
+      history: (contexte && contexte.history) || []
     });
-    var endpoints = [this.endpointProxy];
-    if (this.fallbackProxy && this.fallbackProxy !== this.endpointProxy) {
-      endpoints.push(this.fallbackProxy);
-    }
+    var host = (window.location && window.location.hostname) || "";
+    var isGithubPages = /\.github\.io$/i.test(host) || window.location.protocol === "file:";
+    var endpoints = isGithubPages
+      ? [this.vercelProxy]
+      : [this.endpointProxy, this.fallbackProxy, this.vercelProxy];
+    var lastReason = "";
 
     for (var i = 0; i < endpoints.length; i++) {
+      var ep = endpoints[i];
+      if (!ep) continue;
       try {
-        var repProxy = await fetch(endpoints[i], {
+        var repProxy = await fetch(ep, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: payload,
           signal: signal
         });
         if (repProxy.status === 404 && i < endpoints.length - 1) {
+          lastReason = "Route introuvable (" + ep + " · 404)";
           continue;
         }
         var jsonProxy = null;
@@ -433,22 +438,24 @@ window.APIFY_CONFIG = {
         if (repProxy.status === 503) {
           return {
             ok: false,
-            answer: (jsonProxy && jsonProxy.error) || "Le Chat IA en ligne attend la configuration de la clé API (GEMINI_API_KEY) sur Vercel. En attendant, les fiches officielles correspondantes du cours s’affichent ci-dessous."
+            answer: (jsonProxy && jsonProxy.error) || "Le Chat IA en ligne attend la configuration de GEMINI_API_KEY sur Vercel (Settings > Environment Variables)."
           };
         }
         if (jsonProxy && jsonProxy.error) {
           return { ok: false, answer: String(jsonProxy.error) };
         }
+        lastReason = "HTTP " + repProxy.status + " sur " + ep;
       } catch (e) {
         if (e && e.name === "AbortError") {
           return { ok: false, answer: "La requête a expiré. Vérifiez votre connexion internet et réessayez." };
         }
+        lastReason = "Réseau/CORS sur " + ep;
       }
     }
 
     return {
       ok: false,
-      answer: "Service Chat IA en ligne indisponible pour le moment. Les fiches officielles du programme restent accessibles hors-ligne ci-dessous."
+      answer: "Service Chat IA indisponible (" + (lastReason || "erreur réseau") + "). Les fiches officielles restent accessibles ci-dessous."
     };
   }
 };
@@ -1894,7 +1901,13 @@ window.SECTIONS_OFFICIELLES = [
     majZoneApify();
 
     try {
-      var res = await window.APIFY_CONFIG.interroger(q, ctx, activeAiAbort ? activeAiAbort.signal : undefined);
+      var reqCtx = {
+        courseId: ctx.courseId || "",
+        courseName: ctx.courseName || "",
+        sectionName: ctx.sectionName || "",
+        history: (ui.chatHistory || []).slice(-4)
+      };
+      var res = await window.APIFY_CONFIG.interroger(q, reqCtx, activeAiAbort ? activeAiAbort.signal : undefined);
       if (abortTimer) clearTimeout(abortTimer);
       var ans = (res && res.answer) || "Aucune réponse reçue.";
       if (res && res.ok && res.answer) {
