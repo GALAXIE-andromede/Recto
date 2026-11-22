@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const SHELL_CACHE = 'recto-shell-' + CACHE_VERSION;
 const COURSES_CACHE = 'recto-courses-' + CACHE_VERSION;
 const FONTS_CACHE = 'recto-fonts-' + CACHE_VERSION;
