@@ -395,7 +395,7 @@ window.MAISHAPAY_CONFIG = {
 };
 
 /* ==============================================================
-   CHAT IA INTÉGRÉ (PROXY VERCEL /api/gemini + CACHE PERSISTANT)
+   CHAT IA INTÉGRÉ (PROXY VERCEL /api/apify + CACHE PERSISTANT)
    ============================================================== */
 window.APIFY_CONFIG = {
   endpointProxy: "/api/chat",
@@ -425,10 +425,6 @@ window.APIFY_CONFIG = {
           body: payload,
           signal: signal
         });
-        if (repProxy.status === 404 && i < endpoints.length - 1) {
-          lastReason = "Route introuvable (" + ep + " · 404)";
-          continue;
-        }
         var jsonProxy = null;
         try { jsonProxy = await repProxy.json(); } catch (_) {}
         var ans = jsonProxy && (jsonProxy.answer || jsonProxy.text || jsonProxy.reply || jsonProxy.message);
@@ -443,6 +439,10 @@ window.APIFY_CONFIG = {
         }
         if (jsonProxy && jsonProxy.error) {
           return { ok: false, answer: String(jsonProxy.error) };
+        }
+        if (repProxy.status === 404 && i < endpoints.length - 1) {
+          lastReason = "Route introuvable (" + ep + " · 404)";
+          continue;
         }
         lastReason = "HTTP " + repProxy.status + " sur " + ep;
       } catch (e) {
